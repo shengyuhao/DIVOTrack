@@ -86,6 +86,11 @@ sh ./experiments/divo_test.sh
 ```
 The result will be saved to "exp/tracking/"exp_id"/result_divo
 ## Evaluation
+1. Change the directory name from "result_divo" to "centertrack"
+2. Make sure "centertrack" has the middle directory "data". (i.e. centertrack/data/circleRegion_Drone.txt instead of centertrack/circleRegion_Drone.txt)
+3. Copy your result_divo to DIVOTrack/TrackEval/data/trackers/mot_challenge/divo
+4. Go to DIVOTrack/TrackEval
+5. See the instrcution on [TrackEval](https://github.com/shengyuhao/DIVOTrack/tree/main/TrackEval)
 
 ## License
 
