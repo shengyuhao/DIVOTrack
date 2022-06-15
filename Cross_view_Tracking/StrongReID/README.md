@@ -41,10 +41,12 @@ python3 tools/train.py --config_file='configs/softmax_triplet_with_center.yml' M
 python3 tools/test.py --config_file='configs/softmax_triplet_with_center.yml' TEST.NECK_FEAT "('after')" TEST.FEAT_NORM "('yes')" MODEL.PRETRAIN_CHOICE "('self')" TEST.RE_RANKING "('yes')" TEST.WEIGHT "('your train model path')"
 ```
 The test will generate rsb_divo.npy to DIVOTrack/Cross_view_Tracking/StrongReID. If you want to change its name, modify in tools/test.py <br>
-Format of rsb_divo.npy
-{circleRegion:{Drone:[[fid,pid,lx,ly,w,h,1,0,0,0,feature],...], View1:{...}, View2:{...}}, <br>
+Format of rsb_divo.npy <br>
+{ <br>
+circleRegion:{Drone:[[fid,pid,lx,ly,w,h,1,0,0,0,feature],...],   View1:{...},   View2:{...}}, <br>
  innerShop:{Drone:{...}, View1:{...}, View2:{...}}, <br>
- ...}
+ ... <br>
+ }
 
 ## Evaluation
 Please refer to [Multi_view_Tracking](https://github.com/shengyuhao/DIVOTrack/tree/main/Multi_view_Tracking)
