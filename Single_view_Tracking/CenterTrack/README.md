@@ -74,6 +74,7 @@ or
 sh ./experiments/divo_train.sh
 ```
 ## Inference
+Make sure the "exp_id" is the same as the training one, the model will be directly loaded from the corresponding dir "exp/tracking/"exp_id"/model_last.pth".
 ```
 cd ${CenterTrack_ROOT}
 cd src
@@ -83,6 +84,7 @@ or
 ```
 sh ./experiments/divo_test.sh
 ```
+THe result will be saved to "exp/tracking/"exp_id"/result_divo
 ## Evaluation
 
 ## License
