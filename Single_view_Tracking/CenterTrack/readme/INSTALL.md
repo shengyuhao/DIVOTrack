@@ -19,7 +19,7 @@ After installing Anaconda:
 1. Install PyTorch:
 
     ~~~
-    conda install pytorch torchvision -c pytorch
+    pip install torch==1.7.0+cu110 torchvision==0.8.1+cu110 torchaudio==0.7.0 -f https://download.pytorch.org/whl/torch_stable.html
     ~~~
     
 
@@ -29,23 +29,14 @@ After installing Anaconda:
     pip install cython; pip install -U 'git+https://github.com/cocodataset/cocoapi.git#subdirectory=PythonAPI'
     ~~~
 
-3. Clone this repo:
-
-    ~~~
-    CenterTrack_ROOT=/path/to/clone/CenterTrack
-    git clone --recursive https://github.com/xingyizhou/CenterTrack $CenterTrack_ROOT
-    ~~~
-
-    You can manually install the [submodules](../.gitmodules) if you forget `--recursive`.
-
-4. Install the requirements
+3. Install the requirements
 
     ~~~
     pip install -r requirements.txt
     ~~~
     
     
-5. Compile deformable convolutional (from [DCNv2](https://github.com/CharlesShang/DCNv2/)).
+4. Compile deformable convolutional (from [DCNv2](https://github.com/CharlesShang/DCNv2/)).
 
     ~~~
     cd $CenterTrack_ROOT/src/lib/model/networks/
@@ -54,4 +45,4 @@ After installing Anaconda:
     ./make.sh
     ~~~
 
-6. Download pertained models for [monocular 3D tracking](https://drive.google.com/open?id=1e8zR1m1QMJne-Tjp-2iY_o81hn2CiQRt), [80-category tracking](https://drive.google.com/open?id=1tJCEJmdtYIh8VuN8CClGNws3YO7QGd40), or [pose tracking](https://drive.google.com/open?id=1H0YvFYCOIZ06EzAkC2NxECNQGXxK27hH) and move them to `$CenterTrack_ROOT/models/`. More models can be found in [Model zoo](MODEL_ZOO.md).
+5. Download pertained models for [monocular 3D tracking](https://drive.google.com/open?id=1e8zR1m1QMJne-Tjp-2iY_o81hn2CiQRt), [80-category tracking](https://drive.google.com/open?id=1tJCEJmdtYIh8VuN8CClGNws3YO7QGd40), or [pose tracking](https://drive.google.com/open?id=1H0YvFYCOIZ06EzAkC2NxECNQGXxK27hH) and move them to `$CenterTrack_ROOT/models/`. More models can be found in [Model zoo](MODEL_ZOO.md).
