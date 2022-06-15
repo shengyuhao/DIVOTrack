@@ -51,6 +51,6 @@ The result will be saved to "exp/tracking/"exp_id"/result_divo
 3. Copy your result_divo to DIVOTrack/TrackEval/data/trackers/mot_challenge/divo
 4. Go to DIVOTrack/TrackEval
 5. See the instrcution on [TrackEval](https://github.com/shengyuhao/DIVOTrack/tree/main/TrackEval)
-6. 
+
 ## Acknowledgment
 Many thanks to [CenterTrack](https://github.com/xingyizhou/CenterTrack) authors for their great framework!
