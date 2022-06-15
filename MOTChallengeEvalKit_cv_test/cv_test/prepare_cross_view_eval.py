@@ -2,9 +2,9 @@ import os
 import numpy as np
 import pdb
 
-gt_dir = "data/eval/self_collected/test/wildscene"
-track_dir = "data/eval/self_collected/deepsort_centernet_result"
-save_dir = "data/eval/self_collected/deepsort_centernet_result_cvma"
+gt_dir = "data/eval/divo/gt"
+track_dir = "data/eval/divo/mvmhat_result"
+save_dir = "data/eval/divo/mvmhat_result_cvma"
 
 gt_folder = "gt"
 
