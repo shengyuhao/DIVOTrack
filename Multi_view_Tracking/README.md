@@ -24,13 +24,20 @@ The project is organized as:
 
 ## Dataset Description
 ### Dataset Structure
-### Dataset Downloads
+your path to *.npy <br>
+Format of *.npy <br>
+{ <br>
+circleRegion:{Drone:[[fid,pid,lx,ly,w,h,1,0,0,0,feature],...],   View1:{...},   View2:{...}}, <br>
+ innerShop:{Drone:{...}, View1:{...}, View2:{...}}, <br>
+ ... <br>
+ }
 
-### Evaluation
-This is the evaluation method.
-
-## Training Detector
-The training process of our detector is in ```./Training_detector/``` and the details can see from  ```./Training_detector/Readme.md```.
-## Single-view Tracking
 
 ## Cross-view Tracking
+```
+python src/trackm.py --feature "your path to .npy file" --result_dir "your path to store the result"
+
+```
+
+## Evaluation
+Please refer to [MOTChallengeEvalKit](https://github.com/shengyuhao/DIVOTrack/tree/main/MOTChallengeEvalKit_cv_test)
