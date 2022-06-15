@@ -1,0 +1,34 @@
+1. generate cross_view tracking results 
+
+cv_test/prepare_cross_view_eval.py:
+
+	gt_dir = "data/eval/wildscene" 	# ground truth data
+	track_dir = "data/eval/wildscene_pred"	# prediction data
+	save_dir = "data/eval/wildscene_eval_cvma"	# save cross_view data
+
+	delimiter = ' ' # or delimiter = ','	# ground truth delimiter 
+	track_delimiter = ' ' # or track_delimiter = ','	# prediction delimiter 
+
+cd MOTChallengeEvalKit_cv_test
+python cv_test/prepare_cross_view_eval.py
+
+
+2. evaluate CVIDF1
+
+MOT/evalMOT.py:
+
+	gt_dir = "data/eval/wildscene_eval_cvma/gt"
+	res_dir = "data/eval/wildscene_eval_cvma/track"
+	seq_file = "data/eval/wildscene_eval_cvma/seqs.txt"
+
+python MOT/evalMOT.py
+
+3. evaluate CVMA
+
+MOT/evalMOT.py:
+
+	gt_dir = "data/eval/wildscene_eval_cvma/gt_cvma"
+	res_dir = "data/eval/wildscene_eval_cvma/track_cvma"
+	seq_file = "data/eval/wildscene_eval_cvma/seqs.txt"
+
+python MOT/evalMOT.py
