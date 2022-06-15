@@ -1,10 +1,13 @@
+'''
+Convert the divo to coco format
+generate "annotations" directory
+'''
 import os
 import numpy as np
 import json
 import cv2
 import pdb
-# Use the same script for MOT16
-# DATA_PATH = '../../data/mot16/'
+
 DATA_PATH = "../../../../datasets/DIVO/images/"
 OUT_PATH = DATA_PATH + 'annotations/'
 if not os.path.exists(OUT_PATH):
