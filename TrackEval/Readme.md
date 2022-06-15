@@ -61,11 +61,11 @@ frame_id,person_id,lx,ly,w,h,-1,-1,-1,-1
 ```
 python scripts/run_mot_challenge.py --GT_FOLDER './data/gt/mot_challenge' --TRACKERS_FOLDER './data/trackers/mot_challenge' --BENCHMARK divo --TRACKERS_TO_EVAL your_result
 ```
-The output will be stored to "./data/trackers/mot_challenge/divo/your_result" and has the following four files:
-pedestrian_detailed.xls
-pedestrian_plot.png
-pedestrian_plot.pdf
-pedestrian_summary.txt
+The output will be stored to "./data/trackers/mot_challenge/divo/your_result" and has the following four files: <br>
+pedestrian_detailed.csv <br>
+pedestrian_plot.png <br>
+pedestrian_plot.pdf <br>
+pedestrian_summary.txt <br>
 
 ## License
 
