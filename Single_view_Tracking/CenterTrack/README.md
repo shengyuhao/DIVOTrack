@@ -84,7 +84,7 @@ or
 ```
 sh ./experiments/divo_test.sh
 ```
-THe result will be saved to "exp/tracking/"exp_id"/result_divo
+The result will be saved to "exp/tracking/"exp_id"/result_divo
 ## Evaluation
 
 ## License
