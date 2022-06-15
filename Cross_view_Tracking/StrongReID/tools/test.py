@@ -97,9 +97,8 @@ def main():
         save_dict[seq][view].append([fid] + [pid] + bbox + [1, 0, 0, 0] + feature[0])
 
 
-    np.save('./rsb_self.npy', save_dict)
+    np.save('./rsb_divo.npy', save_dict)
 
 if __name__ == '__main__':
     main()
 
-# python3 tools/test.py --config_file='configs/softmax_triplet_with_center.yml' TEST.NECK_FEAT "('after')" TEST.FEAT_NORM "('yes')" MODEL.PRETRAIN_CHOICE "('self')" TEST.RE_RANKING "('yes')" TEST.WEIGHT "('../models/resnet50_model_120.pth')"
