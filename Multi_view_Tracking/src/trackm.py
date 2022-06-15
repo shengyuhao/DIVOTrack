@@ -19,12 +19,11 @@ from tracking_utils.utils import *
 from collections import defaultdict
 from deep_sort.mvtracker import MVTracker
 from deep_sort.update import Update
-import pdb
 import argparse
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--det_dir', default='/mnt/sdb/dataset/MOT_datasets/lpy/images/results/FairMOT_HSY_0602/')
-parser.add_argument('--feature', default='/home/xqr/shengyuhao/deep-person-reid/deepreid.npy')
+parser.add_argument('--feature', type=str, default=None)
+parser.add_argument('--result_dir', type=str, default=None)
 args = parser.parse_args()
 
 def search_feature(frame_id, view_id, feature_list):
@@ -58,28 +57,18 @@ def gather_seq_info_multi_view(datas, seq, seq_length):
         '''
         det_data[view] = sorted(det_data[view], key=lambda x:x[0])
         for data in det_data[view]:
-            # frame_id = int(data[0])
-            # view_id = data[1]
-            # pdb.set_trace()
-            # score = data[6]
-            # xmin = int(data[2])
-            # ymin = int(data[3])
-            # w = int(data[4])
-            # h = int(data[5])
-            # det = [frame_id] + [view_id] + [xmin, ymin, w, h] + [score] + [0, 0, 0] + feature
             data[1] = -1
             detections[view].append(data)
-            # view_det = det
             view_detections[view].append(data)
             
     for view in view_ls:
         seq_dict[view] = { 
-            "image_filenames": seq, # circleRegion
+            "image_filenames": seq,
             "detections": np.array(detections[view]),
             "view_detections": np.array(view_detections[view]),
             "image_size":(3, 1920, 1080),
             "min_frame_idx": int(min_frame),
-            "max_frame_idx": int(max_frame) }  # 3201
+            "max_frame_idx": int(max_frame) }
     return seq_dict
 
 def main(datas, result_root, seqs):
@@ -124,7 +113,6 @@ if __name__ == '__main__':
     
     datas = np.load(args.feature, allow_pickle=True).item()
     print(args.feature)
-    # pdb.set_trace()
     # datas: input data from a file.
     # data[0]: frame_id, view_id, xmin, ymin, w, h, score, 0, 0, 0, single_view_feature
-    main(datas, '../result_deepreid', seqs)
+    main(datas, args.feature, seqs)
