@@ -156,5 +156,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-# python3 tools/train.py --config_file='configs/softmax_triplet_with_center.yml'
