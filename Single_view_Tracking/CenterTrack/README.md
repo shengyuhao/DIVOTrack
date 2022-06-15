@@ -5,38 +5,7 @@ The code is built with [CenterTrack](https://github.com/xingyizhou/CenterTrack).
 
 ## Installation
 
-The code was tested on Ubuntu 18.04, with [Anaconda](https://www.anaconda.com/download). After installing Anaconda:
-
-0. create a new conda environment. 
-
-    ```
-    conda create --name CenterTrack python=3.8
-    conda activate CenterTrack
-    conda install pytorch==1.7.0 torchvision==0.8.1 cudatoolkit=11.0 -c pytorch
-    ```
-    
-
-2. Install [COCOAPI](https://github.com/cocodataset/cocoapi):
-
-    ```
-    pip install cython; pip install -U 'git+https://github.com/cocodataset/cocoapi.git#subdirectory=PythonAPI'
-    ```
-   
-3. Install the requirements
-
-    ```
-    pip install -r requirements.txt
-    ```
-    
-    
-4. We use [DCNv2_pytorch_1.7](https://github.com/ifzhang/DCNv2/tree/pytorch_1.7) in our backbone network (pytorch_1.7 branch). Previous versions can be found in [DCNv2](https://github.com/CharlesShang/DCNv2).
-    ```
-    git clone -b pytorch_1.7 https://github.com/ifzhang/DCNv2.git
-    cd DCNv2
-    ./make.sh
-    ```
-
-5. Download pertained models for [monocular 3D tracking](https://drive.google.com/open?id=1e8zR1m1QMJne-Tjp-2iY_o81hn2CiQRt) and move them to `$CenterTrack_ROOT/models/`. 
+Please refer to [INSTALL.md](https://github.com/shengyuhao/DIVOTrack/blob/main/Single_view_Tracking/CenterTrack/readme/INSTALL.md) for installation instructions.
 
 ## Data preparation
 The data in the following structure:
