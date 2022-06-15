@@ -1,5 +1,8 @@
 # CenterTrack: Tracking Objects as Points
 
+## Citation
+The code is built with [CenterTrack](https://github.com/xingyizhou/CenterTrack). Thanks for their great work.
+
 ## Installation
 
 The code was tested on Ubuntu 18.04, with [Anaconda](https://www.anaconda.com/download). After installing Anaconda:
@@ -18,29 +21,22 @@ The code was tested on Ubuntu 18.04, with [Anaconda](https://www.anaconda.com/do
     ```
     pip install cython; pip install -U 'git+https://github.com/cocodataset/cocoapi.git#subdirectory=PythonAPI'
     ```
-
-3. Clone this repo:
-
-    ```
-    CenterTrack_ROOT=../Single_view_Tracking/CenterTrack
-    git clone --recursive https://github.com/xingyizhou/CenterTrack $CenterTrack_ROOT
-    ```
    
-4. Install the requirements
+3. Install the requirements
 
     ```
     pip install -r requirements.txt
     ```
     
     
-5. We use [DCNv2_pytorch_1.7](https://github.com/ifzhang/DCNv2/tree/pytorch_1.7) in our backbone network (pytorch_1.7 branch). Previous versions can be found in [DCNv2](https://github.com/CharlesShang/DCNv2).
+4. We use [DCNv2_pytorch_1.7](https://github.com/ifzhang/DCNv2/tree/pytorch_1.7) in our backbone network (pytorch_1.7 branch). Previous versions can be found in [DCNv2](https://github.com/CharlesShang/DCNv2).
     ```
     git clone -b pytorch_1.7 https://github.com/ifzhang/DCNv2.git
     cd DCNv2
     ./make.sh
     ```
 
-6. Download pertained models for [monocular 3D tracking](https://drive.google.com/open?id=1e8zR1m1QMJne-Tjp-2iY_o81hn2CiQRt) and move them to `$CenterTrack_ROOT/models/`. 
+5. Download pertained models for [monocular 3D tracking](https://drive.google.com/open?id=1e8zR1m1QMJne-Tjp-2iY_o81hn2CiQRt) and move them to `$CenterTrack_ROOT/models/`. 
 
 ## Data preparation
 The data in the following structure:
@@ -52,11 +48,20 @@ DIVOTrack
     |           |        └——————train
     |           |        └——————test
     |           └——————labels_with_ids
-    |                    └——————train
-    |                    └——————test  
+    |           |        └——————train
+    |           |        └——————test  
+    |           └——————annoatations
+    |           |        └——————train.json
+    |           |        └——————test.json
     └——————${ROOT}
 ```
-
+If your data does not has the "annotations" directory, please use the following command to generate
+```
+cd ${CenterTrack_ROOT}
+cd src
+python convert_divo_to_coco.py
+```
+ 
 ## Train
 ```
 cd ${CenterTrack_ROOT}
