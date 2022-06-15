@@ -1,0 +1,1 @@
+python scripts/main.py --config-file ./configs/ours.yaml --root '../../datasets/DIVO/' model.load_weights './log/ours/model/model.pth.tar-100' test.evaluate True

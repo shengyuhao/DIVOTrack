@@ -1,0 +1,17 @@
+.vscode
+.idea
+*.so
+*.o
+*pyc
+_ext
+build
+DCNv2.egg-info
+dist
+*.pth
+*.jpg
+*.mp4
+*.tar.gz
+*.tar
+*.zip
+*.gif
+*.txt

@@ -1,0 +1,10 @@
+{
+     "root":"../../datasets",
+    "train":
+    {
+        "street":"./data/divo.train"
+    },
+    "test": {
+        "street":"./data/divo.val"
+    }
+}

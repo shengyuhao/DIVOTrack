@@ -1,0 +1,1 @@
+python3 tools/main.py --config_file='configs/AGW_baseline.yml' MODEL.DEVICE_ID "('0')" DATASETS.NAMES "('divo')"

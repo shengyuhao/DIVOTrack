@@ -1,0 +1,1 @@
+python scripts/main.py --config-file ./configs/ours.yaml --root '../../datasets/DIVO/'
