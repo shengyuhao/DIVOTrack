@@ -1,3 +1,13 @@
+shengyuhao
+shengyuhao
+on Wed Jun 15 2022
+Update README.md
+shengyuhao
+shengyuhao
+on Wed Jun 15 2022
+shengyuhao
+shengyuhao
+on Wed Jun 15 2022
 # DIVOTrack: A Cross-View Dataset for Multi-Human Tracking in DIVerse Open Scenes
 ## Abstract
 Cross-view multi-human tracking tries to link human subjects between frames and camera views that contain substantial overlaps. Although cross-view multi-human tracking has received increased attention in recent years, existing datasets still have several issues, including 1) missing real-world scenarios, 2) lacking diverse scenes, 3) owning a limited number of tracks, 4) comprising only static cameras, and 5) lacking standard benchmarks, which hinders the exploration and comparison of cross-view tracking methods.
