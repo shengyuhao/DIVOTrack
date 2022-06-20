@@ -13,9 +13,10 @@ To solve the above concerns, we present **DIVOTrack**: a new cross-view multi-hu
 - TrackEval
 - Multi_view_Tracking
 - MOTChallengeEvalKit_cv_test
-
+The test result of the cross-view MOT baselone method *MvMHAT* on the DIVOTrack. 
 ![test.gif](asset/test.gif)
-
+The ground truth of the DIVOTrak.
+![gt.gif](asset/gt.gif)
 ## Dataset Description
 We collect data in 10 different real-world scenarios, named: `'circleRegion', 'innerShop', 'movingView', 'park', 'playground', 'shopFrontGate', 'shopSecondFloor', 'shopSideGate', 'shopSideSquare', 'southGate'`. All
 the sequences are captured by using 3 moving cameras: `'Drone', 'View1' 'View2'` and are manually synchronized. 
