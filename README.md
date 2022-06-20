@@ -14,7 +14,7 @@ To solve the above concerns, we present **DIVOTrack**: a new cross-view multi-hu
 - Multi_view_Tracking
 - MOTChallengeEvalKit_cv_test
 
-
+![test.gif](./asset/test.gif)
 
 ## Dataset Description
 We collect data in 10 different real-world scenarios, named: `'circleRegion', 'innerShop', 'movingView', 'park', 'playground', 'shopFrontGate', 'shopSecondFloor', 'shopSideGate', 'shopSideSquare', 'southGate'`. All
