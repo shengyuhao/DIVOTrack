@@ -1,5 +1,5 @@
 # ReID-Survey with a Powerful AGW Baseline
-Deep Learning for Person Re-identification:  A Survey and Outlook. PDF with supplementary materials. [arXiv](https://arxiv.org/abs/2001.04193v2)
+Deep Learning for Person Re-identification:  A Survey and Outlook. PDF with supplementary materials. [TPAMI](https://ieeexplore.ieee.org/abstract/document/9336268)
 
 ### Quick Start
 
@@ -29,7 +29,7 @@ The `bounding_box_test` is the cropped images set based on the [CenterNet](Train
 conda create -n agw python=3.8
 conda activate agw
 pip install -r requirements.txt
-pip install torch==1.7.0+cu110 torchvision==0.8.0+cu110 torchaudio==0.7.0 -f https://download.pytorch.org/whl/torch_stable.html
+pip install torch==1.7.0+cu110 torchvision==0.8.1+cu110 torchaudio==0.7.0 -f https://download.pytorch.org/whl/torch_stable.html
 python setup.py develop
 ```
   
