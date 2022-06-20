@@ -1,0 +1,28 @@
+motchallenge-devkit
+*.sbatch
+
+# C/C++ compiler
+*.so
+*.a
+*.o
+*.out
+*.obj
+
+# C Extensions
+*.so
+
+# Python
+*.py[cod]
+*$py.class
+.python-version
+__pycache__
+*.egg-info
+.ipynb_checkpoints
+
+# MacOSX
+.DS_Store
+._.DS_Store
+._*
+
+# Visual Studio Code
+.vscode
