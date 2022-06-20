@@ -49,11 +49,11 @@ DIVOTrack
 The whole dataset can download from [GoogleDrive](https://drive.google.com/drive/folders/1QycDVFQticDUg0PE4uofUqULx_E_1GlF?usp=sharing). You can decompress each `.tar.gz` file in its folder.
 
 ## Training Detector
-The training process of our detector is in ```./Training_detector/``` and the details can see from  [Training_detector/Readme.md]().
+The training process of our detector is in ```./Training_detector/``` and the details can see from  [Training_detector/Readme.md](https://github.com/shengyuhao/DIVOTrack/tree/main/Training_Detector#readme).
 ## Single-view Tracking
-The implement of single-view tracking baseline methods is in ```./Single_view_Tracking``` and the details can see from [Single_view_Tracking/Readme.md]().
+The implement of single-view tracking baseline methods is in ```./Single_view_Tracking``` and the details can see from [Single_view_Tracking/Readme.md](https://github.com/shengyuhao/DIVOTrack/tree/main/Single_view_Tracking#readme).
 ## Cross-view Tracking
-The implement of cross-view tracking baseline methods is in ```./Cross_view_Tracking``` and the details can see from [Cross_view_Tracking/Readme.md]().
+The implement of cross-view tracking baseline methods is in ```./Cross_view_Tracking``` and the details can see from [Cross_view_Tracking/Readme.md](https://github.com/shengyuhao/DIVOTrack/tree/main/Cross_view_Tracking#readme).
 ## TrackEval
 We evaluation each single-view tracking baseline by ```./TrackEval```, and the details can see from [TrackEval/Readme.md](https://github.com/shengyuhao/DIVOTrack/tree/main/TrackEval#readme).
 ## Multi-view Tracking
