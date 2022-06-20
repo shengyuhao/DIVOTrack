@@ -33,14 +33,13 @@ python setup.py develop
 ```
   
 #### 3. Train
-Download the [pre-trained model](https) and put it into `./models/` 
 To train a AGW model with on `./bounding_box_train/` with GPU device 0, run similarly:
 ```
 sh Train_osnet.sh
 ```
 
 #### 4. Test
-Download our [model](https) and put it into `./log/ours/Experiment-AGW-baseline/`
+Download our [model](https://drive.google.com/file/d/1Aygf9e5ewlOHuExQvGGA1tfseMKJGYmP/view?usp=sharing) and put it into `./log/ours/model/`
 To test a AGW model with on `./bounding_box_test/` with our model, run similarly:
 ```
 sh Test_osnet.sh
