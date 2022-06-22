@@ -47,6 +47,7 @@ DIVOTrack
 ```
 ### Dataset Downloads
 The whole dataset can download from [GoogleDrive](https://drive.google.com/drive/folders/1QycDVFQticDUg0PE4uofUqULx_E_1GlF?usp=sharing). You can decompress each `.tar.gz` file in its folder.
+After that, you should run `generate_ini.py` to generate `seqinfo.ini` file. 
 
 ## Training Detector
 The training process of our detector is in ```./Training_detector/``` and the details can see from  [Training_detector/Readme.md](https://github.com/shengyuhao/DIVOTrack/tree/main/Training_Detector#readme).
