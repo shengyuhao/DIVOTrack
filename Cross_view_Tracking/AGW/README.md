@@ -48,6 +48,27 @@ sh Test-AGW.sh
 ```
 The out put is a `.npy` file contains `frame, pseudo_id, xmin, ymin, xmax, ymax, feature`.
 This file is saved in `DIVOTrack/datasets/DIVO/npy/cross_view/AGW/`
+<br><br> The format of npy file is:
+```
+{
+circleRegion:{
+    Drone:[[fid,pid,lx,ly,w,h,1,0,0,0,feature],...],   
+    View1:[...],   
+    View2:[...]
+}, 
+ innerShop:{
+    Drone:[[fid,pid,lx,ly,w,h,1,0,0,0,feature],...],   
+    View1:[...],   
+    View2:[...]
+}, 
+ ...
+ }
+```
+
+## Evaluation
+Please refer to [Multi_view_Tracking](https://github.com/shengyuhao/DIVOTrack/tree/main/Multi_view_Tracking)
+
+
 ### Citation
 
 Please kindly cite this paper in your publications if it helps your research:

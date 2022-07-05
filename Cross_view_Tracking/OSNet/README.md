@@ -46,6 +46,26 @@ sh Test_osnet.sh
 ```
 The output is a `.npy` file contains `frame, pseudo_id, xmin, ymin, xmax, ymax, feature`.
 This file is saved in `DIVOTrack/datasets/DIVO/npy/cross_view/OSNet/`
+<br><br> The format of npy file is:
+```
+{
+circleRegion:{
+    Drone:[[fid,pid,lx,ly,w,h,1,0,0,0,feature],...],   
+    View1:[...],   
+    View2:[...]
+}, 
+ innerShop:{
+    Drone:[[fid,pid,lx,ly,w,h,1,0,0,0,feature],...],   
+    View1:[...],   
+    View2:[...]
+}, 
+ ...
+ }
+```
+
+## Evaluation
+Please refer to [Multi_view_Tracking](https://github.com/shengyuhao/DIVOTrack/tree/main/Multi_view_Tracking)
+
 ### Citation
 
 This work is from:
