@@ -18,6 +18,7 @@ import pdb
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--model', default=C.INF_ID)
+parser.add_argument('--output_name', default="")
 args = parser.parse_args()
 
 os.environ["CUDA_VISIBLE_DEVICES"] = C.TRAIN_GPUS
@@ -124,4 +125,4 @@ if __name__ == "__main__":
     for dataset_name in C.TEST_DATASET:
         save_feature[dataset_name] = run(dataset_name , display=C.DISPLAY, dataset=dataset_name, model=model)
 
-    np.save('./feature/self_0603_feature.npy', save_feature)
+    np.save(args.output_name, save_feature)

@@ -26,11 +26,21 @@ The project is organized as:
 ### Dataset Structure
 your path to *.npy <br>
 Format of *.npy <br>
-{ <br>
-circleRegion:{Drone:[[fid,pid,lx,ly,w,h,1,0,0,0,feature],...],   View1:{...},   View2:{...}}, <br>
- innerShop:{Drone:{...}, View1:{...}, View2:{...}}, <br>
- ... <br>
+```
+{
+circleRegion:{
+    Drone:[[fid,pid,lx,ly,w,h,1,0,0,0,feature],...],   
+    View1:[...],   
+    View2:[...]
+}, 
+ innerShop:{
+    Drone:[[fid,pid,lx,ly,w,h,1,0,0,0,feature],...],   
+    View1:[...],   
+    View2:[...]
+}, 
+ ...
  }
+```
 
 
 ## Cross-view Tracking
@@ -39,5 +49,5 @@ python src/trackm.py --feature "your path to .npy file" --result_dir "your path 
 
 ```
 
-## Evaluation
+## MOT Challenge Evaluation 
 Please refer to [MOTChallengeEvalKit](https://github.com/shengyuhao/DIVOTrack/tree/main/MOTChallengeEvalKit_cv_test)
