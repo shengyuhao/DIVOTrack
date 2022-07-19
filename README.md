@@ -15,7 +15,7 @@ To solve the above concerns, we present **DIVOTrack**: a new cross-view multi-hu
 - MOTChallengeEvalKit_cv_test
 
 
-The test result of the cross-view MOT baselone method *MvMHAT* on the DIVOTrack. 
+The test result of the cross-view MOT baseline method *MvMHAT* on the DIVOTrack. 
 ![test.gif](asset/test.gif)
 
 
