@@ -59,7 +59,7 @@ sh experiments/test_det.sh
 * To get the detection results, run:
 ```
 cd src
-python detect.py --load_model='../exp/mot/train_det/model_det_last.pth'
+python detect.py mot --load_model='../exp/mot/train_det/model_det_last.pth'
 ```
 the detection results are saved in `../../datasets/images/dets/detection_results/`
 ## Final Model
