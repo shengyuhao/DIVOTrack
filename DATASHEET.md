@@ -1,6 +1,6 @@
 # DIVOTrack: A Cross-View Dataset for Multi-Human Tracking in DIVerse Open Scenes
 
-We present **DIVOTrack**: a new cross-view multi-human tracking dataset for **DIV**erse **O**pen scenes with dense tracking pedestrians in realistic and non-experimental environments If you use this dataset, please acknowledge it by citing the original paper:
+We present **DIVOTrack**: a new cross-view multi-human tracking dataset for **DIV**erse **O**pen scenes with dense tracking pedestrians in realistic and non-experimental environments. If you use this dataset, please acknowledge it by citing the original paper:
 
 ```
 @article{wangdivotrack,
