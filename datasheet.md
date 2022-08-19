@@ -9,8 +9,6 @@ We present **DIVOTrack**: a new cross-view multi-human tracking dataset for **DI
   year={2022}
 }
 ```
-collection #10 #11
-distribution #4
 
 ## Motivation
 
@@ -163,42 +161,37 @@ distribution #4
     The dataset was collected in the fall of 2020, which does not necessarily reflect the timeframe of the data collected.
 
 
-6. **Were any ethical review processes conducted (e.g., by an institutional review board)?** *(If so, please provide a description of these review processes, including the outcomes, as well as a link or other access point to any supporting documentation.)*
-    
-    No review processes were conducted with respect to the collection and annotation of this data.
-
-
-7. **Does the dataset relate to people?** *(If not, you may skip the remaining questions in this section.)*
+6. **Does the dataset relate to people?** *(If not, you may skip the remaining questions in this section.)*
     
     Yes; all videos of each scene are related to people.
 
 
-8. **Did you collect the data from the individuals in question directly, or obtain it via third parties or other sources (e.g., websites)?**
+7. **Did you collect the data from the individuals in question directly, or obtain it via third parties or other sources (e.g., websites)?**
     
     Other sources: collected by authors.
 
 
-9. **Were the individuals in question notified about the data collection?** *(If so, please describe (or show with screenshots or other information) how notice was provided, and provide a link or other access point to, or otherwise reproduce, the exact language of the notification itself.)*
+8. **Were the individuals in question notified about the data collection?** *(If so, please describe (or show with screenshots or other information) how notice was provided, and provide a link or other access point to, or otherwise reproduce, the exact language of the notification itself.)*
     
     No, they were not notified.
 
 
-10. **Did the individuals in question consent to the collection and use of their data?** *(If so, please describe (or show with screenshots or other information) how consent was requested and provided, and provide a link or other access point to, or otherwise reproduce, the exact language to which the individuals consented.)*
+9. **Did the individuals in question consent to the collection and use of their data?** *(If so, please describe (or show with screenshots or other information) how consent was requested and provided, and provide a link or other access point to, or otherwise reproduce, the exact language to which the individuals consented.)*
     
     No. 
 
 
-11. **If consent was obtained, were the consenting individuals provided with a mechanism to revoke their consent in the future or for certain uses?** *(If so, please provide a description, as well as a link or other access point to the mechanism (if appropriate).)*
+10. **If consent was obtained, were the consenting individuals provided with a mechanism to revoke their consent in the future or for certain uses?** *(If so, please provide a description, as well as a link or other access point to the mechanism (if appropriate).)*
     
     N/A.
 
 
-12. **Has an analysis of the potential impact of the dataset and its use on data subjects (e.g., a data protection impact analysis) been conducted?** *(If so, please provide a description of this analysis, including the outcomes, as well as a link or other access point to any supporting documentation.)*
+11. **Has an analysis of the potential impact of the dataset and its use on data subjects (e.g., a data protection impact analysis) been conducted?** *(If so, please provide a description of this analysis, including the outcomes, as well as a link or other access point to any supporting documentation.)*
     
     Yes. Our dataset only used for research and without any individual information. Everyone must apply for the authority of this dataset.
 
 
-13. **Any other comments?**
+12. **Any other comments?**
     
     None.
 
@@ -286,7 +279,7 @@ distribution #4
 
 4. **Will the dataset be distributed under a copyright or other intellectual property (IP) license, and/or under applicable terms of use (ToU)?** *(If so, please describe this license and/or ToU, and provide a link or other access point to, or otherwise reproduce, any relevant licensing terms or ToU, as well as any fees associated with these restrictions.)*
     
-    The dataset is licensed under a MIT license.
+    Please see the [LICENSE](https://github.com/shengyuhao/DIVOTrack/blob/main/LICENSE.md).
 
 
 5. **Have any third parties imposed IP-based or other restrictions on the data associated with the instances?** *(If so, please describe these restrictions, and provide a link or other access point to, or otherwise reproduce, any relevant licensing terms, as well as any fees associated with these restrictions.)*
