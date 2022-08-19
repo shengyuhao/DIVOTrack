@@ -61,5 +61,15 @@ We evaluation each single-view tracking baseline by ```./TrackEval```, and the d
 The multi-view tracking results can get from `./Multi_view_Tracking`, the details can see from [Multi_view_Tracking/Readme.md](https://github.com/shengyuhao/DIVOTrack/tree/main/Multi_view_Tracking#readme)
 ## MOTChallengeEvalKit_cv_test
 The cross-view evaluation can get from `./MOTChallengeEvalKit_cv_test`, and the details can see from [./MOTChallengeEvalKit_cv_test/Readme.md](https://github.com/shengyuhao/DIVOTrack/tree/main/MOTChallengeEvalKit_cv_test#readme)
+## Reference
+Any use whatsoever of this dataset and its associated software shall constitute your acceptance of the terms of this agreement. By using the dataset and its associated software, you agree to cite the papers of the authors, in any of your publications by you and your collaborators that make any use of the dataset, in the following format:
+```
+@article{wangdivotrack,
+  title={DIVOTrack: A Cross-View Dataset for Multi-Human Tracking in DIVerse Open Scenes},
+  author={Wang, Gaoang and Hao, Shengyu and Zhan, Yibing and Liu, Peiyuan and Liu, Zuozhu and Song, Mingli and Hwang, Jenq-Neng},
+  year={2022}
+}
+```
+The license agreement for data usage implies the citation of the paper above. Please notice that citing the dataset URL instead of the publications would not be compliant with this license agreement. You can read the LICENSE from [LICENSE](https://github.com/shengyuhao/DIVOTrack/blob/main/LICENSE.md).
 ## Contact
 If any concerns please contact shengyuhao@zju.edu.cn
