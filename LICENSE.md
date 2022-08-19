@@ -36,7 +36,8 @@ supervisor while sending the agreement to us.
 (For a student applicant, please provide your supervisor’s information below and ask your supervisor to sign the 
 agreement)
 
-Faculty Name:_________ Signature:_________ Email:_________
+Faculty Name:_____________ Signature:_____________ \
+Email:_____________
 Faculty Homepage:__________________ \
 University and Department:__________________ \
 Date:_________ (MM/DD/YY)
