@@ -22,7 +22,7 @@ The ground truth of the DIVOTrak.
 ![gt.gif](asset/gt.gif)
 ## Dataset Description
 We collect data in 10 different real-world scenarios, named: `'Circle', 'Shop', 'Moving', 'Park', 'Ground', 'Gate1', 'Floor', 'Side', 'Square', 'Gate2'`. All
-the sequences are captured by using 3 moving cameras: 'View1', 'View2'`, `'View3' and are manually synchronized. 
+the sequences are captured by using 3 moving cameras: 'View1', 'View2'`,`'View3' and are manually synchronized. 
 ### Dataset Structure
 The structure of our dataset as:
 ```
