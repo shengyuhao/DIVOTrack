@@ -16,7 +16,7 @@ images will never be released in commercial materials, newspapers, or other publ
 2. The dataset will not be re-distributed, published, copied, or further disseminated in any way or form 
 whatsoever, whether for profit or not. This includes further distributing, copying, or disseminating to a 
 different facility or organizational unit in the requesting university, organization, or company.
-3. All the data in DIVOTrack dataset can only be used for the purpose of scientific researches. The DIVOTrack, in whole or in part, will not be used for any commercial purpose in any form.
+3. All the data in DIVOTrack dataset can only be used for the purpose of scientific researches. The DIVOTrack, in whole or in part, will not be used for any commercial, military and other illegal purpose in any form.
 4. All technical papers, documents and reports which used the DIVOTrack dataset should acknowledge the 
 use of the database as follows: "The research in this paper used the DIVOTrack dataset collected by Zhejiang University." and provide citations to the corresponding article:
 ```
