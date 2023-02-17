@@ -1,7 +1,6 @@
 import configparser
 from glob import glob
 import os
-import pdb
 
 
 class myconf(configparser.ConfigParser):
