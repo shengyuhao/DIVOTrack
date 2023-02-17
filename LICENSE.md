@@ -1,6 +1,6 @@
 # DIVOTrack: A Cross-View Dataset for Multi-Human Tracking in DIVerse Open Scenes
 
-The DIVOTrack dataset was created by Gaoang Wang, Shengyu Hao, Yibing Zhan, Peiyuan Liu, Zuozhu Liu, Mingli Song and Hwang, Jenq-Neng. 
+The DIVOTrack dataset was created by Shenghao Hao, Peiyuan Liu, Yibing Zhan, Kaixun Jin, Zuozhu Liu, Mingli Song, Jenq-Neng Hwang, Gaoang Wang. 
 DIVOTrack is a novel cross-view multi-human tracking dataset which is more realistic and diverse, has more tracks, and incorporates moving cameras. Accordingly, a standardized benchmark is built for cross-view tracking, with clear split of training and testing set, publicly accessible detection, and standard cross-view tracking evaluation metrics. With the proposed dataset and benchmark, the cross-view tracking methods can be fairly compared in the future, which will improve the development of cross-view tracking techniques.
 now made publicly available for 
 research purpose only on a case-by-case basis. DIVOTrack is serving as the technical agent for distribution of the 
@@ -21,9 +21,10 @@ different facility or organizational unit in the requesting university, organiza
 use of the database as follows: "The research in this paper used the DIVOTrack dataset collected by Zhejiang University." and provide citations to the corresponding article:
 ```
 @article{wangdivotrack,
-  title={DIVOTrack: A Cross-View Dataset for Multi-Human Tracking in DIVerse Open Scenes},
-  author={Wang, Gaoang and Hao, Shengyu and Zhan, Yibing and Liu, Peiyuan and Liu, Zuozhu and Song, Mingli and Hwang, Jenq-Neng},
-  year={2022}
+  title={DIVOTrack: A Novel Dataset and Baseline Method for Cross-View Multi-Object Tracking in DIVerse Open Scenes},
+  author={Shenghao Hao, Peiyuan Liu, Yibing Zhan, Kaixun Jin, Zuozhu Liu, Mingli Song, Jenq-Neng Hwang, Gaoang Wang},
+  journal={arXiv preprint arXiv:2302.07676},
+  year={2023}
 }
 ```
 5. A student applicant should ask his/her supervisor to sign this agreement, and send the signed agreement to 
