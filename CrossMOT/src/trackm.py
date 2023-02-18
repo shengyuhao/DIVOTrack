@@ -36,7 +36,6 @@ from collections import defaultdict
 from tqdm import tqdm
 from deep_sort.mvtracker import MVTracker
 from deep_sort.update import Update
-import pdb
 
     
 def post_process(opt, dets, meta):

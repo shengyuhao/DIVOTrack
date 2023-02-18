@@ -5,7 +5,7 @@ from __future__ import print_function
 import torch
 import torch.nn as nn
 from .utils import _gather_feat, _tranpose_and_gather_feat
-import pdb
+
 def _nms(heat, kernel=3):
     pad = (kernel - 1) // 2
 

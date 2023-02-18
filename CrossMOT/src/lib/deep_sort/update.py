@@ -8,11 +8,8 @@ from application_util import visualization
 from scipy.optimize import linear_sum_assignment as sklearn_linear_assignment
 import cv2
 import numpy as np
-import config as C
 from opts import opts
-
-
-import pdb
+RENEW_TIME = 30
 
 class Update():
     def __init__(self, opt, seq, mvtracker, display, view_list):
@@ -20,7 +17,7 @@ class Update():
         self.view_ls = mvtracker.view_ls
         self.tracker = mvtracker
         self.display = display
-        self.min_confidence = 0.7
+        self.min_confidence = 0.5
         self.nms_max_overlap = 1
         self.min_detection_height = 0
         self.delta = 0.5
@@ -51,7 +48,7 @@ class Update():
         detections = self.create_detections(
             self.seq[view]["detections"], frame_idx, self.min_detection_height)   
 
-        detections = [d for d in detections]# if d.confidence >= self.min_confidence]
+        detections = [d for d in detections]
 
         # Run non-maxima suppression.
         boxes = np.array([d.tlwh for d in detections])
@@ -65,7 +62,7 @@ class Update():
         view_detections = self.create_detections(
             self.seq[view]["view_detections"], frame_idx, self.min_detection_height)   
 
-        view_detections = [d for d in view_detections]# if d.confidence >= self.min_confidence]
+        view_detections = [d for d in view_detections]
 
         # Run non-maxima suppression.
         boxes = np.array([d.tlwh for d in view_detections])
@@ -120,8 +117,8 @@ class Update():
         self.tracker.update(match_mat)
 
     def frame_callback(self, frame_idx):
-        if C.RENEW_TIME:
-            re_matching = frame_idx % C.RENEW_TIME == 0
+        if RENEW_TIME:
+            re_matching = frame_idx % RENEW_TIME == 0
         else:
             re_matching = 0
         for view in self.view_ls:

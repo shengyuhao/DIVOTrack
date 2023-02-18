@@ -4,8 +4,7 @@ import numpy as np
 # from sklearn.utils.linear_assignment_ import linear_assignment
 from scipy.optimize import linear_sum_assignment as linear_assignment
 from . import kalman_filter
-import config as C
-import pdb
+INFTY_COST = 1e+5
 
 def spatial_association(tracker, view):
     matching_dict = tracker.matching_mat[view]
@@ -173,7 +172,7 @@ def matching_cascade(
 
 def gate_cost_matrix(
         kf, cost_matrix, tracks, detections, track_indices, detection_indices,
-        gated_cost=C.INFTY_COST, only_position=False):
+        gated_cost=INFTY_COST, only_position=False):
     """Invalidate infeasible entries in cost matrix based on the state
     distributions obtained by Kalman filtering.
 

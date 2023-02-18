@@ -18,7 +18,6 @@ from models.utils import _sigmoid, _tranpose_and_gather_feat
 from utils.post_process import ctdet_post_process
 from .base_trainer import BaseTrainer
 
-import pdb
 
 class MotLoss(torch.nn.Module):
     def __init__(self, opt):

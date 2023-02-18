@@ -1,7 +1,7 @@
 # vim: expandtab:ts=4:sw=4
 from __future__ import absolute_import
 import numpy as np
-import config as C
+INFTY_COST = 1e+5
 
 def iou(bbox, candidates):
     """Computer intersection over union.
@@ -71,7 +71,7 @@ def iou_cost(tracks, detections, track_indices=None,
     cost_matrix = np.zeros((len(track_indices), len(detection_indices)))
     for row, track_idx in enumerate(track_indices):
         if tracks[track_idx].time_since_update > 1:
-            cost_matrix[row, :] = C.INFTY_COST
+            cost_matrix[row, :] = INFTY_COST
             continue
 
         bbox = tracks[track_idx].to_tlwh()

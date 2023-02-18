@@ -5,7 +5,6 @@ from __future__ import print_function
 import _init_paths
 
 import os
-
 import json
 import torch
 import torch.utils.data
@@ -16,7 +15,6 @@ from models.data_parallel import DataParallel
 from logger import Logger
 from datasets.dataset_factory import get_dataset
 from trains.train_factory import train_factory
-import pdb
 
 def main(opt):
     torch.manual_seed(opt.seed)

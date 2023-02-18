@@ -19,7 +19,7 @@ class ModleWithLoss(torch.nn.Module):
     outputs = self.model(batch['input'])
     loss, loss_stats = self.loss(outputs, batch)
     return outputs[-1], loss, loss_stats
-import pdb
+
 class BaseTrainer(object):
   def __init__(
     self, opt, model, optimizer=None):
@@ -85,7 +85,7 @@ class BaseTrainer(object):
           avg_loss_stats[l].update(
             loss_stats[l].mean().item(), batch['input'].size(0))
         except:
-          pdb.set_trace()
+          import pdb; pdb.set_trace()
         Bar.suffix = Bar.suffix + '|{} {:.4f} '.format(l, avg_loss_stats[l].avg)
       if not opt.hide_data_time:
         Bar.suffix = Bar.suffix + '|Data {dt.val:.3f}s({dt.avg:.3f}s) ' \

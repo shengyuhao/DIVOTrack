@@ -4,7 +4,6 @@ from __future__ import print_function
 
 import torch
 import torch.nn as nn
-import pdb
 
 def _sigmoid(x):
   y = torch.clamp(x.sigmoid_(), min=1e-4, max=1-1e-4)
