@@ -22,6 +22,94 @@ from utils.utils import xyxy2xywh, generate_anchors, xywh2xyxy, encode_delta
 import utils
 import pdb
 
+class LoadImages_DIVO:  # for inference
+    def __init__(self, opt, path, img_size=(1088, 608)):
+        if os.path.isdir(path):
+            image_format = ['.jpg', '.jpeg', '.png', '.tif']
+            self.files = sorted(glob.glob('%s/*.*' % path))
+            self.files = list(filter(lambda x: os.path.splitext(x)[1].lower() in image_format, self.files))
+        elif os.path.isfile(path):
+            self.files = [path]
+        seq_info, seq_length = None, 0
+        for filename in os.listdir(path):
+            if (filename.split('.')[-1] == 'ini'):
+                seq_info = open(osp.join(path, filename)).read()
+
+        if seq_info != None:
+            seq_length = int(seq_info[seq_info.find('seqLength=') + 10:seq_info.find('\nimWidth')])
+        file_list = []
+        self.view_list = []
+        for filename in self.files:
+            name = filename.split('.')[0]
+            # gather the view
+            if name.split('_')[-2] not in self.view_list:
+                self.view_list.append(name.split('_')[-2])
+            if opt.test_divo:
+                file_list.append(filename)
+                seq_length = int(name.split('_')[-1]) if int(name.split('_')[-1]) > seq_length else seq_length
+            if opt.test_mvmhat or opt.test_mvmhat_campus or opt.test_wildtrack:
+                if (int(name.split('_')[-1]) > int(seq_length * 2 / 3)):
+                    file_list.append(filename)
+            if opt.test_epfl:
+                if (int(name.split('_')[-1]) >= int(seq_length)):
+                    file_list.append(filename)
+        self.view_list.sort()
+        self.files = file_list
+        self.nF = len(self.files)  # number of image files
+        self.width = img_size[0]
+        self.height = img_size[1]
+        self.count = 0
+        self.seq_length = seq_length
+        assert self.nF > 0, 'No images found in ' + path
+
+    def __iter__(self):
+        self.count = -1
+        return self
+
+    def __next__(self):
+        self.count += 1
+        if self.count == self.nF:
+            raise StopIteration
+        img_path = self.files[self.count]
+
+        # Read image
+        img0 = cv2.imread(img_path)  # BGR
+        img0 = cv2.resize(img0, (1920, 1080))
+        assert img0 is not None, 'Failed to load ' + img_path
+
+        # Padded resize
+        img, _, _, _ = letterbox(img0, height=self.height, width=self.width)
+
+        # Normalize RGB
+        img = img[:, :, ::-1].transpose(2, 0, 1)
+        img = np.ascontiguousarray(img, dtype=np.float32)
+        img /= 255.0
+
+        # cv2.imwrite(img_path + '.letterbox.jpg', 255 * img.transpose((1, 2, 0))[:, :, ::-1])  # save letterbox image
+        return img_path, img, img0
+
+    def __getitem__(self, idx):
+        idx = idx % self.nF
+        img_path = self.files[idx]
+
+        # Read image
+        img0 = cv2.imread(img_path)  # BGR
+        img0 = cv2.resize(img0, (1920, 1080))
+        assert img0 is not None, 'Failed to load ' + img_path
+
+        # Padded resize
+        img, _, _, _ = letterbox(img0, height=self.height, width=self.width)
+
+        # Normalize RGB
+        img = img[:, :, ::-1].transpose(2, 0, 1)
+        img = np.ascontiguousarray(img, dtype=np.float32)
+        img /= 255.0
+
+        return img_path, img, img0
+
+    def __len__(self):
+        return self.nF  # number of files
+
 class LoadImages:  # for inference
     def __init__(self, opt, path, img_size=(1088, 608)):
         
@@ -107,6 +195,8 @@ class LoadImages:  # for inference
 
     def __len__(self):
         return self.nF  # number of files
+
+
 
 class LoadImagesAndLabels:  # for training
     def __init__(self, path, img_size=(1088, 608), augment=False, transforms=None):

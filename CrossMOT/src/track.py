@@ -36,7 +36,7 @@ from collections import defaultdict
 from tqdm import tqdm
 from deep_sort.mvtracker import MVTracker
 from deep_sort.update import Update
-
+import pdb
     
 def post_process(opt, dets, meta):
     dets = dets.detach().cpu().numpy()
@@ -65,16 +65,14 @@ def merge_outputs(opt, detections):
     return results
 
 def gather_seq_info_multi_view(opt, dataloader, seq, seq_length,use_cuda = True):
-    #groundtruth = None
     seq_dict = {}
-    #coffidence = 1
-    print('loading dataset...')
+    # print('loading dataset...')
 
     image_filenames = defaultdict(list)
     detections = defaultdict(list)
     view_detections = defaultdict(list)
     #model     
-    print('Creating model...')
+    # print('Creating model...')
     if opt.gpus[0] >= 0:
         device = torch.device('cuda')
     else:
@@ -114,39 +112,26 @@ def gather_seq_info_multi_view(opt, dataloader, seq, seq_length,use_cuda = True)
             wh = output['wh']
 
             if opt.baseline == 0:
-                view_id_feature = output['cross_view_id']
-                # view_id_feature = output['id']
-                id_feature = output['single_view_id']
-                id_feature = F.normalize(id_feature, dim=1)
-                view_id_feature = F.normalize(view_id_feature, dim=1)
+                view_id_feature = F.normalize(output['cross_view_id'], dim = 1)
+                id_feature = F.normalize(output['single_view_id'], dim = 1)
             else:
                 if opt.baseline_view == 0:
-                    id_feature = output['single_view_id']
-                    id_feature = F.normalize(id_feature, dim=1)
+                    id_feature = F.normalize(output['single_view_id'], dim = 1)
                 else:
-                    view_id_feature = output['cross_view_id']
-                    view_id_feature = F.normalize(view_id_feature, dim=1)
+                    view_id_feature = F.normalize(output['cross_view_id'], dim = 1)
 
             reg = output['reg'] if opt.reg_offset else None
             dets, bboxes, scores, clses, inds = mot_decode(hm, wh, reg=reg, ltrb=opt.ltrb, K=opt.K)
 
             if opt.baseline == 0:
-                id_feature = _tranpose_and_gather_feat(id_feature, inds)
-                id_feature = id_feature.squeeze(0)
-                id_feature = id_feature.cpu().numpy()
-                view_id_feature = _tranpose_and_gather_feat(view_id_feature, inds)
-                view_id_feature = view_id_feature.squeeze(0)
-                view_id_feature = view_id_feature.cpu().numpy()
+                id_feature = _tranpose_and_gather_feat(id_feature, inds).squeeze(0).cpu().numpy()
+                view_id_feature = _tranpose_and_gather_feat(view_id_feature, inds).squeeze(0).cpu().numpy()
             else:
                 if opt.baseline_view == 0:
-                    id_feature = _tranpose_and_gather_feat(id_feature, inds)
-                    id_feature = id_feature.squeeze(0)
-                    id_feature = id_feature.cpu().numpy()
+                    id_feature = _tranpose_and_gather_feat(id_feature, inds).squeeze(0).cpu().numpy()
                     view_id_feature = id_feature
                 else:
-                    view_id_feature = _tranpose_and_gather_feat(view_id_feature, inds)
-                    view_id_feature = view_id_feature.squeeze(0)
-                    view_id_feature = view_id_feature.cpu().numpy()
+                    view_id_feature = _tranpose_and_gather_feat(view_id_feature, inds).squeeze(0).cpu().numpy()
                     id_feature = view_id_feature
         #detections   
 
@@ -169,32 +154,23 @@ def gather_seq_info_multi_view(opt, dataloader, seq, seq_length,use_cuda = True)
             detections[view].append(det)
             view_det = [index] + [id] + [detection[0], detection[1], detection[2] - detection[0], detection[3] - detection[1]] + [confidence] + [0, 0, 0] + view_feature.tolist()
             view_detections[view].append(view_det)
-            
+               
     for view in view_ls:
+        view_dict = { 
+                "image_filenames": seq,
+                "detections": np.array(detections[view]),
+                "view_detections": np.array(view_detections[view]),
+                "image_size":(3, 1920, 1080),
+                "min_frame_idx": 1,
+                "max_frame_idx": seq_length}
         if opt.test_divo:
-            seq_dict[view] = { 
-                "image_filenames": seq,
-                "detections": np.array(detections[view]),
-                "view_detections": np.array(view_detections[view]),
-                "image_size":(3, 1920, 1080),
-                "min_frame_idx": 0,
-                "max_frame_idx": seq_length}#can be found in metainfo
+            seq_dict = view_dict
         if opt.test_mvmhat or opt.test_mvmhat_campus or opt.test_wildtrack:
-            seq_dict[view] = { 
-                "image_filenames": seq,
-                "detections": np.array(detections[view]),
-                "view_detections": np.array(view_detections[view]),
-                "image_size":(3, 1920, 1080),
-                "min_frame_idx": int(seq_length * 2 / 3) + 1,
-                "max_frame_idx": seq_length }#can be found in metainfo
+            view_dict["min_frame_idx"] = int(seq_length * 2 / 3) + 1
+            seq_dict[view] = view_dict
         if opt.test_epfl:
-            seq_dict[view] = { 
-                "image_filenames": seq,
-                "detections": np.array(detections[view]),
-                "view_detections": np.array(view_detections[view]),
-                "image_size":(3, 1920, 1080),
-                "min_frame_idx": int(seq_length),
-                "max_frame_idx": int(seq_length * 3 / 2) }#can be found in metainfo
+            view_dict["min_frame_idx"] = int(seq_length)
+            view_dict["max_frame_idx"] = int(seq_length * 3 / 2)
     return seq_dict
 
 def main(opt, data_root='/data/MOT16/train', det_root=None, seqs=('MOT16-05',), exp_name='demo',
@@ -202,19 +178,23 @@ def main(opt, data_root='/data/MOT16/train', det_root=None, seqs=('MOT16-05',), 
     logger.setLevel(logging.INFO)
     result_root = os.path.join(data_root, '..', 'results', exp_name)
     mkdir_if_missing(result_root)
+    view_ls = ['View1', 'View2', 'View3']
 
     # run tracking
-
     for seq in seqs:
         logger.info('start seq: {}'.format(seq))
-        dataloader = datasets.LoadImages(opt, osp.join(data_root, seq), opt.img_size)
-        meta_info = open(os.path.join(data_root, seq, 'seqinfo.ini')).read()
-        seq_length = int(meta_info[meta_info.find('seqLength=') + 10:meta_info.find('\nimWidth')])
-
-        seq_mv = gather_seq_info_multi_view(opt, dataloader, seq, seq_length)
-
-        view_ls = dataloader.view_list
-
+        if opt.test_divo:
+            seq_mv = {}
+            for view in view_ls:
+                dataloader = datasets.LoadImages_DIVO(opt, osp.join(data_root, '{}_{}'.format(seq, view), 'img1'), opt.img_size)
+                seq_mv[view] = gather_seq_info_multi_view(opt, dataloader, seq, dataloader.seq_length)
+        else:
+            dataloader = datasets.LoadImages(opt, osp.join(data_root, seq), opt.img_size)
+            meta_info = open(os.path.join(data_root, seq, 'seqinfo.ini')).read()
+            seq_length = int(meta_info[meta_info.find('seqLength=') + 10:meta_info.find('\nimWidth')])
+            seq_mv = gather_seq_info_multi_view(opt, dataloader, seq, seq_length)
+            view_ls = dataloader.view_list
+        
         mvtracker = MVTracker(view_ls)
         updater = Update(opt, seq=seq_mv, mvtracker=mvtracker, display=0, view_list=view_ls)
         updater.run()
@@ -235,18 +215,17 @@ if __name__ == '__main__':
     opt = opts().init()
         
     if opt.test_divo:
-        seqs_str = '''circleRegion
-                      innerShop
-                      movingView
-                      park
-                      playground
-                      shopFrontGate
-                      shopSecondFloor
-                      shopSideGate
-                      shopSideSquare
-                      southGate'''
-        # seqs_str = '''southGate'''
-        data_root = os.path.join(opt.data_dir, 'CrossMOT_dataset/DIVOTrack/images/train')
+        seqs_str = '''Circle
+                      Shop
+                      Moving
+                      Park
+                      Ground
+                      Gate1
+                      Floor
+                      Side
+                      Square
+                      Gate2'''
+        data_root = os.path.join(opt.data_dir, 'DIVOTrack/images/test')
 
     if opt.test_mvmhat:
         seqs_str = '''scene1
@@ -276,9 +255,9 @@ if __name__ == '__main__':
     seqs = [seq.strip() for seq in seqs_str.split()]
 
     main(opt,
-         data_root=data_root,
-         seqs=seqs,
-         exp_name=opt.exp_name,
-         show_image=True,
-         save_images=True,
-         save_videos=False)
+         data_root = data_root,
+         seqs = seqs,
+         exp_name = opt.exp_name,
+         show_image = True,
+         save_images = True,
+         save_videos = False)

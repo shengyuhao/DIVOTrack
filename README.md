@@ -1,8 +1,12 @@
-# DIVOTrack: A Cross-View Dataset for Multi-Human Tracking in DIVerse Open Scenes
-## Abstract
-Cross-view multi-human tracking tries to link human subjects between frames and camera views that contain substantial overlaps. Although cross-view multi-human tracking has received increased attention in recent years, existing datasets still have several issues, including 1) missing real-world scenarios, 2) lacking diverse scenes, 3) owning a limited number of tracks, 4) comprising only static cameras, and 5) lacking standard benchmarks, which hinders the exploration and comparison of cross-view tracking methods.
+# DIVOTrack: A Novel Dataset and Baseline Method for Cross-View Multi-Object Tracking in DIVerse Open Scenes
 
-To solve the above concerns, we present **DIVOTrack**: a new cross-view multi-human tracking dataset for **DIV**erse **O**pen scenes with dense tracking pedestrians in realistic and non-experimental environments. In addition, our DIVOTrack contains ten different types of scenarios and 550 cross-view tracks, which surpasses all existing cross-view human tracking datasets. Furthermore, our DIVOTrack contains videos that are collected by two mobile cameras and one unmanned aerial vehicle, allowing us to evaluate the efficacy of methods while dealing with dynamic views. Finally, we present a summary of current methodologies and a set of standard benchmarks with our DIVOTrack to provide a fair comparison and conduct a thorough analysis of current approaches.
+This repository contains the details of dataset and the Pytorch implementation of Baseline Method CrossMOT of the Paper:
+[DIVOTrack: A Novel Dataset and Baseline Method for Cross-View Multi-Object Tracking in DIVerse Open Scenes](https://arxiv.org/abs/2302.07676)
+
+
+## Abstract
+Cross-view multi-object tracking aims to link objects between frames and camera views with substantial overlaps. Although cross-view multi-object tracking has received increased attention in recent years, existing datasets still have several issues, including 1) missing real-world scenarios, 2) lacking diverse scenes, 3) owning a limited number of tracks, 4) comprising only static cameras, and 5) lacking standard benchmarks, which hinder the investigation and comparison of cross-view tracking methods. To solve the aforementioned issues, we introduce **DIVOTrack**: a new cross-view multi-object tracking dataset for **DIV**erse **O**pen scenes with dense tracking pedestrians in realistic and non-experimental environments. Our DIVOTrack has ten distinct scenarios and 550 cross-view tracks, surpassing all cross-view multi-object tracking datasets currently available. Furthermore, we provide a novel baseline cross-view tracking method with a unified joint detection and cross-view tracking framework named CrossMOT, which learns object detection, single-view association, and cross-view matching with an all-in-one embedding model. Finally, we present a summary of current methodologies and a set of standard benchmarks with our DIVOTrack to provide a fair comparison and conduct a comprehensive analysis of current approaches and our proposed CrossMOT.
+
 
 - Dataset Description
   - Dataset Structure
@@ -37,7 +41,6 @@ DIVOTrack
                 └——————labels_with_ids
                 |        └——————train
                 |        └——————test  
-                |——————npy
                 |——————ReID_format
                 |        └——————bounding_box_test
                 |        └——————bounding_box_train
@@ -60,6 +63,10 @@ We evaluation each single-view tracking baseline by ```./TrackEval```, and the d
 The multi-view tracking results can get from `./Multi_view_Tracking`, the details can see from [Multi_view_Tracking/Readme.md](https://github.com/shengyuhao/DIVOTrack/tree/main/Multi_view_Tracking#readme)
 ## MOTChallengeEvalKit_cv_test
 The cross-view evaluation can get from `./MOTChallengeEvalKit_cv_test`, and the details can see from [./MOTChallengeEvalKit_cv_test/Readme.md](https://github.com/shengyuhao/DIVOTrack/tree/main/MOTChallengeEvalKit_cv_test#readme)
+
+# CrossMOT: A Novel Baseline Cross-View Tracking Method with A Unified Joint Detection and Cross-view Tracking Framework
+The details of implementation of CrossMOT can see from [CrossMOT/Readme.md](https://github.com/shengyuhao/DIVOTrack/tree/main/CrossMOT#readme)
+
 ## Reference
 Any use whatsoever of this dataset and its associated software shall constitute your acceptance of the terms of this agreement. By using the dataset and its associated software, you agree to cite the papers of the authors, in any of your publications by you and your collaborators that make any use of the dataset, in the following format:
 ```

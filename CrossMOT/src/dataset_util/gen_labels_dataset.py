@@ -9,13 +9,26 @@ def mkdirs(d):
         os.makedirs(d)
 
 
-seq_root = '/mnt/sdb/dataset/MOT_datasets/CrossMOT_dataset/EPFL/images/train'
-label_root = '/mnt/sdb/dataset/MOT_datasets/FairMOT_divo/labels_with_ids/test'
+seq_root = '/mnt/sdb/dataset/MOT_datasets/DIVOTrack/images/train'
+label_root = '/mnt/sdb/dataset/MOT_datasets/DIVOTrack/labels_with_ids/train'
 gt_root = '/mnt/sdb/dataset/MOT_datasets/annotation/test_gt'
 mkdirs(label_root)
 #seqs = [s for s in os.listdir(seq_root)]
 seqs = ['circleRegion', 'innerShop', 'movingView', 'park', 'playground', 'shopFrontGate', 'shopSecondFloor', 'shopSideGate', 'shopSideSquare', 'southGate']
 views = ['Drone', 'View1', 'View2']
+
+seqs_dict = {'circleRegion': 'Circle',
+             'innerShop': 'Shop',
+             'movingView': 'Moving',
+             'park': 'Park',
+             'playground': 'Ground',
+             'shopFrontGate': 'Gate1',
+             'shopSecondFloor': 'Floor',
+             'shopSideGate': 'Side',
+             'shopSideSquare': 'Square',
+             'southGate': 'Gate2'}
+
+views_dict = {'Drone': 'View1', 'View1': 'View2', 'View2': 'View3'}
 
 tid_curr = 0
 tid_last = -1

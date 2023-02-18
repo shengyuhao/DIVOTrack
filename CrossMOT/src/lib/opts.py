@@ -99,11 +99,11 @@ class opts(object):
                              help='keep the original resolution'
                                   ' during validation.')
     # tracking
-    self.parser.add_argument('--test_divo', default=False, help='test divo')
-    self.parser.add_argument('--test_mvmhat', default=False, help='test mvmhat')
-    self.parser.add_argument('--test_mvmhat_campus', default=False, help='test mvmhat campus')
-    self.parser.add_argument('--test_wildtrack', default=False, help='test wildtrack')
-    self.parser.add_argument('--test_epfl', default=False, help='test EPFL')
+    self.parser.add_argument('--test_divo', action='store_true', help='Track DIVOTrack dataset')
+    self.parser.add_argument('--test_mvmhat', action='store_true', help='Track MvMHAT dataset')
+    self.parser.add_argument('--test_mvmhat_campus', action='store_true', help='Track CAMPUS dataset')
+    self.parser.add_argument('--test_wildtrack', action='store_true', help='Track Wildtrack dataset')
+    self.parser.add_argument('--test_epfl', action='store_true', help='Track EPFL dataset')
   
     self.parser.add_argument('--conf_thres', type=float, default=0.5, help='confidence thresh for tracking')
     self.parser.add_argument('--det_thres', type=float, default=0.3, help='confidence thresh for detection')
@@ -113,8 +113,7 @@ class opts(object):
     self.parser.add_argument('--input-video', type=str,
                              default='../videos/MOT16-03.mp4',
                              help='path to the input video')
-    self.parser.add_argument('--output-format', type=str, default='video', help='video or text')
-    self.parser.add_argument('--output-root', type=str, default='../demos', help='expected output root path')
+
     self.parser.add_argument('--exp_name', type=str, default='test', help='The test name of experiment')
     
     # mot
@@ -160,12 +159,12 @@ class opts(object):
     self.parser.add_argument('--baseline', type=int, default=0, help='default 0, 1 for baseline')
     self.parser.add_argument('--baseline_view', type=int, default=0, 
                                 help='default 0 for single view id, 1 for cross view id')
-
+    
     self.parser.add_argument('--single_loss_array', type=list, default=[])
     self.parser.add_argument('--cross_loss_array', type=list, default=[])
-    self.parser.add_argument('--single_view_id_split_loss', action='store_true')
-    self.parser.add_argument('--cross_view_id_split_loss', action='store_true')
-    self.parser.add_argument('--zero_start', action='store_true')  
+    self.parser.add_argument('--single_view_id_split_loss', action='store_true', help="locaily-awareness and conflict-free loss for single-view feature")
+    self.parser.add_argument('--cross_view_id_split_loss', action='store_true', help="locaily-awareness and conflict-free loss for cross-view feature")
+    self.parser.add_argument('--zero_start', action='store_true', help='If the person id starts from 0, choose this')  
 
   def parse(self, args=''):
     if args == '':

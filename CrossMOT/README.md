@@ -1,7 +1,7 @@
 # CrossMOT
 
-## Abstract
-Cross-view multi-object tracking (CVMOT) has gained significant attention in the computer vision community in recent years. Based on different views of multiple cameras, CVMOT aims to simultaneously track the movement of objects and match objects across overlapping views. Existing works usually follow the multi-stage tracking, processing object detection, single-view tracking, and cross-view matching one by one with different models, leading to a complex training procedure and difficulty in adapting to other environments. In this paper, we propose a unified joint detection and cross-view tracking framework, which learns object detection, single-view association and cross-view matching with an all-in-one embedding model. The proposed CVMOT tracker, namely CrossMOT, is built on the widely used single-view tracker, e.g., FairMOT, and is extended from the single-view tracking to the cross-view tracking. Specifically, the proposed CrossMOT adopts the decoupled multi-head embeddings that simultaneously learn the object detection, single-view re-identification (Re-ID), and cross-view Re-ID. To address the ID conflict issue for cross-view and single-view embeddings, we employ a locality-aware and conflict-free loss to improve the joint embedding. In the inference stage, the model can take advantage of separate embeddings to improve the cross-view tracking performance. We conduct experiments on several cross-view tracking datasets, including DIVOTrack, MvMHAT and CAMPUS. The state-of-the-art performance is achieved, demonstrating the effectiveness of the proposed CrossMOT.
+## Framework
+![test.gif](assets/framework.jpg)
 
 ## Installation
 * Install dependencies. We use python 3.8 and pytorch >= 1.7.0
@@ -44,7 +44,6 @@ After downloading, you should put the baseline model in the following structure:
 ${CrossMOT_ROOT}
    └——————models
            └——————fairmot_dla34.pth
-           └——————...
 ```
 
 ## Training
@@ -87,7 +86,7 @@ python track.py mot --load_model {your path to the tracking model} --test_divo -
 # This is the dimension of single-view and cross-view embeddings
 ```
 
-### Train
+### Track
 ```
 --conf_thres
 # Default set to 0.5. This is the detection threshold.

@@ -2,14 +2,14 @@
     "root":"/mnt/sdb/dataset/MOT_datasets",
     "train":
     {
-        "mot17":"./data/divo.train"
+        "mot17":"./data/DIVOTrack.train"
     },
     "test_emb":
     {
-        "mot17":"./data/divo.train"
+        "mot17":"./data/DIVOTrack.train"
     },
     "test":
     {
-        "mot17":"./data/divo.val"
+        "mot17":"./data/DIVOTrack.val"
     }
 }

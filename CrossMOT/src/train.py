@@ -32,7 +32,8 @@ def main(opt):
 
     opt = opts().update_dataset_info_and_set_heads(opt, dataset)
     print(opt)
-
+    import pdb
+    pdb.set_trace()
     logger = Logger(opt)
     
     # os.environ['CUDA_VISIBLE_DEVICES'] = opt.gpus_str
@@ -96,5 +97,3 @@ if __name__ == '__main__':
     opt = opts().parse()
     main(opt)
 
-
-# python train.py mot --exp_id epfl --data_cfg '../src/lib/cfg/EPFL.json' --load_model "../models/fairmot_dla34.pth" --gpus 0,1,2,3 --batch_size 32 --num_epochs 30 --zero_start

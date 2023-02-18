@@ -2,7 +2,6 @@
 import numpy as np
 import colorsys
 from .image_viewer import ImageViewer
-import config as C
 from tqdm import tqdm
 
 
