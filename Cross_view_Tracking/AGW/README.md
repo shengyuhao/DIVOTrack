@@ -34,14 +34,14 @@ python setup.py develop
 ```
   
 #### 3. Train
-Download the [pre-trained model](https://drive.google.com/file/d/1vuv4G3GPlpKAMZsX9MAC-TZL3yveqckb/view?usp=sharing) and put it into `./models/` 
+Download the [pre-trained model](https://drive.google.com/file/d/1kPr3jWutqkW7AlqBOy0XqjfXaupslvti/view?usp=share_link) and put it into `./models/` 
 To train a AGW model with on `./bounding_box_train/` with GPU device 0, run similarly:
 ```
 sh Train-AGW.sh
 ```
 
 #### 4. Test
-Download our [model](https://drive.google.com/file/d/1ubBF_8nb5Aw4hCWi8mul3YTpDigm-_5M/view?usp=sharing) and put it into `./log/ours/Experiment-AGW-baseline/`
+Download our [model](https://drive.google.com/file/d/1kPr3jWutqkW7AlqBOy0XqjfXaupslvti/view?usp=share_link) and put it into `./log/ours/Experiment-AGW-baseline/`
 To test a AGW model with on `./bounding_box_test/` with our model, run similarly:
 ```
 sh Test-AGW.sh
