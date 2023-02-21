@@ -35,7 +35,7 @@ or
 sh ./experiments/divo_train.sh
 ```
 ## Inference
-Download our final [model](https://drive.google.com/file/d/18M794uE8KjpZc6VcPHu5LzKQfW1bnapP/view?usp=sharing).
+Download our final [model](https://drive.google.com/file/d/1wqrYo80WWVOA7ciYVYHWzi2yXN2EQG_M/view?usp=share_link).
 Make sure the "exp_id" is the same as the training one, the model will be directly loaded from the corresponding dir "exp/tracking/"exp_id"/model_last.pth".
 ```
 cd ${TraDeS_ROOT}
