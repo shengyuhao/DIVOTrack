@@ -67,7 +67,7 @@ sh experiments/test.sh
 
 ## Final Model
 
-You can download our final model here: [FairMOT model](https://drive.google.com/file/d/1_Pf8Yet-VS6peDXBGddO73npcbSaEh3E/view?usp=sharing)
+You can download our final model here: [FairMOT model](https://drive.google.com/file/d/1TA7uHJtweHc0BYdH3eo3vFdtMahHutxi/view?usp=share_link)
 
 After downloading, you should put the final detection model in the following structure:
 ```
