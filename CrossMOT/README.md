@@ -22,7 +22,7 @@ cd DCNv2
 
 ## Data preparation
 
-* We use three cross-view MOT datasets: [EPFL](https://www.epfl.ch/labs/cvlab/data/data-pom-index-php/), [DIVOTrack](https://github.com/shengyuhao/DIVOTrack), [MvMHAT](https://github.com/realgump/MvMHAT), [CAMPUS](http://web.cs.ucla.edu/~yuanluxu/research/mv_track.html) and [Wildtrack](https://www.epfl.ch/labs/cvlab/data/data-wildtrack/). You can go to their official website to download the images and annotations. After download the datasets, please put the all the image in 
+* We use five cross-view MOT datasets: [EPFL](https://www.epfl.ch/labs/cvlab/data/data-pom-index-php/), [DIVOTrack](https://github.com/shengyuhao/DIVOTrack), [MvMHAT](https://github.com/realgump/MvMHAT), [CAMPUS](http://web.cs.ucla.edu/~yuanluxu/research/mv_track.html) and [Wildtrack](https://www.epfl.ch/labs/cvlab/data/data-wildtrack/). You can go to their official website to download the images and annotations. After download the datasets, please put the all the image in 
 {CrossMOT_root}/dataset/dataset_name/images. Notice that the name of each image should have the format "{scene_name}\_{view_name}\_{frame_id}.jpg". Then you need to use the annotation file and {CrossMOT_root}/src/dataset_util/ to generate the corresponding training file {dataset_name.train} and store in {CrossMOT_root}/src/data/.
 * Before training, the dataset should have the following format
 
