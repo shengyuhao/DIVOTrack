@@ -33,7 +33,7 @@ DIVOTrack_github
 ```
 
 ## Pretrained model
-* You can download the pretrained model from [Google Drive](https://drive.google.com/file/d/1KIJMI6dUdXQrFqRxRZyfUDyi_8b2BnUO/view?usp=sharing).
+* You can download the pretrained model from [Google Drive](https://drive.google.com/file/d/1TUk_YXPmCVYfQVKTQozX2N3ZZykgxhPR/view?usp=share_link).
 After downloading, you should put the pretrained models in the following structure:
 ```
 ${ROOT}
@@ -64,7 +64,7 @@ python detect.py mot --load_model='../exp/mot/train_det/model_det_last.pth'
 the detection results are saved in `../../datasets/images/dets/detection_results/`
 ## Final Model
 
-You can download our final model here: [Detection model](https://drive.google.com/file/d/1_Pf8Yet-VS6peDXBGddO73npcbSaEh3E/view?usp=sharing)
+You can download our final model here: [Detection model](https://drive.google.com/file/d/1y2WmMWv8OrCnNXUjaNx0iwNpgqlvrjBk/view?usp=share_link)
 
 After downloading, you should put the final detection model in the following structure:
 ```
