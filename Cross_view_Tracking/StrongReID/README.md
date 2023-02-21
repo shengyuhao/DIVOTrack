@@ -26,7 +26,7 @@ DIVOTrack
 ```
 
 5. Prepare pretrained model
-Put the model in ./models/. You can obtain the model from [Google Drive](https://drive.google.com/file/d/1YknZJrWNPdapx2O1V8Q_N6_Yg0-oSFLd/view?usp=sharing)
+Put the model in ./models/. You can obtain the model from [Google Drive](https://drive.google.com/file/d/1qF7iehkdgKYqnNQQr_Puzl2hr0lQ1ZOm/view?usp=share_link)
 
 
 ## Train
@@ -36,7 +36,7 @@ python3 tools/train.py --config_file='configs/softmax_triplet_with_center.yml' M
 ```
 
 ## Test
-Download our final [model](https://drive.google.com/file/d/11O6MNa8h5zWlAlBARR4k6WiFRQ-DU8AE/view?usp=sharing) and put it into `./models`.
+Download our final [model](https://drive.google.com/file/d/1qF7iehkdgKYqnNQQr_Puzl2hr0lQ1ZOm/view?usp=share_link) and put it into `./models`.
 ```
 python3 tools/test.py --config_file='configs/softmax_triplet_with_center.yml' TEST.NECK_FEAT "('after')" TEST.FEAT_NORM "('yes')" MODEL.PRETRAIN_CHOICE "('self')" TEST.RE_RANKING "('yes')" TEST.WEIGHT "('your train model path')"
 ```
