@@ -32,7 +32,7 @@ python convert_divo_to_coco.py
 ```
  
 ## Train
-The pre-trained model can download from [Google Drive](https://drive.google.com/file/d/16P3B2lDfeVi4jDiY0SkmEF1Y1lasptDr/view?usp=sharing) and put it into `./models/`
+The pre-trained model can download from [Google Drive](https://drive.google.com/file/d/1-RM7T76RTPh8Q0h8Cn9ZdyhU-gnnPIuT/view?usp=share_link) and put it into `./models/`
 ```
 cd ${CenterTrack_ROOT}
 cd src
@@ -56,7 +56,7 @@ sh ./experiments/divo_test.sh
 ```
 The result will be saved to "exp/tracking/"exp_id"/result_divo
 ## Evaluation
-0. Download our final [model](https://drive.google.com/file/d/1O5jdPeliUascmESIcFXcdwqIzZN7pzx4/view?usp=sharing) and put it into `./exp/tracking/"exp_id"/`
+0. Download our final [model](https://drive.google.com/file/d/1-RM7T76RTPh8Q0h8Cn9ZdyhU-gnnPIuT/view?usp=share_link) and put it into `./exp/tracking/"exp_id"/`
 1. Change the directory name from "result_divo" to "centertrack"
 2. Make sure "centertrack" has the middle directory "data". (i.e. centertrack/data/circleRegion_Drone.txt instead of centertrack/circleRegion_Drone.txt)
 3. Copy your result_divo to DIVOTrack/TrackEval/data/trackers/mot_challenge/divo
