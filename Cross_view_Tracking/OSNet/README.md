@@ -39,7 +39,7 @@ sh Train_osnet.sh
 ```
 
 #### 4. Test
-Download our [model](https://drive.google.com/file/d/1Aygf9e5ewlOHuExQvGGA1tfseMKJGYmP/view?usp=sharing) and put it into `./log/ours/model/`
+Download our [model](https://drive.google.com/file/d/1tRi6gJo0tk8d5S-v05GBFCYcGjNEYwgs/view?usp=share_link) and put it into `./log/ours/model/`
 To test a AGW model with on `./bounding_box_test/` with our model, run similarly:
 ```
 sh Test_osnet.sh
