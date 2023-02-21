@@ -22,7 +22,7 @@ cd DCNv2
 
 ## Data preparation
 
-* We use three cross-view MOT datasets: [DIVOTrack](https://github.com/shengyuhao/DIVOTrack), [MvMHAT](https://github.com/realgump/MvMHAT) and [CAMPUS](http://web.cs.ucla.edu/~yuanluxu/research/mv_track.html). You can go to their official website to download the images and annotations. After download the datasets, please put the all the image in \${CrossMOT_root}/dataset/dataset_name/images. Notice that the name of each image should have the format "{scene_name}_{view_name}_{frame_id}.jpg". Then you need to use the annotation file and  ${CrossMOT_root}/src/dataset_util/ to generate the corresponding labels and store in \${CrossMOT_root}/dataset/dataset_name/labels_with_ids. 
+* We use three cross-view MOT datasets: [DIVOTrack](https://github.com/shengyuhao/DIVOTrack), [MvMHAT](https://github.com/realgump/MvMHAT) and [CAMPUS](http://web.cs.ucla.edu/~yuanluxu/research/mv_track.html). You can go to their official website to download the images and annotations. **DIVOTrack** has a cross-view [annotations](https://drive.google.com/file/d/1eedti0PPJ_nDlS3SFsy08DRpSh8RAdyU/view?usp=share_link) version for CrossMOT. After download the datasets, please put the all the image in \${CrossMOT_root}/dataset/dataset_name/images. Notice that the name of each image should have the format "{scene_name}_{view_name}_{frame_id}.jpg". Then you need to use the annotation file and  ${CrossMOT_root}/src/dataset_util/ to generate the corresponding labels and store in \${CrossMOT_root}/dataset/dataset_name/labels_with_ids. 
 * Before training, the dataset should have the following format
 
 ```
