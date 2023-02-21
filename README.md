@@ -51,7 +51,7 @@ DIVOTrack
                 └——————boxes.json  
 ```
 ### Dataset Downloads
-The whole dataset can download from [GoogleDrive](https://drive.google.com/drive/folders/1RCk95TdFv3Tt7gVuyxJasiHG1IPE6jkX?usp=sharing). *Note that, each file needs to unzip by the password. You can decompress each `.zip` file in its folder after send us the License in any format.*
+The whole dataset can download from [GoogleDrive](https://drive.google.com/drive/folders/1RCk95TdFv3Tt7gVuyxJasiHG1IPE6jkX?usp=sharing). **Note that, each file needs to unzip by the password. You can decompress each `.zip` file in its folder after send us the License in any format.**
 After that, you should run `generate_ini.py` to generate `seqinfo.ini` file. 
 
 ## Training Detector
