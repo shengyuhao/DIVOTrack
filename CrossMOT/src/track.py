@@ -195,7 +195,7 @@ def main(opt, data_root='/data/MOT16/train', det_root=None, seqs=('MOT16-05',), 
             seq_mv = gather_seq_info_multi_view(opt, dataloader, seq, seq_length)
             view_ls = dataloader.view_list
         
-        mvtracker = MVTracker(view_ls)
+        mvtracker = MVTracker(opt, view_ls)
         updater = Update(opt, seq=seq_mv, mvtracker=mvtracker, display=0, view_list=view_ls)
         updater.run()
 
