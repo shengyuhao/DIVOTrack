@@ -33,7 +33,7 @@ DIVOTrack_github
 ```
 
 ## Pretrained model
-* You can download the pretrained model from [Google Drive](https://drive.google.com/file/d/1TUk_YXPmCVYfQVKTQozX2N3ZZykgxhPR/view?usp=share_link).
+* You can download the pretrained model from [Google Drive](https://drive.google.com/file/d/1RQvWC-kmp1alZFyqydCKpntShMYuQU8A/view?usp=sharing).
 After downloading, you should put the pretrained models in the following structure:
 ```
 ${ROOT}
