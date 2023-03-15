@@ -29,46 +29,47 @@ The ground truth of the DIVOTrak.
 We collect data in 10 different real-world scenarios, named: `'Circle', 'Shop', 'Moving', 'Park', 'Ground', 'Gate1', 'Floor', 'Side', 'Square', 'Gate2'`. All
 the sequences are captured by using 3 moving cameras: `'View1', 'View2', 'View3'` and are manually synchronized. 
 
-In old version, the corresponding scenarios named: `'circleRegion', 'innerShop', 'movingView', 'park', 'playground', 'shopFrontGate', 'shopSecondFloor', 'shopSideGate', 'shopSideSquare', 'southGate'`. The corresponding camera named: `'Drone', 'View1', 'View2'`.
+In the old version, the corresponding scenarios named: `'circleRegion', 'innerShop', 'movingView', 'park', 'playground', 'shopFrontGate', 'shopSecondFloor', 'shopSideGate', 'shopSideSquare', 'southGate'`. The corresponding camera named: `'Drone', 'View1', 'View2'`.
 
 ### Dataset Structure
 The structure of our dataset as:
 ```
 DIVOTrack
-    └——————datasets
-             └——————DIVO
-                |——————images
-                |        └——————annotations
-                |        └——————dets    
-                |        └——————train
-                |        └——————test
-                └——————labels_with_ids
-                |        └——————train
-                |        └——————test  
-                |——————ReID_format
-                |        └——————bounding_box_test
-                |        └——————bounding_box_train
-                |        └——————query        
-                └——————boxes.json  
+    └─────datasets
+             └─────DIVO
+                    ├───images
+                    │    ├───annotations
+                    │    ├───dets
+                    │    ├───train
+                    │    └───test
+                    ├───labels_with_ids
+                    │    ├───train
+                    │    └───test
+                    ├───ReID_format
+                    │    ├───bounding_box_test
+                    │    ├───bounding_box_train
+                    │    └───query
+                    └───boxes.json
+
 ```
 ### Dataset Downloads
 The whole dataset can download from [GoogleDrive](https://drive.google.com/drive/folders/1RCk95TdFv3Tt7gVuyxJasiHG1IPE6jkX?usp=sharing). **Note that, each file needs to unzip by the password. You can decompress each `.zip` file in its folder after send us (shengyuhao@zju.edu.cn, gaoangwang@intl.zju.edu.cn) the License in any format.** After that, you should run `generate_ini.py` to generate `seqinfo.ini` file. 
 
 ## Training Detector
-The training process of our detector is in ```./Training_detector/``` and the details can see from  [Training_detector/Readme.md](https://github.com/shengyuhao/DIVOTrack/tree/main/Training_Detector#readme).
+The training process of our detector is in `./Training_detector/` and the details can see from  [Training_detector/README.md](https://github.com/shengyuhao/DIVOTrack/tree/main/Training_Detector#readme).
 ## Single-view Tracking
-The implement of single-view tracking baseline methods is in ```./Single_view_Tracking``` and the details can see from [Single_view_Tracking/Readme.md](https://github.com/shengyuhao/DIVOTrack/tree/main/Single_view_Tracking#readme).
+The implement of single-view tracking baseline methods is in `./Single_view_Tracking` and the details can see from [Single_view_Tracking/README.md](https://github.com/shengyuhao/DIVOTrack/tree/main/Single_view_Tracking#readme).
 ## Cross-view Tracking
-The implement of cross-view tracking baseline methods is in ```./Cross_view_Tracking``` and the details can see from [Cross_view_Tracking/Readme.md](https://github.com/shengyuhao/DIVOTrack/tree/main/Cross_view_Tracking#readme).
+The implement of cross-view tracking baseline methods is in ```./Cross_view_Tracking``` and the details can see from [Cross_view_Tracking/README.md](https://github.com/shengyuhao/DIVOTrack/tree/main/Cross_view_Tracking#readme).
 ## TrackEval
-We evaluation each single-view tracking baseline by ```./TrackEval```, and the details can see from [TrackEval/Readme.md](https://github.com/shengyuhao/DIVOTrack/tree/main/TrackEval#readme).
+We evaluate each single-view tracking baseline using `./TrackEval`, and the details can see from [TrackEval/README.md](https://github.com/shengyuhao/DIVOTrack/tree/main/TrackEval#readme).
 ## Multi-view Tracking
-The multi-view tracking results can get from `./Multi_view_Tracking`, the details can see from [Multi_view_Tracking/Readme.md](https://github.com/shengyuhao/DIVOTrack/tree/main/Multi_view_Tracking#readme)
+The multi-view tracking results can be obtained from `./Multi_view_Tracking`, the details can see from [Multi_view_Tracking/README.md](https://github.com/shengyuhao/DIVOTrack/tree/main/Multi_view_Tracking#readme)
 ## MOTChallengeEvalKit_cv_test
-The cross-view evaluation can get from `./MOTChallengeEvalKit_cv_test`, and the details can see from [./MOTChallengeEvalKit_cv_test/Readme.md](https://github.com/shengyuhao/DIVOTrack/tree/main/MOTChallengeEvalKit_cv_test#readme)
+The cross-view evaluation can be obtained from `./MOTChallengeEvalKit_cv_test`, and the details can see from [MOTChallengeEvalKit_cv_test/README.md](https://github.com/shengyuhao/DIVOTrack/tree/main/MOTChallengeEvalKit_cv_test#readme)
 
-# CrossMOT: A Novel Baseline Cross-View Tracking Method with A Unified Joint Detection and Cross-view Tracking Framework
-The details of implementation of CrossMOT can see from [CrossMOT/Readme.md](https://github.com/shengyuhao/DIVOTrack/tree/main/CrossMOT#readme)
+## CrossMOT: A Novel Baseline Cross-View Tracking Method with A Unified Joint Detection and Cross-view Tracking Framework
+The details of the implementation of CrossMOT can be found in [CrossMOT/README.md](https://github.com/shengyuhao/DIVOTrack/tree/main/CrossMOT#readme)
 
 ## Reference
 Any use whatsoever of this dataset and its associated software shall constitute your acceptance of the terms of this agreement. By using the dataset and its associated software, you agree to cite the papers of the authors, in any of your publications by you and your collaborators that make any use of the dataset, in the following format:
@@ -81,5 +82,6 @@ Any use whatsoever of this dataset and its associated software shall constitute 
 }
 ```
 The license agreement for data usage implies the citation of the paper above. Please notice that citing the dataset URL instead of the publications would not be compliant with this license agreement. You can read the LICENSE from [LICENSE](https://github.com/shengyuhao/DIVOTrack/blob/main/LICENSE.md).
+
 ## Contact
-If any concerns please contact shengyuhao@zju.edu.cn
+If you have any concerns, please contact shengyuhao@zju.edu.cn
