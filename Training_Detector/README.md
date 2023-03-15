@@ -64,7 +64,7 @@ python detect.py mot --load_model='../exp/mot/train_det/model_det_last.pth'
 the detection results are saved in `../../datasets/images/dets/detection_results/`
 ## Final Model
 
-You can download our final model here: [Detection model](https://drive.google.com/file/d/1y2WmMWv8OrCnNXUjaNx0iwNpgqlvrjBk/view?usp=share_link)
+You can download our final model here: [Detection model](https://drive.google.com/file/d/1vwUQyVPGAUKHKUp8OjW3LOht_SbtAQPI/view?usp=sharing)
 
 After downloading, you should put the final detection model in the following structure:
 ```
