@@ -24,8 +24,7 @@ class Update():
         self.epsilon = 0.5
         self.result = {key: [] for key in self.view_ls}
         self.view_list = view_list
-        self.reid_dim = opt.reid_dim
-        matrix = [[]]
+        self.opt = opt
 
 
 
@@ -82,7 +81,7 @@ class Update():
                     S12 = np.dot(x, y.transpose(1, 0))
                     scale12 = np.log(self.delta / (1 - self.delta) * S12.shape[1]) / self.epsilon
                     S12 = softmax(S12 * scale12)
-                    S12[S12 < 0.6] = 0
+                    S12[S12 < self.opt.cross_view_threshold] = 0
                     assign_ls = sklearn_linear_assignment(- S12)
                     assign_ls = np.asarray(assign_ls)
                     assign_ls = np.transpose(assign_ls)
@@ -111,7 +110,7 @@ class Update():
                 view_feature = sklearn_preprocessing.normalize(view_feature, norm='l2', axis=1)
                 all_view_features.append(view_feature)
             else:
-                all_view_features.append(np.array([[0] * self.reid_dim]))
+                all_view_features.append(np.array([[0] * self.opt.reid_dim]))
             all_view_id.append(view_id)
         match_mat = gen_X(all_view_features)
         self.tracker.update(match_mat)

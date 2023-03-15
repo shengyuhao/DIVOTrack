@@ -96,4 +96,3 @@ def main(opt):
 if __name__ == '__main__':
     opt = opts().parse()
     main(opt)
-

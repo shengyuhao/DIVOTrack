@@ -23,7 +23,10 @@ class opts(object):
                                   'Reloaded the optimizer parameter and '
                                   'set load_model to model_last.pth '
                                   'in the exp dir if load_model is empty.') 
-
+    self.parser.add_argument('--baseline', type=int, default=0, 
+                             help='default 0, 1 for baseline')
+    self.parser.add_argument('--baseline_view', type=int, default=0, 
+                                help='default 0 for single view id, 1 for cross view id')
     # system
     self.parser.add_argument('--gpus', default='2, 3',
                              help='-1 for CPU, use comma for multiple gpus')
@@ -67,6 +70,8 @@ class opts(object):
                              help='input height. -1 for default from dataset.')
     self.parser.add_argument('--input_w', type=int, default=-1, 
                              help='input width. -1 for default from dataset.')
+    self.parser.add_argument('--zero_start', action='store_true', 
+                             help='Enable if the person id starts from 0') 
     
     # train
     self.parser.add_argument('--lr', type=float, default=1e-4,
@@ -113,8 +118,11 @@ class opts(object):
     self.parser.add_argument('--input-video', type=str,
                              default='../videos/MOT16-03.mp4',
                              help='path to the input video')
-
     self.parser.add_argument('--exp_name', type=str, default='test', help='The test name of experiment')
+    self.parser.add_argument('--single_view_threshold', type=float, default=0.3,
+                             help='single view tracking matching threshold')
+    self.parser.add_argument('--cross_view_threshold', type=float, default=0.5,
+                             help='cross view tracking matching threshold')
     
     # mot
     self.parser.add_argument('--data_cfg', type=str,
@@ -154,17 +162,13 @@ class opts(object):
                              help='category specific bounding box size.')
     self.parser.add_argument('--not_reg_offset', action='store_true',
                              help='not regress local offset.')
-    
-    # add for choose baseline or not
-    self.parser.add_argument('--baseline', type=int, default=0, help='default 0, 1 for baseline')
-    self.parser.add_argument('--baseline_view', type=int, default=0, 
-                                help='default 0 for single view id, 1 for cross view id')
-    
     self.parser.add_argument('--single_loss_array', type=list, default=[])
     self.parser.add_argument('--cross_loss_array', type=list, default=[])
-    self.parser.add_argument('--single_view_id_split_loss', action='store_true', help="locaily-awareness and conflict-free loss for single-view feature")
-    self.parser.add_argument('--cross_view_id_split_loss', action='store_true', help="locaily-awareness and conflict-free loss for cross-view feature")
-    self.parser.add_argument('--zero_start', action='store_true', help='If the person id starts from 0, choose this')  
+    self.parser.add_argument('--single_view_id_split_loss', action='store_true', 
+                             help="locaily-awareness and conflict-free loss for single-view feature")
+    self.parser.add_argument('--cross_view_id_split_loss', action='store_true', 
+                             help="locaily-awareness and conflict-free loss for cross-view feature")
+    
 
   def parse(self, args=''):
     if args == '':
@@ -268,4 +272,3 @@ class opts(object):
     opt.dataset = dataset.dataset
     opt = self.update_dataset_info_and_set_heads(opt, dataset)
     return opt
-
