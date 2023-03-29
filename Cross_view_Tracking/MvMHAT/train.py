@@ -8,8 +8,6 @@ from tqdm import tqdm
 from torch.utils.data import DataLoader, ConcatDataset
 from loader import Loader
 from torch.cuda.amp import autocast as autocast
-import pdb
-
 
 def train(epoch):
     model.train()

@@ -10,7 +10,7 @@ import torch.nn as nn
 from ignite.engine import Engine
 
 from utils.reid_metric import R1_mAP, R1_mAP_reranking
-import pdb
+
 
 def create_supervised_evaluator(model, metrics,
                                 device=None):

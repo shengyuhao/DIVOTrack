@@ -12,7 +12,6 @@ import motmetrics as mm
 import pandas as pd
 from collections import OrderedDict
 from pathlib import Path
-import pdb
 
 
 def parse_args():

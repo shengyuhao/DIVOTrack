@@ -208,7 +208,6 @@ def compute_rot_loss(output, target_bin, target_res, mask):
     # target_bin: (B, 128, 2) [bin1_cls, bin2_cls]
     # target_res: (B, 128, 2) [bin1_res, bin2_res]
     # mask: (B, 128, 1)
-    # import pdb; pdb.set_trace()
     output = output.view(-1, 8)
     target_bin = target_bin.view(-1, 2)
     target_res = target_res.view(-1, 2)

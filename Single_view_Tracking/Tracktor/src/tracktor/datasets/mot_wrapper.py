@@ -5,7 +5,6 @@ import torch
 from torch.utils.data import Dataset
 
 from .mot_sequence import MOTSequence
-import pdb
 
 class MOT17Wrapper(Dataset):
 	"""A Wrapper for the MOT_Sequence class to return multiple sequences."""

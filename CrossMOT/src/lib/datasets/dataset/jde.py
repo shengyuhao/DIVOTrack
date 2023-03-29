@@ -20,38 +20,48 @@ from opts import opts
 from utils.image import gaussian_radius, draw_umich_gaussian, draw_msra_gaussian
 from utils.utils import xyxy2xywh, generate_anchors, xywh2xyxy, encode_delta
 import utils
-import pdb
+
 
 class LoadImages_DIVO:  # for inference
     def __init__(self, opt, path, img_size=(1088, 608)):
         if os.path.isdir(path):
-            image_format = ['.jpg', '.jpeg', '.png', '.tif']
-            self.files = sorted(glob.glob('%s/*.*' % path))
-            self.files = list(filter(lambda x: os.path.splitext(x)[1].lower() in image_format, self.files))
+            image_format = [".jpg", ".jpeg", ".png", ".tif"]
+            self.files = sorted(glob.glob("%s/*.*" % path))
+            self.files = list(
+                filter(
+                    lambda x: os.path.splitext(x)[1].lower() in image_format, self.files
+                )
+            )
         elif os.path.isfile(path):
             self.files = [path]
         seq_info, seq_length = None, 0
         for filename in os.listdir(path):
-            if (filename.split('.')[-1] == 'ini'):
+            if filename.split(".")[-1] == "ini":
                 seq_info = open(osp.join(path, filename)).read()
 
         if seq_info != None:
-            seq_length = int(seq_info[seq_info.find('seqLength=') + 10:seq_info.find('\nimWidth')])
+            seq_length = int(
+                seq_info[seq_info.find("seqLength=") + 10 : seq_info.find("\nimWidth")]
+            )
         file_list = []
         self.view_list = []
         for filename in self.files:
-            name = filename.split('.')[0]
+            name = filename.split(".")[0]
             # gather the view
-            if name.split('_')[-2] not in self.view_list:
-                self.view_list.append(name.split('_')[-2])
+            if name.split("_")[-2] not in self.view_list:
+                self.view_list.append(name.split("_")[-2])
             if opt.test_divo:
                 file_list.append(filename)
-                seq_length = int(name.split('_')[-1]) if int(name.split('_')[-1]) > seq_length else seq_length
+                seq_length = (
+                    int(name.split("_")[-1])
+                    if int(name.split("_")[-1]) > seq_length
+                    else seq_length
+                )
             if opt.test_mvmhat or opt.test_mvmhat_campus or opt.test_wildtrack:
-                if (int(name.split('_')[-1]) > int(seq_length * 2 / 3)):
+                if int(name.split("_")[-1]) > int(seq_length * 2 / 3):
                     file_list.append(filename)
             if opt.test_epfl:
-                if (int(name.split('_')[-1]) >= int(seq_length)):
+                if int(name.split("_")[-1]) >= int(seq_length):
                     file_list.append(filename)
         self.view_list.sort()
         self.files = file_list
@@ -60,7 +70,7 @@ class LoadImages_DIVO:  # for inference
         self.height = img_size[1]
         self.count = 0
         self.seq_length = seq_length
-        assert self.nF > 0, 'No images found in ' + path
+        assert self.nF > 0, "No images found in " + path
 
     def __iter__(self):
         self.count = -1
@@ -75,7 +85,7 @@ class LoadImages_DIVO:  # for inference
         # Read image
         img0 = cv2.imread(img_path)  # BGR
         img0 = cv2.resize(img0, (1920, 1080))
-        assert img0 is not None, 'Failed to load ' + img_path
+        assert img0 is not None, "Failed to load " + img_path
 
         # Padded resize
         img, _, _, _ = letterbox(img0, height=self.height, width=self.width)
@@ -95,7 +105,7 @@ class LoadImages_DIVO:  # for inference
         # Read image
         img0 = cv2.imread(img_path)  # BGR
         img0 = cv2.resize(img0, (1920, 1080))
-        assert img0 is not None, 'Failed to load ' + img_path
+        assert img0 is not None, "Failed to load " + img_path
 
         # Padded resize
         img, _, _, _ = letterbox(img0, height=self.height, width=self.width)
@@ -110,35 +120,41 @@ class LoadImages_DIVO:  # for inference
     def __len__(self):
         return self.nF  # number of files
 
+
 class LoadImages:  # for inference
     def __init__(self, opt, path, img_size=(1088, 608)):
-        
         if os.path.isdir(path):
-            image_format = ['.jpg', '.jpeg', '.png', '.tif']
-            self.files = sorted(glob.glob('%s/*.*' % path))
-            self.files = list(filter(lambda x: os.path.splitext(x)[1].lower() in image_format, self.files))
+            image_format = [".jpg", ".jpeg", ".png", ".tif"]
+            self.files = sorted(glob.glob("%s/*.*" % path))
+            self.files = list(
+                filter(
+                    lambda x: os.path.splitext(x)[1].lower() in image_format, self.files
+                )
+            )
         elif os.path.isfile(path):
             self.files = [path]
         for filename in os.listdir(path):
-            if (filename.split('.')[-1] == 'ini'):
+            if filename.split(".")[-1] == "ini":
                 seq_info = open(osp.join(path, filename)).read()
-        seq_length = int(seq_info[seq_info.find('seqLength=') + 10:seq_info.find('\nimWidth')])
+        seq_length = int(
+            seq_info[seq_info.find("seqLength=") + 10 : seq_info.find("\nimWidth")]
+        )
 
         file_list = []
         self.view_list = []
         for filename in self.files:
-            name = filename.split('.')[0]
+            name = filename.split(".")[0]
             # gather the view
-            if name.split('_')[-2] not in self.view_list:
-                self.view_list.append(name.split('_')[-2])
+            if name.split("_")[-2] not in self.view_list:
+                self.view_list.append(name.split("_")[-2])
             if opt.test_divo:
-                if (int(name.split('_')[-1]) <= int(seq_length)):
+                if int(name.split("_")[-1]) <= int(seq_length):
                     file_list.append(filename)
             if opt.test_mvmhat or opt.test_mvmhat_campus or opt.test_wildtrack:
-                if (int(name.split('_')[-1]) > int(seq_length * 2 / 3)):
+                if int(name.split("_")[-1]) > int(seq_length * 2 / 3):
                     file_list.append(filename)
             if opt.test_epfl:
-                if (int(name.split('_')[-1]) >= int(seq_length)):
+                if int(name.split("_")[-1]) >= int(seq_length):
                     file_list.append(filename)
         self.view_list.sort()
         self.files = file_list
@@ -146,7 +162,7 @@ class LoadImages:  # for inference
         self.width = img_size[0]
         self.height = img_size[1]
         self.count = 0
-        assert self.nF > 0, 'No images found in ' + path
+        assert self.nF > 0, "No images found in " + path
 
     def __iter__(self):
         self.count = -1
@@ -161,7 +177,7 @@ class LoadImages:  # for inference
         # Read image
         img0 = cv2.imread(img_path)  # BGR
         img0 = cv2.resize(img0, (1920, 1080))
-        assert img0 is not None, 'Failed to load ' + img_path
+        assert img0 is not None, "Failed to load " + img_path
 
         # Padded resize
         img, _, _, _ = letterbox(img0, height=self.height, width=self.width)
@@ -181,7 +197,7 @@ class LoadImages:  # for inference
         # Read image
         img0 = cv2.imread(img_path)  # BGR
         img0 = cv2.resize(img0, (1920, 1080))
-        assert img0 is not None, 'Failed to load ' + img_path
+        assert img0 is not None, "Failed to load " + img_path
 
         # Padded resize
         img, _, _, _ = letterbox(img0, height=self.height, width=self.width)
@@ -197,16 +213,19 @@ class LoadImages:  # for inference
         return self.nF  # number of files
 
 
-
 class LoadImagesAndLabels:  # for training
     def __init__(self, path, img_size=(1088, 608), augment=False, transforms=None):
-        with open(path, 'r') as file:
+        with open(path, "r") as file:
             self.img_files = file.readlines()
-            self.img_files = [x.replace('\n', '') for x in self.img_files]
+            self.img_files = [x.replace("\n", "") for x in self.img_files]
             self.img_files = list(filter(lambda x: len(x) > 0, self.img_files))
 
-        self.label_files = [x.replace('images', 'labels_with_ids').replace('.png', '.txt').replace('.jpg', '.txt')
-                            for x in self.img_files]
+        self.label_files = [
+            x.replace("images", "labels_with_ids")
+            .replace(".png", ".txt")
+            .replace(".jpg", ".txt")
+            for x in self.img_files
+        ]
 
         self.nF = len(self.img_files)  # number of image files
         self.width = img_size[0]
@@ -226,9 +245,8 @@ class LoadImagesAndLabels:  # for training
         rs = 0
         if (img.shape[0], img.shape[1]) != (1080, 1920):
             img = cv2.resize(img, (1920, 1080))
-        # pdb.set_trace()
         if img is None:
-            raise ValueError('File corrupt {}'.format(img_path))
+            raise ValueError("File corrupt {}".format(img_path))
         augment_hsv = True
         if self.augment and augment_hsv:
             # SV augmentation by 50%
@@ -255,7 +273,6 @@ class LoadImagesAndLabels:  # for training
         img, ratio, padw, padh = letterbox(img, height=height, width=width)
         # if label_path.split('/')[-1].split('_')[1] == 'View1' and label_path.split('/')[-1].split('_')[0] == 'southGate':
         #     cv2.imwrite('/mnt/sdb/dataset/MOT_datasets/lpy/test1.png', img)
-        # pdb.set_trace()
         # Load labels
         if os.path.isfile(label_path) and os.path.getsize(label_path) != 0:
             labels0 = np.loadtxt(label_path, dtype=np.float32).reshape(-1, 6)
@@ -272,7 +289,9 @@ class LoadImagesAndLabels:  # for training
 
         # Augment image and labels
         if self.augment:
-            img, labels, M = random_affine(img, labels, degrees=(-5, 5), translate=(0.10, 0.10), scale=(0.50, 1.20))
+            img, labels, M = random_affine(
+                img, labels, degrees=(-5, 5), translate=(0.10, 0.10), scale=(0.50, 1.20)
+            )
 
         nL = len(labels)
         if nL > 0:
@@ -291,7 +310,7 @@ class LoadImagesAndLabels:  # for training
                     labels[:, 2] = 1 - labels[:, 2]
 
         img = np.ascontiguousarray(img[:, :, ::-1])  # BGR to RGB
-        
+
         if self.transforms is not None:
             img = self.transforms(img)
 
@@ -301,22 +320,35 @@ class LoadImagesAndLabels:  # for training
         return self.nF  # number of batches
 
 
-def letterbox(img, height=608, width=1088,
-              color=(127.5, 127.5, 127.5)):  # resize a rectangular image to a padded rectangular
+def letterbox(
+    img, height=608, width=1088, color=(127.5, 127.5, 127.5)
+):  # resize a rectangular image to a padded rectangular
     shape = img.shape[:2]  # shape = [height, width]
     ratio = min(float(height) / shape[0], float(width) / shape[1])
-    new_shape = (round(shape[1] * ratio), round(shape[0] * ratio))  # new_shape = [width, height]
+    new_shape = (
+        round(shape[1] * ratio),
+        round(shape[0] * ratio),
+    )  # new_shape = [width, height]
     dw = (width - new_shape[0]) / 2  # width padding
     dh = (height - new_shape[1]) / 2  # height padding
     top, bottom = round(dh - 0.1), round(dh + 0.1)
     left, right = round(dw - 0.1), round(dw + 0.1)
     img = cv2.resize(img, new_shape, interpolation=cv2.INTER_AREA)  # resized, no border
-    img = cv2.copyMakeBorder(img, top, bottom, left, right, cv2.BORDER_CONSTANT, value=color)  # padded rectangular
+    img = cv2.copyMakeBorder(
+        img, top, bottom, left, right, cv2.BORDER_CONSTANT, value=color
+    )  # padded rectangular
     return img, ratio, dw, dh
 
 
-def random_affine(img, targets=None, degrees=(-10, 10), translate=(.1, .1), scale=(.9, 1.1), shear=(-2, 2),
-                  borderValue=(127.5, 127.5, 127.5)):
+def random_affine(
+    img,
+    targets=None,
+    degrees=(-10, 10),
+    translate=(0.1, 0.1),
+    scale=(0.9, 1.1),
+    shear=(-2, 2),
+    borderValue=(127.5, 127.5, 127.5),
+):
     # torchvision.transforms.RandomAffine(degrees=(-10, 10), translate=(.1, .1), scale=(.9, 1.1), shear=(-10, 10))
     # https://medium.com/uruvideo/dataset-augmentation-with-random-homographies-a8f4b44830d4
 
@@ -329,21 +361,32 @@ def random_affine(img, targets=None, degrees=(-10, 10), translate=(.1, .1), scal
     a = random.random() * (degrees[1] - degrees[0]) + degrees[0]
     # a += random.choice([-180, -90, 0, 90])  # 90deg rotations added to small rotations
     s = random.random() * (scale[1] - scale[0]) + scale[0]
-    R[:2] = cv2.getRotationMatrix2D(angle=a, center=(img.shape[1] / 2, img.shape[0] / 2), scale=s)
+    R[:2] = cv2.getRotationMatrix2D(
+        angle=a, center=(img.shape[1] / 2, img.shape[0] / 2), scale=s
+    )
 
     # Translation
     T = np.eye(3)
-    T[0, 2] = (random.random() * 2 - 1) * translate[0] * img.shape[0] + border  # x translation (pixels)
-    T[1, 2] = (random.random() * 2 - 1) * translate[1] * img.shape[1] + border  # y translation (pixels)
+    T[0, 2] = (random.random() * 2 - 1) * translate[0] * img.shape[
+        0
+    ] + border  # x translation (pixels)
+    T[1, 2] = (random.random() * 2 - 1) * translate[1] * img.shape[
+        1
+    ] + border  # y translation (pixels)
 
     # Shear
     S = np.eye(3)
-    S[0, 1] = math.tan((random.random() * (shear[1] - shear[0]) + shear[0]) * math.pi / 180)  # x shear (deg)
-    S[1, 0] = math.tan((random.random() * (shear[1] - shear[0]) + shear[0]) * math.pi / 180)  # y shear (deg)
+    S[0, 1] = math.tan(
+        (random.random() * (shear[1] - shear[0]) + shear[0]) * math.pi / 180
+    )  # x shear (deg)
+    S[1, 0] = math.tan(
+        (random.random() * (shear[1] - shear[0]) + shear[0]) * math.pi / 180
+    )  # y shear (deg)
 
     M = S @ T @ R  # Combined rotation matrix. ORDER IS IMPORTANT HERE!!
-    imw = cv2.warpPerspective(img, M, dsize=(width, height), flags=cv2.INTER_LINEAR,
-                              borderValue=borderValue)  # BGR order borderValue
+    imw = cv2.warpPerspective(
+        img, M, dsize=(width, height), flags=cv2.INTER_LINEAR, borderValue=borderValue
+    )  # BGR order borderValue
 
     # Return warped points also
     if targets is not None:
@@ -354,13 +397,17 @@ def random_affine(img, targets=None, degrees=(-10, 10), translate=(.1, .1), scal
 
             # warp points
             xy = np.ones((n * 4, 3))
-            xy[:, :2] = points[:, [0, 1, 2, 3, 0, 3, 2, 1]].reshape(n * 4, 2)  # x1y1, x2y2, x1y2, x2y1
+            xy[:, :2] = points[:, [0, 1, 2, 3, 0, 3, 2, 1]].reshape(
+                n * 4, 2
+            )  # x1y1, x2y2, x1y2, x2y1
             xy = (xy @ M.T)[:, :2].reshape(n, 8)
 
             # create new boxes
             x = xy[:, [0, 2, 4, 6]]
             y = xy[:, [1, 3, 5, 7]]
-            xy = np.concatenate((x.min(1), y.min(1), x.max(1), y.max(1))).reshape(4, n).T
+            xy = (
+                np.concatenate((x.min(1), y.min(1), x.max(1), y.max(1))).reshape(4, n).T
+            )
 
             # apply angle-based reduction
             radians = a * math.pi / 180
@@ -369,13 +416,17 @@ def random_affine(img, targets=None, degrees=(-10, 10), translate=(.1, .1), scal
             y = (xy[:, 3] + xy[:, 1]) / 2
             w = (xy[:, 2] - xy[:, 0]) * reduction
             h = (xy[:, 3] - xy[:, 1]) * reduction
-            xy = np.concatenate((x - w / 2, y - h / 2, x + w / 2, y + h / 2)).reshape(4, n).T
+            xy = (
+                np.concatenate((x - w / 2, y - h / 2, x + w / 2, y + h / 2))
+                .reshape(4, n)
+                .T
+            )
 
             # reject warped points outside of image
-            #np.clip(xy[:, 0], 0, width, out=xy[:, 0])
-            #np.clip(xy[:, 2], 0, width, out=xy[:, 2])
-            #np.clip(xy[:, 1], 0, height, out=xy[:, 1])
-            #np.clip(xy[:, 3], 0, height, out=xy[:, 3])
+            # np.clip(xy[:, 0], 0, width, out=xy[:, 0])
+            # np.clip(xy[:, 2], 0, width, out=xy[:, 2])
+            # np.clip(xy[:, 1], 0, height, out=xy[:, 1])
+            # np.clip(xy[:, 3], 0, height, out=xy[:, 3])
             w = xy[:, 2] - xy[:, 0]
             h = xy[:, 3] - xy[:, 1]
             area = w * h
@@ -418,7 +469,9 @@ class JointDataset(LoadImagesAndLabels):  # for training
     std = None
     num_classes = 1
 
-    def __init__(self, opt, root, paths, img_size=(1088, 608), augment=False, transforms=None):
+    def __init__(
+        self, opt, root, paths, img_size=(1088, 608), augment=False, transforms=None
+    ):
         self.opt = opt
         self.baseline = self.opt.baseline
         self.baseline_view = self.opt.baseline_view
@@ -433,40 +486,54 @@ class JointDataset(LoadImagesAndLabels):  # for training
         self.zero_start = self.opt.zero_start
 
         for ds, path in paths.items():
-            with open(path, 'r') as file:
+            with open(path, "r") as file:
                 self.img_files[ds] = file.readlines()
-                self.img_files[ds] = [osp.join(root, x.strip()) for x in self.img_files[ds]]
-                self.img_files[ds] = list(filter(lambda x: len(x) > 0, self.img_files[ds]))
+                self.img_files[ds] = [
+                    osp.join(root, x.strip()) for x in self.img_files[ds]
+                ]
+                self.img_files[ds] = list(
+                    filter(lambda x: len(x) > 0, self.img_files[ds])
+                )
 
             self.label_files[ds] = [
-                x.replace('images', 'labels_with_ids').replace('.png', '.txt').replace('.jpg', '.txt')
-                for x in self.img_files[ds]]
+                x.replace("images", "labels_with_ids")
+                .replace(".png", ".txt")
+                .replace(".jpg", ".txt")
+                for x in self.img_files[ds]
+            ]
 
         self.sce = []
         self.view = []
         for ds, label_paths in self.label_files.items():
             for lp in label_paths:
-                scene = (lp.split('/')[-1]).split('_')[0]
-                view = (lp.split('/')[-1]).split('_')[1]
+                scene = (lp.split("/")[-1]).split("_")[0]
+                view = (lp.split("/")[-1]).split("_")[1]
                 if scene not in self.sce:
                     self.sce.append(scene)
                 if view not in self.view:
                     self.view.append(view)
         self.sce.sort()
         self.view.sort()
-        
+
         self.id_array = [-1 for i in range(len(self.sce))]
-        self.single_view_id_array = [[-1 for i in range(len(self.view))] for i in range(len(self.sce))]
+        self.single_view_id_array = [
+            [-1 for i in range(len(self.view))] for i in range(len(self.sce))
+        ]
 
         for ds, label_paths in self.label_files.items():
             max_index = -1
             view_max_index = -1
             for lp in label_paths:
-                scene = (lp.split('/')[-1]).split('_')[0]
-                view = (lp.split('/')[-1]).split('_')[1]
+                scene = (lp.split("/")[-1]).split("_")[0]
+                view = (lp.split("/")[-1]).split("_")[1]
                 if self.id_array[self.sce.index(scene)] == -1:
                     max_index = -1
-                if self.single_view_id_array[self.sce.index(scene)][self.view.index(view)] == -1:
+                if (
+                    self.single_view_id_array[self.sce.index(scene)][
+                        self.view.index(view)
+                    ]
+                    == -1
+                ):
                     view_max_index = -1
                 if osp.getsize(lp) != 0:
                     lb = np.loadtxt(lp)
@@ -480,16 +547,20 @@ class JointDataset(LoadImagesAndLabels):  # for training
                     max_index = img_max
                 if img_max > view_max_index:
                     view_max_index = img_max
-                self.id_array[self.sce.index(scene)] = max_index + 1 if self.zero_start else max_index
-                self.single_view_id_array[self.sce.index(scene)][self.view.index(view)] = view_max_index + 1 if self.zero_start else view_max_index
+                self.id_array[self.sce.index(scene)] = (
+                    max_index + 1 if self.zero_start else max_index
+                )
+                self.single_view_id_array[self.sce.index(scene)][
+                    self.view.index(view)
+                ] = (view_max_index + 1 if self.zero_start else view_max_index)
             self.tid_num[ds] = sum(self.id_array)
 
         # remove any non exist view
         for l in self.single_view_id_array:
             for i in l:
                 if i == -1:
-                    l.remove(i)      
- 
+                    l.remove(i)
+
         last_index = 0
         for i, (k, v) in enumerate(self.tid_num.items()):
             self.tid_start_index[k] = last_index
@@ -501,12 +572,16 @@ class JointDataset(LoadImagesAndLabels):  # for training
 
         for i in range(len(self.single_view_id_array)):
             for j in range(len(self.single_view_id_array[i])):
-                self.single_loss_array.append(int(self.single_loss_array[-1] + self.single_view_id_array[i][j]))
+                self.single_loss_array.append(
+                    int(self.single_loss_array[-1] + self.single_view_id_array[i][j])
+                )
         opt.single_loss_array = self.single_loss_array
 
         self.cross_loss_array = [0]
         for i in range(len(self.id_array)):
-            self.cross_loss_array.append(int(self.cross_loss_array[-1] + self.id_array[i]))
+            self.cross_loss_array.append(
+                int(self.cross_loss_array[-1] + self.id_array[i])
+            )
         opt.cross_loss_array = self.cross_loss_array
 
         # self.nds = total length of the dataset = [25299]
@@ -521,15 +596,14 @@ class JointDataset(LoadImagesAndLabels):  # for training
         self.max_objs = opt.K
         self.augment = augment
         self.transforms = transforms
-        # pdb.set_trace()
-        print('=' * 80)
-        print('dataset summary')
+        print("=" * 80)
+        print("dataset summary")
         print(self.tid_num)
-        print('total # identities:', self.nID)
-        print('start index')
+        print("total # identities:", self.nID)
+        print("start index")
         print(self.tid_start_index)
-        print('=' * 80)
-        
+        print("=" * 80)
+
     def __getitem__(self, files_index):
         for i, c in enumerate(self.cds):
             if files_index >= c:
@@ -539,18 +613,20 @@ class JointDataset(LoadImagesAndLabels):  # for training
         img_path = self.img_files[ds][files_index - start_index]
         label_path = self.label_files[ds][files_index - start_index]
 
-        imgs, labels, img_path, (input_h, input_w) = self.get_data(img_path, label_path, self.zero_start)
+        imgs, labels, img_path, (input_h, input_w) = self.get_data(
+            img_path, label_path, self.zero_start
+        )
 
         for i, _ in enumerate(labels):
             if labels[i, 1] > -1:
                 labels[i, 1] += self.tid_start_index[ds]
-        
-        scene = (img_path.split('/')[-1]).split('_')[0]
-        view = (img_path.split('/')[-1]).split('_')[1]
+
+        scene = (img_path.split("/")[-1]).split("_")[0]
+        view = (img_path.split("/")[-1]).split("_")[1]
         # 1088 608 / 4
         output_h = imgs.shape[1] // self.opt.down_ratio
         output_w = imgs.shape[2] // self.opt.down_ratio
-        
+
         num_classes = self.num_classes
         num_objs = labels.shape[0]
         # (1, 152, 272)
@@ -560,10 +636,10 @@ class JointDataset(LoadImagesAndLabels):  # for training
         else:
             wh = np.zeros((self.max_objs, 2), dtype=np.float32)
         reg = np.zeros((self.max_objs, 2), dtype=np.float32)
-        ind = np.zeros((self.max_objs, ), dtype=np.int64)
-        reg_mask = np.zeros((self.max_objs, ), dtype=np.uint8)
-        ids = np.zeros((self.max_objs, ), dtype=np.int64)
-        single_view_ids = np.zeros((self.max_objs, ), dtype=np.int64)
+        ind = np.zeros((self.max_objs,), dtype=np.int64)
+        reg_mask = np.zeros((self.max_objs,), dtype=np.uint8)
+        ids = np.zeros((self.max_objs,), dtype=np.int64)
+        single_view_ids = np.zeros((self.max_objs,), dtype=np.int64)
         bbox_xys = np.zeros((self.max_objs, 4), dtype=np.float32)
 
         draw_gaussian = draw_msra_gaussian if self.opt.mse_loss else draw_umich_gaussian
@@ -576,11 +652,11 @@ class JointDataset(LoadImagesAndLabels):  # for training
             # bbox (lx, ly, w, h) * 272 152
             bbox[[0, 2]] = bbox[[0, 2]] * output_w
             bbox[[1, 3]] = bbox[[1, 3]] * output_h
-            # copy of bbox 
+            # copy of bbox
             bbox_amodal = copy.deepcopy(bbox)
             # offset bbox
-            bbox_amodal[0] = bbox_amodal[0] - bbox_amodal[2] / 2.
-            bbox_amodal[1] = bbox_amodal[1] - bbox_amodal[3] / 2.
+            bbox_amodal[0] = bbox_amodal[0] - bbox_amodal[2] / 2.0
+            bbox_amodal[1] = bbox_amodal[1] - bbox_amodal[3] / 2.0
             bbox_amodal[2] = bbox_amodal[0] + bbox_amodal[2]
             bbox_amodal[3] = bbox_amodal[1] + bbox_amodal[3]
             # adjust the ordinate value
@@ -599,31 +675,75 @@ class JointDataset(LoadImagesAndLabels):  # for training
                 radius = gaussian_radius((math.ceil(h), math.ceil(w)))
                 radius = max(0, int(radius))
                 radius = 6 if self.opt.mse_loss else radius
-                #radius = max(1, int(radius)) if self.opt.mse_loss else radius
-                ct = np.array(
-                    [bbox[0], bbox[1]], dtype=np.float32)
+                # radius = max(1, int(radius)) if self.opt.mse_loss else radius
+                ct = np.array([bbox[0], bbox[1]], dtype=np.float32)
                 ct_int = ct.astype(np.int32)
                 draw_gaussian(hm[cls_id], ct_int, radius)
                 if self.opt.ltrb:
-                    wh[k] = ct[0] - bbox_amodal[0], ct[1] - bbox_amodal[1], \
-                            bbox_amodal[2] - ct[0], bbox_amodal[3] - ct[1]
+                    wh[k] = (
+                        ct[0] - bbox_amodal[0],
+                        ct[1] - bbox_amodal[1],
+                        bbox_amodal[2] - ct[0],
+                        bbox_amodal[3] - ct[1],
+                    )
                 else:
-                    wh[k] = 1. * w, 1. * h
+                    wh[k] = 1.0 * w, 1.0 * h
                 ind[k] = ct_int[1] * output_w + ct_int[0]
                 reg[k] = ct - ct_int
                 reg_mask[k] = 1
-                ids[k] = label[1] + sum([self.id_array[i] for i in range(self.sce.index(scene))])
+                ids[k] = label[1] + sum(
+                    [self.id_array[i] for i in range(self.sce.index(scene))]
+                )
                 ids[k] = ids[k] if self.cross_view_id_split_loss else ids[k] - 1
-                s_index = self.view.index(view) + sum(len(self.single_view_id_array[i]) for i in range(self.sce.index(scene))) if self.sce.index(scene) != 0 else self.view.index(view)
+                s_index = (
+                    self.view.index(view)
+                    + sum(
+                        len(self.single_view_id_array[i])
+                        for i in range(self.sce.index(scene))
+                    )
+                    if self.sce.index(scene) != 0
+                    else self.view.index(view)
+                )
                 single_view_ids[k] = self.single_loss_array[s_index] + label[1]
-                single_view_ids[k] = single_view_ids[k] if self.single_view_id_split_loss else single_view_ids[k] - 1
+                single_view_ids[k] = (
+                    single_view_ids[k]
+                    if self.single_view_id_split_loss
+                    else single_view_ids[k] - 1
+                )
                 bbox_xys[k] = bbox_xy
         if self.baseline == 0:
-            ret = {'input': imgs, 'hm': hm, 'reg_mask': reg_mask, 'ind': ind, 'wh': wh, 'reg': reg, 'ids': ids, 'single_view_ids': single_view_ids, 'bbox': bbox_xys}
+            ret = {
+                "input": imgs,
+                "hm": hm,
+                "reg_mask": reg_mask,
+                "ind": ind,
+                "wh": wh,
+                "reg": reg,
+                "ids": ids,
+                "single_view_ids": single_view_ids,
+                "bbox": bbox_xys,
+            }
         else:
-            if self.baseline_view == 0:     # single view id
-                ret = {'input': imgs, 'hm': hm, 'reg_mask': reg_mask, 'ind': ind, 'wh': wh, 'reg': reg, 'single_view_ids': single_view_ids, 'bbox': bbox_xys}
-            else:                           # cross view id
-                ret = {'input': imgs, 'hm': hm, 'reg_mask': reg_mask, 'ind': ind, 'wh': wh, 'reg': reg, 'ids': ids, 'bbox': bbox_xys}
+            if self.baseline_view == 0:  # single view id
+                ret = {
+                    "input": imgs,
+                    "hm": hm,
+                    "reg_mask": reg_mask,
+                    "ind": ind,
+                    "wh": wh,
+                    "reg": reg,
+                    "single_view_ids": single_view_ids,
+                    "bbox": bbox_xys,
+                }
+            else:  # cross view id
+                ret = {
+                    "input": imgs,
+                    "hm": hm,
+                    "reg_mask": reg_mask,
+                    "ind": ind,
+                    "wh": wh,
+                    "reg": reg,
+                    "ids": ids,
+                    "bbox": bbox_xys,
+                }
         return ret
-

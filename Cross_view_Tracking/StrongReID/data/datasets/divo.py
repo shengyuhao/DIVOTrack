@@ -13,7 +13,6 @@ import os.path as osp
 
 from utils.iotools import mkdir_if_missing
 from .bases import BaseImageDataset
-import pdb
 
 class DIVOreID(BaseImageDataset):
 

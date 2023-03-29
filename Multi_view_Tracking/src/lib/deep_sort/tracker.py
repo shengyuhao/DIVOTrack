@@ -5,7 +5,7 @@ from . import kalman_filter
 from . import linear_assignment
 from . import iou_matching
 from .track import Track
-import pdb
+
 
 class Tracker:
     """

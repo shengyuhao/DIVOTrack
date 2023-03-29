@@ -3,7 +3,7 @@ from unicodedata import category
 import numpy as np
 import json
 import cv2
-import pdb
+
 # Use the same script for MOT16
 # DATA_PATH = '../../data/mot16/'
 DATA_PATH = '../../data/mot17/'
@@ -15,7 +15,6 @@ CREATE_SPLITTED_DET = False
 
 if __name__ == '__main__':
   for split in SPLITS:
-    # pdb.set_trace()
     data_path = DATA_PATH + split
     print(data_path)
     out_path = OUT_PATH + '{}.json'.format(split)
@@ -42,7 +41,6 @@ if __name__ == '__main__':
       images = os.listdir(img_path)
       images.sort()
       num_images = len([image for image in images if 'jpg' in image])
-      # pdb.set_trace()
 
       if split == 'train':
         image_range = [0, num_images] 

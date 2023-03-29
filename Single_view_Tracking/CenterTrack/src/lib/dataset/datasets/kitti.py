@@ -89,7 +89,6 @@ class KITTI(GenericDataset):
       f.close()
 
   def run_eval(self, results, save_dir):
-    # import pdb; pdb.set_trace()
     self.save_results(results, save_dir)
     print('Results of IoU threshold 0.7')
     os.system('./tools/kitti_eval/evaluate_object_3d_offline_07 ' + \

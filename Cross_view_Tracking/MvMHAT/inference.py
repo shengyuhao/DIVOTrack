@@ -14,7 +14,6 @@ from torch.cuda.amp import autocast as autocast
 import config as C
 from collections import defaultdict
 import argparse
-import pdb
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--model', default=C.INF_ID)

@@ -10,7 +10,6 @@ import cv2
 import numpy as np
 import config as C 
 
-import pdb
 
 class Update():
     def __init__(self, seq, mvtracker, display, view_list):

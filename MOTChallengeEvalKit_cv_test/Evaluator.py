@@ -68,11 +68,9 @@ class Evaluator(object):
 
 		self.gtfiles = []
 		self.tsfiles = []
-		#import pdb; pdb.set_trace()
 		for seq in self.sequences:
 			#gtf = os.path.join(self.benchmark_gt_dir, self.mode ,seq, 'gt/gt.txt')
 			gtf = gt_dir+"/"+seq+'.txt'
-			#import pdb; pdb.set_trace()
 			if path.exists(gtf): self.gtfiles.append(gtf)
 			else: raise Exception("Ground Truth %s missing" % gtf)
 			tsf = os.path.join( res_dir, "%s.txt" % seq)

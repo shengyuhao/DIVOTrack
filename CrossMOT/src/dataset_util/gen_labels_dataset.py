@@ -1,7 +1,6 @@
 import os.path as osp
 import os
 import numpy as np
-import pdb
 from tqdm import tqdm
 
 def mkdirs(d):
@@ -44,7 +43,6 @@ for seq in tqdm(seqs):
         gt = np.genfromtxt(gt_txt, dtype=np.float64, delimiter=' ')
     # idx = np.lexsort(gt.T[:2, :])
     # gt = gt[idx, :]
-        # pdb.set_trace()
         for fid, tid, lx, ly, rx, ry in gt:
             if view == 'View1':
                 lx *= (1920 / 3640)

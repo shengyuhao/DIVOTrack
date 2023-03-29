@@ -32,7 +32,7 @@ def write_results(filename, results_dict: Dict, data_type: str):
                 f.write(line)
     logger.info('Save results to {}'.format(filename))
 
-import pdb
+
 def read_results(filename, data_type: str, is_gt=False, is_ignore=False, view='Drone'):
     if data_type in ('mot', 'lab'):
         read_fun = read_mot_results
@@ -40,11 +40,9 @@ def read_results(filename, data_type: str, is_gt=False, is_ignore=False, view='D
         read_fun = read_lpy_results
     else:
         raise ValueError('Unknown data type: {}'.format(data_type))
-    pdb.set_trace()
     return read_fun(filename, is_gt, is_ignore, view)
 
 def read_lpy_results(filename, is_gt, is_ignore, view):
-    pdb.set_trace()
     results_dict = dict()
     if os.path.isfile(filename):
         with open(filename, 'r') as f:

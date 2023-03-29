@@ -15,7 +15,7 @@ from model.data_parallel import DataParallel
 from logger import Logger
 from dataset.dataset_factory import get_dataset
 from trainer import Trainer
-import pdb
+
 
 def get_optimizer(opt, model):
   if opt.optim == 'adam':
