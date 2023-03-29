@@ -17,7 +17,6 @@ from logger import Logger
 from utils.utils import AverageMeter
 from dataset.dataset_factory import dataset_factory
 from detector import Detector
-import pdb
 
 class PrefetchDataset(torch.utils.data.Dataset):
   def __init__(self, opt, dataset, pre_process_func):

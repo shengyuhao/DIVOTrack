@@ -23,9 +23,13 @@ from utils.utils import xyxy2xywh, generate_anchors, xywh2xyxy, encode_delta
 class LoadImages:  # for inference
     def __init__(self, path, img_size=(1088, 608)):
         if os.path.isdir(path):
-            image_format = ['.jpg', '.jpeg', '.png', '.tif']
-            self.files = sorted(glob.glob('%s/*.*' % path))
-            self.files = list(filter(lambda x: os.path.splitext(x)[1].lower() in image_format, self.files))
+            image_format = [".jpg", ".jpeg", ".png", ".tif"]
+            self.files = sorted(glob.glob("%s/*.*" % path))
+            self.files = list(
+                filter(
+                    lambda x: os.path.splitext(x)[1].lower() in image_format, self.files
+                )
+            )
         elif os.path.isfile(path):
             self.files = [path]
 
@@ -34,7 +38,7 @@ class LoadImages:  # for inference
         self.height = img_size[1]
         self.count = 0
 
-        assert self.nF > 0, 'No images found in ' + path
+        assert self.nF > 0, "No images found in " + path
 
     def __iter__(self):
         self.count = -1
@@ -48,7 +52,7 @@ class LoadImages:  # for inference
 
         # Read image
         img0 = cv2.imread(img_path)  # BGR
-        assert img0 is not None, 'Failed to load ' + img_path
+        assert img0 is not None, "Failed to load " + img_path
 
         # Padded resize
         shape = [self.height, self.width]
@@ -68,7 +72,7 @@ class LoadImages:  # for inference
 
         # Read image
         img0 = cv2.imread(img_path)  # BGR
-        assert img0 is not None, 'Failed to load ' + img_path
+        assert img0 is not None, "Failed to load " + img_path
 
         # Padded resize
         shape = [self.height, self.width]
@@ -98,7 +102,7 @@ class LoadVideo:  # for inference
         self.count = 0
 
         self.w, self.h = 1920, 1080
-        print('Lenth of the video: {:d} frames'.format(self.vn))
+        print("Lenth of the video: {:d} frames".format(self.vn))
 
     def get_size(self, vw, vh, dw, dh):
         wa, ha = float(dw) / vw, float(dh) / vh
@@ -115,7 +119,7 @@ class LoadVideo:  # for inference
             raise StopIteration
         # Read image
         res, img0 = self.cap.read()  # BGR
-        assert img0 is not None, 'Failed to load frame {:d}'.format(self.count)
+        assert img0 is not None, "Failed to load frame {:d}".format(self.count)
         img0 = cv2.resize(img0, (self.w, self.h))
 
         # Padded resize
@@ -136,13 +140,17 @@ class LoadVideo:  # for inference
 
 class LoadImagesAndLabels:  # for training
     def __init__(self, path, img_size=(1088, 608), augment=False, transforms=None):
-        with open(path, 'r') as file:
+        with open(path, "r") as file:
             self.img_files = file.readlines()
-            self.img_files = [x.replace('\n', '') for x in self.img_files]
+            self.img_files = [x.replace("\n", "") for x in self.img_files]
             self.img_files = list(filter(lambda x: len(x) > 0, self.img_files))
 
-        self.label_files = [x.replace('images', 'labels_with_ids').replace('.png', '.txt').replace('.jpg', '.txt')
-                            for x in self.img_files]
+        self.label_files = [
+            x.replace("images", "labels_with_ids")
+            .replace(".png", ".txt")
+            .replace(".jpg", ".txt")
+            for x in self.img_files
+        ]
 
         self.nF = len(self.img_files)  # number of image files
         self.width = img_size[0]
@@ -155,16 +163,15 @@ class LoadImagesAndLabels:  # for training
         img, labels = self.load_mosaic(img_files, label_files, index)
         # MixUp
         if random.random() < 0.0:
-            img2, labels2 = self.load_mosaic(img_files, label_files, random.randint(0, len(label_files) - 1))
+            img2, labels2 = self.load_mosaic(
+                img_files, label_files, random.randint(0, len(label_files) - 1)
+            )
             r = np.random.beta(8.0, 8.0)  # mixup ratio, alpha=beta=8.0
             img = (img * r + img2 * (1 - r)).astype(np.uint8)
             labels = np.concatenate((labels, labels2), 0)
-        img, labels = random_perspective(img, labels,
-                                         degrees=0,
-                                         translate=0.1,
-                                         scale=0.5,
-                                         shear=0,
-                                         perspective=0.0)
+        img, labels = random_perspective(
+            img, labels, degrees=0, translate=0.1, scale=0.5, shear=0, perspective=0.0
+        )
         augment_hsv(img, hgain=0.015, sgain=0.7, vgain=0.4)
         nL = len(labels)
         if nL > 0:
@@ -189,12 +196,16 @@ class LoadImagesAndLabels:  # for training
         # loads 1 image from dataset, returns img, original hw, resized hw
         path = img_files[index]
         img = cv2.imread(path)  # BGR
-        assert img is not None, 'Image Not Found ' + path
+        assert img is not None, "Image Not Found " + path
         h0, w0 = img.shape[:2]  # orig hw
         r_w = self.width / w0  # resize image to img_size
         r_h = self.height / h0
-        if r_w != 1 or r_h != 1:  # always resize down, only resize up if training with augmentation
-            interp = cv2.INTER_AREA if r_w < 1 and not self.augment else cv2.INTER_LINEAR
+        if (
+            r_w != 1 or r_h != 1
+        ):  # always resize down, only resize up if training with augmentation
+            interp = (
+                cv2.INTER_AREA if r_w < 1 and not self.augment else cv2.INTER_LINEAR
+            )
             img = cv2.resize(img, (int(w0 * r_w), int(h0 * r_h)), interpolation=interp)
         return img, (h0, w0), img.shape[:2]  # img, hw_original, hw_resized
 
@@ -227,16 +238,30 @@ class LoadImagesAndLabels:  # for training
         y_s = self.height
 
         yc, xc = self.height, self.width  # mosaic center x, y
-        indices = [index_ori] + [random.randint(0, len(label_files) - 1) for _ in range(3)]  # 3 additional image indices
+        indices = [index_ori] + [
+            random.randint(0, len(label_files) - 1) for _ in range(3)
+        ]  # 3 additional image indices
         for i, index in enumerate(indices):
             # Load image
             img, _, (h, w) = self.load_image(img_files, index)
 
             # place img in img4
             if i == 0:  # top left
-                img4 = np.full((y_s * 2, x_s * 2, img.shape[2]), 114, dtype=np.uint8)  # base image with 4 tiles
-                x1a, y1a, x2a, y2a = max(xc - w, 0), max(yc - h, 0), xc, yc  # xmin, ymin, xmax, ymax (large image)
-                x1b, y1b, x2b, y2b = w - (x2a - x1a), h - (y2a - y1a), w, h  # xmin, ymin, xmax, ymax (small image)
+                img4 = np.full(
+                    (y_s * 2, x_s * 2, img.shape[2]), 114, dtype=np.uint8
+                )  # base image with 4 tiles
+                x1a, y1a, x2a, y2a = (
+                    max(xc - w, 0),
+                    max(yc - h, 0),
+                    xc,
+                    yc,
+                )  # xmin, ymin, xmax, ymax (large image)
+                x1b, y1b, x2b, y2b = (
+                    w - (x2a - x1a),
+                    h - (y2a - y1a),
+                    w,
+                    h,
+                )  # xmin, ymin, xmax, ymax (small image)
             elif i == 1:  # top right
                 x1a, y1a, x2a, y2a = xc, max(yc - h, 0), min(xc + w, x_s * 2), yc
                 x1b, y1b, x2b, y2b = 0, h - (y2a - y1a), min(w, x2a - x1a), h
@@ -265,10 +290,10 @@ class LoadImagesAndLabels:  # for training
         # Concat/clip labels
         if len(labels4):
             labels4 = np.concatenate(labels4, 0)
-            #np.clip(labels4[:, 2], 0, 2 * x_s, out=labels4[:, 2])  # use with random_affine
-            #np.clip(labels4[:, 4], 0, 2 * x_s, out=labels4[:, 4])  # use with random_affine
-            #np.clip(labels4[:, 3], 0, 2 * y_s, out=labels4[:, 3])  # use with random_affine
-            #np.clip(labels4[:, 5], 0, 2 * y_s, out=labels4[:, 5])  # use with random_affine
+            # np.clip(labels4[:, 2], 0, 2 * x_s, out=labels4[:, 2])  # use with random_affine
+            # np.clip(labels4[:, 4], 0, 2 * x_s, out=labels4[:, 4])  # use with random_affine
+            # np.clip(labels4[:, 3], 0, 2 * y_s, out=labels4[:, 3])  # use with random_affine
+            # np.clip(labels4[:, 5], 0, 2 * y_s, out=labels4[:, 5])  # use with random_affine
 
             # Replicate
             # img4, labels4 = replicate(img4, labels4)
@@ -276,7 +301,9 @@ class LoadImagesAndLabels:  # for training
         # Augment
         # img4 = img4[s // 2: int(s * 1.5), s // 2:int(s * 1.5)]  # center crop (WARNING, requires box pruning)
 
-        img4, labels4 = random_perspective(img4, labels4, border=self.mosaic_border)  # border to remove
+        img4, labels4 = random_perspective(
+            img4, labels4, border=self.mosaic_border
+        )  # border to remove
 
         return img4, labels4
 
@@ -284,18 +311,20 @@ class LoadImagesAndLabels:  # for training
         img, labels = self.load_mosaic_ori(img_files, label_files, index)
         # MixUp
         if random.random() < 0.0:
-            img2, labels2 = self.load_mosaic_ori(img_files, label_files, random.randint(0, len(label_files) - 1))
+            img2, labels2 = self.load_mosaic_ori(
+                img_files, label_files, random.randint(0, len(label_files) - 1)
+            )
             r = np.random.beta(8.0, 8.0)  # mixup ratio, alpha=beta=8.0
             img = (img * r + img2 * (1 - r)).astype(np.uint8)
             labels = np.concatenate((labels, labels2), 0)
-        '''
+        """
         img, labels = random_perspective(img, labels,
                                          degrees=0,
                                          translate=0.1,
                                          scale=0.5,
                                          shear=0,
                                          perspective=0.0)
-        '''
+        """
         augment_hsv(img, hgain=0.015, sgain=0.7, vgain=0.4)
         nL = len(labels)
         if nL > 0:
@@ -320,21 +349,34 @@ class LoadImagesAndLabels:  # for training
         return self.nF  # number of batches
 
 
-def letterbox_jde(img, height=608, width=1088,
-              color=(127.5, 127.5, 127.5)):  # resize a rectangular image to a padded rectangular
+def letterbox_jde(
+    img, height=608, width=1088, color=(127.5, 127.5, 127.5)
+):  # resize a rectangular image to a padded rectangular
     shape = img.shape[:2]  # shape = [height, width]
     ratio = min(float(height) / shape[0], float(width) / shape[1])
-    new_shape = (round(shape[1] * ratio), round(shape[0] * ratio))  # new_shape = [width, height]
+    new_shape = (
+        round(shape[1] * ratio),
+        round(shape[0] * ratio),
+    )  # new_shape = [width, height]
     dw = (width - new_shape[0]) / 2  # width padding
     dh = (height - new_shape[1]) / 2  # height padding
     top, bottom = round(dh - 0.1), round(dh + 0.1)
     left, right = round(dw - 0.1), round(dw + 0.1)
     img = cv2.resize(img, new_shape, interpolation=cv2.INTER_AREA)  # resized, no border
-    img = cv2.copyMakeBorder(img, top, bottom, left, right, cv2.BORDER_CONSTANT, value=color)  # padded rectangular
+    img = cv2.copyMakeBorder(
+        img, top, bottom, left, right, cv2.BORDER_CONSTANT, value=color
+    )  # padded rectangular
     return img, ratio, dw, dh
 
 
-def letterbox(img, new_shape=(640, 640), color=(114, 114, 114), auto=True, scaleFill=False, scaleup=True):
+def letterbox(
+    img,
+    new_shape=(640, 640),
+    color=(114, 114, 114),
+    auto=True,
+    scaleFill=False,
+    scaleup=True,
+):
     # Resize image to a 32-pixel-multiple rectangle https://github.com/ultralytics/yolov3/issues/232
     shape = img.shape[:2]  # current shape [height, width]
     if isinstance(new_shape, int):
@@ -363,7 +405,9 @@ def letterbox(img, new_shape=(640, 640), color=(114, 114, 114), auto=True, scale
         img = cv2.resize(img, new_unpad, interpolation=cv2.INTER_LINEAR)
     top, bottom = int(round(dh - 0.1)), int(round(dh + 0.1))
     left, right = int(round(dw - 0.1)), int(round(dw + 0.1))
-    img = cv2.copyMakeBorder(img, top, bottom, left, right, cv2.BORDER_CONSTANT, value=color)  # add border
+    img = cv2.copyMakeBorder(
+        img, top, bottom, left, right, cv2.BORDER_CONSTANT, value=color
+    )  # add border
     return img, ratio, (dw, dh)
 
 
@@ -377,12 +421,21 @@ def augment_hsv(img, hgain=0.5, sgain=0.5, vgain=0.5):
     lut_sat = np.clip(x * r[1], 0, 255).astype(dtype)
     lut_val = np.clip(x * r[2], 0, 255).astype(dtype)
 
-    img_hsv = cv2.merge((cv2.LUT(hue, lut_hue), cv2.LUT(sat, lut_sat), cv2.LUT(val, lut_val))).astype(dtype)
+    img_hsv = cv2.merge(
+        (cv2.LUT(hue, lut_hue), cv2.LUT(sat, lut_sat), cv2.LUT(val, lut_val))
+    ).astype(dtype)
     cv2.cvtColor(img_hsv, cv2.COLOR_HSV2BGR, dst=img)  # no return needed
 
 
-def random_affine(img, targets=None, degrees=(-10, 10), translate=(.1, .1), scale=(.9, 1.1), shear=(-2, 2),
-                  borderValue=(127.5, 127.5, 127.5)):
+def random_affine(
+    img,
+    targets=None,
+    degrees=(-10, 10),
+    translate=(0.1, 0.1),
+    scale=(0.9, 1.1),
+    shear=(-2, 2),
+    borderValue=(127.5, 127.5, 127.5),
+):
     # torchvision.transforms.RandomAffine(degrees=(-10, 10), translate=(.1, .1), scale=(.9, 1.1), shear=(-10, 10))
     # https://medium.com/uruvideo/dataset-augmentation-with-random-homographies-a8f4b44830d4
 
@@ -395,21 +448,32 @@ def random_affine(img, targets=None, degrees=(-10, 10), translate=(.1, .1), scal
     a = random.random() * (degrees[1] - degrees[0]) + degrees[0]
     # a += random.choice([-180, -90, 0, 90])  # 90deg rotations added to small rotations
     s = random.random() * (scale[1] - scale[0]) + scale[0]
-    R[:2] = cv2.getRotationMatrix2D(angle=a, center=(img.shape[1] / 2, img.shape[0] / 2), scale=s)
+    R[:2] = cv2.getRotationMatrix2D(
+        angle=a, center=(img.shape[1] / 2, img.shape[0] / 2), scale=s
+    )
 
     # Translation
     T = np.eye(3)
-    T[0, 2] = (random.random() * 2 - 1) * translate[0] * img.shape[0] + border  # x translation (pixels)
-    T[1, 2] = (random.random() * 2 - 1) * translate[1] * img.shape[1] + border  # y translation (pixels)
+    T[0, 2] = (random.random() * 2 - 1) * translate[0] * img.shape[
+        0
+    ] + border  # x translation (pixels)
+    T[1, 2] = (random.random() * 2 - 1) * translate[1] * img.shape[
+        1
+    ] + border  # y translation (pixels)
 
     # Shear
     S = np.eye(3)
-    S[0, 1] = math.tan((random.random() * (shear[1] - shear[0]) + shear[0]) * math.pi / 180)  # x shear (deg)
-    S[1, 0] = math.tan((random.random() * (shear[1] - shear[0]) + shear[0]) * math.pi / 180)  # y shear (deg)
+    S[0, 1] = math.tan(
+        (random.random() * (shear[1] - shear[0]) + shear[0]) * math.pi / 180
+    )  # x shear (deg)
+    S[1, 0] = math.tan(
+        (random.random() * (shear[1] - shear[0]) + shear[0]) * math.pi / 180
+    )  # y shear (deg)
 
     M = S @ T @ R  # Combined rotation matrix. ORDER IS IMPORTANT HERE!!
-    imw = cv2.warpPerspective(img, M, dsize=(width, height), flags=cv2.INTER_LINEAR,
-                              borderValue=borderValue)  # BGR order borderValue
+    imw = cv2.warpPerspective(
+        img, M, dsize=(width, height), flags=cv2.INTER_LINEAR, borderValue=borderValue
+    )  # BGR order borderValue
 
     # Return warped points also
     if targets is not None:
@@ -420,13 +484,17 @@ def random_affine(img, targets=None, degrees=(-10, 10), translate=(.1, .1), scal
 
             # warp points
             xy = np.ones((n * 4, 3))
-            xy[:, :2] = points[:, [0, 1, 2, 3, 0, 3, 2, 1]].reshape(n * 4, 2)  # x1y1, x2y2, x1y2, x2y1
+            xy[:, :2] = points[:, [0, 1, 2, 3, 0, 3, 2, 1]].reshape(
+                n * 4, 2
+            )  # x1y1, x2y2, x1y2, x2y1
             xy = (xy @ M.T)[:, :2].reshape(n, 8)
 
             # create new boxes
             x = xy[:, [0, 2, 4, 6]]
             y = xy[:, [1, 3, 5, 7]]
-            xy = np.concatenate((x.min(1), y.min(1), x.max(1), y.max(1))).reshape(4, n).T
+            xy = (
+                np.concatenate((x.min(1), y.min(1), x.max(1), y.max(1))).reshape(4, n).T
+            )
 
             # apply angle-based reduction
             radians = a * math.pi / 180
@@ -435,13 +503,17 @@ def random_affine(img, targets=None, degrees=(-10, 10), translate=(.1, .1), scal
             y = (xy[:, 3] + xy[:, 1]) / 2
             w = (xy[:, 2] - xy[:, 0]) * reduction
             h = (xy[:, 3] - xy[:, 1]) * reduction
-            xy = np.concatenate((x - w / 2, y - h / 2, x + w / 2, y + h / 2)).reshape(4, n).T
+            xy = (
+                np.concatenate((x - w / 2, y - h / 2, x + w / 2, y + h / 2))
+                .reshape(4, n)
+                .T
+            )
 
             # reject warped points outside of image
-            #np.clip(xy[:, 0], 0, width, out=xy[:, 0])
-            #np.clip(xy[:, 2], 0, width, out=xy[:, 2])
-            #np.clip(xy[:, 1], 0, height, out=xy[:, 1])
-            #np.clip(xy[:, 3], 0, height, out=xy[:, 3])
+            # np.clip(xy[:, 0], 0, width, out=xy[:, 0])
+            # np.clip(xy[:, 2], 0, width, out=xy[:, 2])
+            # np.clip(xy[:, 1], 0, height, out=xy[:, 1])
+            # np.clip(xy[:, 3], 0, height, out=xy[:, 3])
             w = xy[:, 2] - xy[:, 0]
             h = xy[:, 3] - xy[:, 1]
             area = w * h
@@ -456,7 +528,16 @@ def random_affine(img, targets=None, degrees=(-10, 10), translate=(.1, .1), scal
         return imw
 
 
-def random_perspective(img, targets=(), degrees=5, translate=0.1, scale=(0.5, 1.2), shear=2, perspective=0.0, border=(0, 0)):
+def random_perspective(
+    img,
+    targets=(),
+    degrees=5,
+    translate=0.1,
+    scale=(0.5, 1.2),
+    shear=2,
+    perspective=0.0,
+    border=(0, 0),
+):
     # torchvision.transforms.RandomAffine(degrees=(-10, 10), translate=(.1, .1), scale=(.9, 1.1), shear=(-10, 10))
     # targets = [cls, xyxy]
 
@@ -488,16 +569,24 @@ def random_perspective(img, targets=(), degrees=5, translate=0.1, scale=(0.5, 1.
 
     # Translation
     T = np.eye(3)
-    T[0, 2] = random.uniform(0.5 - translate, 0.5 + translate) * width  # x translation (pixels)
-    T[1, 2] = random.uniform(0.5 - translate, 0.5 + translate) * height  # y translation (pixels)
+    T[0, 2] = (
+        random.uniform(0.5 - translate, 0.5 + translate) * width
+    )  # x translation (pixels)
+    T[1, 2] = (
+        random.uniform(0.5 - translate, 0.5 + translate) * height
+    )  # y translation (pixels)
 
     # Combined rotation matrix
     M = T @ S @ R @ P @ C  # order of operations (right to left) is IMPORTANT
     if (border[0] != 0) or (border[1] != 0) or (M != np.eye(3)).any():  # image changed
         if perspective:
-            img = cv2.warpPerspective(img, M, dsize=(width, height), borderValue=(114, 114, 114))
+            img = cv2.warpPerspective(
+                img, M, dsize=(width, height), borderValue=(114, 114, 114)
+            )
         else:  # affine
-            img = cv2.warpAffine(img, M[:2], dsize=(width, height), borderValue=(114, 114, 114))
+            img = cv2.warpAffine(
+                img, M[:2], dsize=(width, height), borderValue=(114, 114, 114)
+            )
 
     # Visualize
     # import matplotlib.pyplot as plt
@@ -510,7 +599,9 @@ def random_perspective(img, targets=(), degrees=5, translate=0.1, scale=(0.5, 1.
     if n:
         # warp points
         xy = np.ones((n * 4, 3))
-        xy[:, :2] = targets[:, [2, 3, 4, 5, 2, 5, 4, 3]].reshape(n * 4, 2)  # x1y1, x2y2, x1y2, x2y1
+        xy[:, :2] = targets[:, [2, 3, 4, 5, 2, 5, 4, 3]].reshape(
+            n * 4, 2
+        )  # x1y1, x2y2, x1y2, x2y1
         xy = xy @ M.T  # transform
         if perspective:
             xy = (xy[:, :2] / xy[:, 2:3]).reshape(n, 8)  # rescale
@@ -532,9 +623,9 @@ def random_perspective(img, targets=(), degrees=5, translate=0.1, scale=(0.5, 1.
         # xy = np.concatenate((x - w / 2, y - h / 2, x + w / 2, y + h / 2)).reshape(4, n).T
 
         # clip boxes
-        #xy[:, [0, 2]] = xy[:, [0, 2]].clip(0, width)
-        #xy[:, [1, 3]] = xy[:, [1, 3]].clip(0, height)
-        '''
+        # xy[:, [0, 2]] = xy[:, [0, 2]].clip(0, width)
+        # xy[:, [1, 3]] = xy[:, [1, 3]].clip(0, height)
+        """
         print(xy.shape)
         targets = targets[xy[:, 0] < width]
         targets = targets[xy[:, 2] > 0]
@@ -545,7 +636,7 @@ def random_perspective(img, targets=(), degrees=5, translate=0.1, scale=(0.5, 1.
         xy = xy[xy[:, 1] < height]
         xy = xy[xy[:, 3] > 0]
         print(xy.shape)
-        '''
+        """
         # filter candidates
         i = box_candidates(box1=targets[:, 2:6].T * s, box2=xy.T)
         targets = targets[i]
@@ -558,12 +649,19 @@ def random_perspective(img, targets=(), degrees=5, translate=0.1, scale=(0.5, 1.
     return img, targets
 
 
-def box_candidates(box1, box2, wh_thr=2, ar_thr=20, area_thr=0.2):  # box1(4,n), box2(4,n)
+def box_candidates(
+    box1, box2, wh_thr=2, ar_thr=20, area_thr=0.2
+):  # box1(4,n), box2(4,n)
     # Compute candidate boxes: box1 before augment, box2 after augment, wh_thr (pixels), aspect_ratio_thr, area_ratio
     w1, h1 = box1[2] - box1[0], box1[3] - box1[1]
     w2, h2 = box2[2] - box2[0], box2[3] - box2[1]
     ar = np.maximum(w2 / (h2 + 1e-16), h2 / (w2 + 1e-16))  # aspect ratio
-    return (w2 > wh_thr) & (h2 > wh_thr) & (w2 * h2 / (w1 * h1 + 1e-16) > area_thr) & (ar < ar_thr)  # candidates
+    return (
+        (w2 > wh_thr)
+        & (h2 > wh_thr)
+        & (w2 * h2 / (w1 * h1 + 1e-16) > area_thr)
+        & (ar < ar_thr)
+    )  # candidates
 
 
 class JointDataset(LoadImagesAndLabels):  # for training
@@ -572,7 +670,9 @@ class JointDataset(LoadImagesAndLabels):  # for training
     std = None
     num_classes = 1
 
-    def __init__(self, opt, root, paths, img_size=(1088, 608), augment=False, transforms=None):
+    def __init__(
+        self, opt, root, paths, img_size=(1088, 608), augment=False, transforms=None
+    ):
         self.opt = opt
         dataset_names = paths.keys()
         self.img_files = OrderedDict()
@@ -582,14 +682,21 @@ class JointDataset(LoadImagesAndLabels):  # for training
         self.num_classes = 1
 
         for ds, path in paths.items():
-            with open(path, 'r') as file:
+            with open(path, "r") as file:
                 self.img_files[ds] = file.readlines()
-                self.img_files[ds] = [osp.join(root, x.strip()) for x in self.img_files[ds]]
-                self.img_files[ds] = list(filter(lambda x: len(x) > 0, self.img_files[ds]))
+                self.img_files[ds] = [
+                    osp.join(root, x.strip()) for x in self.img_files[ds]
+                ]
+                self.img_files[ds] = list(
+                    filter(lambda x: len(x) > 0, self.img_files[ds])
+                )
 
             self.label_files[ds] = [
-                x.replace('images', 'labels_with_ids').replace('.png', '.txt').replace('.jpg', '.txt')
-                for x in self.img_files[ds]]
+                x.replace("images", "labels_with_ids")
+                .replace(".png", ".txt")
+                .replace(".jpg", ".txt")
+                for x in self.img_files[ds]
+            ]
 
         for ds, label_paths in self.label_files.items():
             max_index = -1
@@ -621,27 +728,28 @@ class JointDataset(LoadImagesAndLabels):  # for training
         self.transforms = transforms
         self.mosaic_border = [-img_size[1] // 2, -img_size[0] // 2]
 
-        print('=' * 80)
-        print('dataset summary')
+        print("=" * 80)
+        print("dataset summary")
         print(self.tid_num)
-        print('total # identities:', self.nID)
-        print('start index')
+        print("total # identities:", self.nID)
+        print("start index")
         print(self.tid_start_index)
-        print('=' * 80)
+        print("=" * 80)
 
     def __getitem__(self, files_index):
-
         for i, c in enumerate(self.cds):
             if files_index >= c:
                 ds = list(self.label_files.keys())[i]
                 start_index = c
 
-        #img_path = self.img_files[ds][files_index - start_index]
-        #label_path = self.label_files[ds][files_index - start_index]
+        # img_path = self.img_files[ds][files_index - start_index]
+        # label_path = self.label_files[ds][files_index - start_index]
         index = files_index - start_index
-        imgs, labels, img_path = self.get_data(self.img_files[ds], self.label_files[ds], index)
+        imgs, labels, img_path = self.get_data(
+            self.img_files[ds], self.label_files[ds], index
+        )
 
-        #imgs, labels, img_path = self.get_data(img_path, label_path)
+        # imgs, labels, img_path = self.get_data(img_path, label_path)
         for i, _ in enumerate(labels):
             if labels[i, 1] > -1:
                 labels[i, 1] += self.tid_start_index[ds]
@@ -656,9 +764,9 @@ class JointDataset(LoadImagesAndLabels):  # for training
         else:
             wh = np.zeros((self.max_objs, 2), dtype=np.float32)
         reg = np.zeros((self.max_objs, 2), dtype=np.float32)
-        ind = np.zeros((self.max_objs, ), dtype=np.int64)
-        reg_mask = np.zeros((self.max_objs, ), dtype=np.uint8)
-        ids = np.zeros((self.max_objs, ), dtype=np.int64)
+        ind = np.zeros((self.max_objs,), dtype=np.int64)
+        reg_mask = np.zeros((self.max_objs,), dtype=np.uint8)
+        ids = np.zeros((self.max_objs,), dtype=np.int64)
         bbox_xys = np.zeros((self.max_objs, 4), dtype=np.float32)
 
         draw_gaussian = draw_msra_gaussian if self.opt.mse_loss else draw_umich_gaussian
@@ -669,8 +777,8 @@ class JointDataset(LoadImagesAndLabels):  # for training
             bbox[[0, 2]] = bbox[[0, 2]] * output_w
             bbox[[1, 3]] = bbox[[1, 3]] * output_h
             bbox_amodal = copy.deepcopy(bbox)
-            bbox_amodal[0] = bbox_amodal[0] - bbox_amodal[2] / 2.
-            bbox_amodal[1] = bbox_amodal[1] - bbox_amodal[3] / 2.
+            bbox_amodal[0] = bbox_amodal[0] - bbox_amodal[2] / 2.0
+            bbox_amodal[1] = bbox_amodal[1] - bbox_amodal[3] / 2.0
             bbox_amodal[2] = bbox_amodal[0] + bbox_amodal[2]
             bbox_amodal[3] = bbox_amodal[1] + bbox_amodal[3]
             bbox[0] = np.clip(bbox[0], 0, output_w - 1)
@@ -688,43 +796,63 @@ class JointDataset(LoadImagesAndLabels):  # for training
                 radius = gaussian_radius((math.ceil(h), math.ceil(w)))
                 radius = max(0, int(radius))
                 radius = 6 if self.opt.mse_loss else radius
-                #radius = max(1, int(radius)) if self.opt.mse_loss else radius
-                ct = np.array(
-                    [bbox[0], bbox[1]], dtype=np.float32)
+                # radius = max(1, int(radius)) if self.opt.mse_loss else radius
+                ct = np.array([bbox[0], bbox[1]], dtype=np.float32)
                 ct_int = ct.astype(np.int32)
                 draw_gaussian(hm[cls_id], ct_int, radius)
                 if self.opt.ltrb:
-                    wh[k] = ct[0] - bbox_amodal[0], ct[1] - bbox_amodal[1], \
-                            bbox_amodal[2] - ct[0], bbox_amodal[3] - ct[1]
+                    wh[k] = (
+                        ct[0] - bbox_amodal[0],
+                        ct[1] - bbox_amodal[1],
+                        bbox_amodal[2] - ct[0],
+                        bbox_amodal[3] - ct[1],
+                    )
                 else:
-                    wh[k] = 1. * w, 1. * h
+                    wh[k] = 1.0 * w, 1.0 * h
                 ind[k] = ct_int[1] * output_w + ct_int[0]
                 reg[k] = ct - ct_int
                 reg_mask[k] = 1
                 ids[k] = label[1]
                 bbox_xys[k] = bbox_xy
 
-        ret = {'input': imgs, 'hm': hm, 'reg_mask': reg_mask, 'ind': ind, 'wh': wh, 'reg': reg, 'ids': ids, 'bbox': bbox_xys}
+        ret = {
+            "input": imgs,
+            "hm": hm,
+            "reg_mask": reg_mask,
+            "ind": ind,
+            "wh": wh,
+            "reg": reg,
+            "ids": ids,
+            "bbox": bbox_xys,
+        }
         return ret
 
 
 class DetDataset(LoadImagesAndLabels):  # for training
-    def __init__(self, root, paths, img_size=(1088, 608), augment=False, transforms=None):
-
+    def __init__(
+        self, root, paths, img_size=(1088, 608), augment=False, transforms=None
+    ):
         dataset_names = paths.keys()
         self.img_files = OrderedDict()
         self.label_files = OrderedDict()
         self.tid_num = OrderedDict()
         self.tid_start_index = OrderedDict()
         for ds, path in paths.items():
-            with open(path, 'r') as file:
+            with open(path, "r") as file:
                 self.img_files[ds] = file.readlines()
-                self.img_files[ds] = [osp.join(root, x.strip()) for x in self.img_files[ds]]
-                self.img_files[ds] = list(filter(lambda x: len(x) > 0, self.img_files[ds]))
+                self.img_files[ds] = [
+                    osp.join(root, x.strip()) for x in self.img_files[ds]
+                ]
+                self.img_files[ds] = list(
+                    filter(lambda x: len(x) > 0, self.img_files[ds])
+                )
 
             self.label_files[ds] = [
-                x.replace('images', 'labels_with_ids').replace('.png', '.txt').replace('.jpg', '.txt')
-                for x in self.img_files[ds]]
+                x.replace("images", "labels_with_ids")
+                .replace(".png", ".txt")
+                .replace(".jpg", ".txt")
+                for x in self.img_files[ds]
+            ]
 
         for ds, label_paths in self.label_files.items():
             max_index = -1
@@ -754,16 +882,15 @@ class DetDataset(LoadImagesAndLabels):  # for training
         self.augment = augment
         self.transforms = transforms
 
-        print('=' * 80)
-        print('dataset summary')
+        print("=" * 80)
+        print("dataset summary")
         print(self.tid_num)
-        print('total # identities:', self.nID)
-        print('start index')
+        print("total # identities:", self.nID)
+        print("start index")
         print(self.tid_start_index)
-        print('=' * 80)
+        print("=" * 80)
 
     def __getitem__(self, files_index):
-
         for i, c in enumerate(self.cds):
             if files_index >= c:
                 ds = list(self.label_files.keys())[i]
@@ -780,5 +907,3 @@ class DetDataset(LoadImagesAndLabels):  # for training
                 labels[i, 1] += self.tid_start_index[ds]
 
         return imgs, labels0, img_path, (h, w)
-
-

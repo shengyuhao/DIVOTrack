@@ -18,7 +18,7 @@ from cython_bbox import bbox_overlaps as bbox_ious
 from opts import opts
 from utils.image import gaussian_radius, draw_umich_gaussian, draw_msra_gaussian
 from utils.utils import xyxy2xywh, generate_anchors, xywh2xyxy, encode_delta
-import pdb
+
 
 class LoadImages:  # for inference
     def __init__(self, path, img_size=(1088, 608)):
@@ -492,7 +492,6 @@ class JointDataset(LoadImagesAndLabels):  # for training
 
 class DetDataset(LoadImagesAndLabels):  # for training
     def __init__(self, root, paths, img_size=(1088, 608), augment=False, transforms=None):
-        # pdb.set_trace()
         dataset_names = paths.keys()
         self.img_files = OrderedDict()
         self.label_files = OrderedDict()

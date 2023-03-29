@@ -21,7 +21,7 @@ import datasets.dataset.jde as datasets
 
 from tracking_utils.utils import mkdir_if_missing
 from opts import opts
-import pdb
+
 
 def write_results(filename, results, data_type):
     if data_type == 'mot':

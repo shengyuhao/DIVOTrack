@@ -136,7 +136,6 @@ def gaussian2D(shape, sigma=1):
 
 # @numba.jit(nopython=True, nogil=True)
 def draw_umich_gaussian(heatmap, center, radius, k=1):
-  # import pdb; pdb.set_trace()
   diameter = 2 * radius + 1
   gaussian = gaussian2D((diameter, diameter), sigma=diameter / 6)
   
@@ -146,7 +145,6 @@ def draw_umich_gaussian(heatmap, center, radius, k=1):
     
   left, right = min(x, radius), min(width - x, radius + 1)
   top, bottom = min(y, radius), min(height - y, radius + 1)
-  # import pdb; pdb.set_trace()
   masked_heatmap  = heatmap[y - top:y + bottom, x - left:x + right]
   masked_gaussian = gaussian[radius - top:radius + bottom, radius - left:radius + right]
   if min(masked_gaussian.shape) > 0 and min(masked_heatmap.shape) > 0: # TODO debug

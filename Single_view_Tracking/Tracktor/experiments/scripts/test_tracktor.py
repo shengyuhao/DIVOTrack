@@ -23,7 +23,6 @@ from tracktor.reid.config import (check_cfg, engine_run_kwargs,
                                   get_default_config, lr_scheduler_kwargs,
                                   optimizer_kwargs, reset_config)
 from torchreid.utils import FeatureExtractor
-import pdb
 
 mm.lap.default_solver = 'lap'
 
@@ -74,10 +73,7 @@ def main(module_name, name, seed, obj_detect_models, reid_models,
         os.makedirs(output_dir)
     with open(sacred_config, 'w') as outfile:
         yaml.dump(copy.deepcopy(_config), outfile, default_flow_style=False)
-    # import pdb; pdb.set_trace()
     dataset = Datasets(dataset)
-    # for data in dataset:
-    #     pdb.set_trace()
     reid_models, obj_detect_models, dataset = add_reid_config(reid_models, obj_detect_models, dataset)
 
     ##########################
@@ -147,7 +143,6 @@ def main(module_name, name, seed, obj_detect_models, reid_models,
 
             for frame_data in tqdm(seq_loader):
                 with torch.no_grad():
-                    # pdb.set_trace()
                     tracker.step(frame_data)
 
             results = tracker.get_results()

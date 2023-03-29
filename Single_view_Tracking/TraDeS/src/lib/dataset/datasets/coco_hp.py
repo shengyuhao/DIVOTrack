@@ -55,7 +55,6 @@ class COCOHP(GenericDataset):
     return float("{:.2f}".format(x))
 
   def convert_eval_format(self, all_bboxes):
-    # import pdb; pdb.set_trace()
     detections = []
     for image_id in all_bboxes:
       if type(all_bboxes[image_id]) != type({}):

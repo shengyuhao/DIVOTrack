@@ -41,7 +41,6 @@ class IDEucl(_BaseMetric):
 
         data['centroid'] = []
         for t, gt_det in enumerate(data['gt_dets']):
-            # import pdb;pdb.set_trace()
             data['centroid'].append(self._compute_centroid(gt_det))
 
         oid_hid_cent = defaultdict(list)

@@ -46,7 +46,6 @@ def _topk(scores, K=40):
 
 
 def mot_decode(heat, wh, reg=None, ltrb=False, K=100):
-    #pdb.set_trace()
     batch, cat, height, width = heat.size()
 
     # heat = torch.sigmoid(heat)

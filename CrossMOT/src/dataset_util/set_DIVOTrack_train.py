@@ -1,12 +1,10 @@
 import os.path as osp
 import os
-import pdb
 from tqdm import tqdm
 
 root = '/mnt/sdb/dataset/MOT_datasets/'
 dataset = 'DIVOTrack/images/train'
 label = '/mnt/sdb/dataset/MOT_datasets/DIVOTrack/labels_with_ids/train'
-# pdb.set_trace()
 train_file = '../data/DIVOTrack.train'
 seqs = os.listdir(osp.join(root, dataset))
 seqs.sort()

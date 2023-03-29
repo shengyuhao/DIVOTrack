@@ -9,7 +9,6 @@ from PIL import Image
 from torch.utils.data import Dataset
 
 import cv2
-import pdb
 from ..config import cfg
 from torchvision.transforms import ToTensor
 
@@ -91,7 +90,6 @@ class MOTSequence(Dataset):
         no_gt = False
         if osp.exists(gt_file):
             with open(gt_file, "r") as inf:
-                # pdb.set_trace()
                 reader = csv.reader(inf, delimiter=',')
                 for row in reader:
                     # class person, certainity 1, visibility >= 0.25

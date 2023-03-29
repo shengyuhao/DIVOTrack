@@ -1,6 +1,5 @@
 import json
 import sys
-import pdb
 
 import cv2
 import os
@@ -127,7 +126,6 @@ def create_avi(file_inpath, video_inpath, filename):
     videoWriter = cv2.VideoWriter('{}/{}.avi'.format(file_inpath, filename), fourcc, fps, size)
     # videoWriter = cv2.VideoWriter('test.avi', fourcc, fps, size)
     b = [i.split() for i in f.readlines()]
-    # pdb.set_trace()
     pre_frame = -1
     frame = None
     for bb in b:
@@ -179,7 +177,6 @@ def save_frame(file_path, img_path, output_path, flag):
     ind = 0
     thickness = 10
     for bb in b:
-        #import pdb;pdb.set_trace()
         if int(float(bb[0])) != flag+1:
             continue
         

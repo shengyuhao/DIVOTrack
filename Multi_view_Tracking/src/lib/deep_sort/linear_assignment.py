@@ -4,10 +4,9 @@ import numpy as np
 # from sklearn.utils.linear_assignment_ import linear_assignment
 from scipy.optimize import linear_sum_assignment as linear_assignment
 from . import kalman_filter
-import pdb
+
 
 def spatial_association(tracker, view):
-    #pdb.set_trace()
     matching_dict = tracker.matching_mat[view]
     possible_matches = []
     unmatches = tracker.mvtrack_dict[view].unmatched_detections

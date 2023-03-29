@@ -14,7 +14,6 @@ from deep_sort import nn_matching
 from deep_sort.detection import Detection
 from deep_sort.tracker import Tracker
 
-import pdb
 
 def gather_sequence_info(sequence_dir, detection_file, dic, seq, view):
     """Gather sequence information, such as image filenames, detections,

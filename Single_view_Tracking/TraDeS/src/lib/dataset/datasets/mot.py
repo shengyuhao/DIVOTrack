@@ -9,7 +9,6 @@ import json
 import os
 from collections import defaultdict
 from ..generic_dataset import GenericDataset
-import pdb
 
 class MOT(GenericDataset):
   num_categories = 1

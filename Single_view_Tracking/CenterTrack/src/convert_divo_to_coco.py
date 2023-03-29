@@ -6,7 +6,7 @@ import os
 import numpy as np
 import json
 import cv2
-import pdb
+
 
 DATA_PATH = "../../../../datasets/DIVO/images/"
 OUT_PATH = DATA_PATH + 'annotations/'
@@ -61,7 +61,6 @@ if __name__ == '__main__':
 
         print(' {} ann images'.format(int(anns[:, 0].max())))
         for i in range(anns.shape[0]):
-          # pdb.set_trace()
           frame_id = int(anns[i][0]) - int(anns[:, 0].min())
           if (frame_id < image_range[0] or frame_id > image_range[1]):
             continue

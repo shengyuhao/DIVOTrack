@@ -1,6 +1,6 @@
 import os
 import numpy as np
-import pdb
+
 
 gt_dir = "data/eval/divo/gt"
 track_dir = "data/eval/divo/mvmhat_result"
@@ -84,7 +84,6 @@ for n in range(len(scene_list)):
 
 
 		# convert format
-		#import pdb; pdb.set_trace()
 		gt_data = np.loadtxt(gt_path, delimiter=delimiter, dtype=str)
 		max_fr = 0
 		for k in range(len(gt_data)):
@@ -114,7 +113,6 @@ for n in range(len(scene_list)):
 					% (int(gt_data[k, 0])*len(vid_list)+m, int(gt_data[k, 1]), float(gt_data[k, 2]), float(gt_data[k, 3]),
 					float(gt_data[k, 4])-float(gt_data[k, 2]), float(gt_data[k, 5])-float(gt_data[k, 3]), -1, -1, -1, -1))
 		
-		#import pdb; pdb.set_trace()
 		track_data = np.loadtxt(track_path, delimiter=track_delimiter, dtype=str)
 
 		for k in range(len(track_data)):
@@ -144,4 +142,4 @@ for n in range(len(scene_list)):
 	save_track_file.close()
 	save_gt_cvma_file.close()
 	save_track_cvma_file.close()
-	#import pdb; pdb.set_trace()
+ 

@@ -7,7 +7,6 @@ import random
 import re
 import config as C
 from glob import glob
-import pdb
 
 class Loader(Dataset):
     def __init__(self, views=3, frames=2, mode='train', dataset='1'):

@@ -18,7 +18,6 @@ from data import make_data_loader
 from engine.inference import inference
 from modeling import build_model
 from utils.logger import setup_logger
-import pdb
 import numpy as np
 from tqdm import tqdm
 

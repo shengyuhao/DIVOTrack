@@ -17,7 +17,7 @@ from utils.image import flip, color_aug
 from utils.image import get_affine_transform, affine_transform
 from utils.image import gaussian_radius, draw_umich_gaussian
 import copy
-import pdb
+
 
 class GenericDataset(data.Dataset):
   is_fusion_dataset = False
@@ -74,11 +74,9 @@ class GenericDataset(data.Dataset):
       
       self.img_dir = img_dir
       # self.__getitem__(0)
-      # pdb.set_trace()
 
   def __getitem__(self, index):
     opt = self.opt
-    # pdb.set_trace()
     img, anns, img_info, img_path = self._load_data(index)
 
     height, width = img.shape[0], img.shape[1]
@@ -166,7 +164,6 @@ class GenericDataset(data.Dataset):
     img_info = coco.loadImgs(ids=[img_id])[0]
     file_name = img_info['file_name']
     img_path = os.path.join(img_dir, file_name)
-    # pdb.set_trace()
     ann_ids = coco.getAnnIds(imgIds=[img_id])
     anns = copy.deepcopy(coco.loadAnns(ids=ann_ids))
     img = cv2.imread(img_path)
