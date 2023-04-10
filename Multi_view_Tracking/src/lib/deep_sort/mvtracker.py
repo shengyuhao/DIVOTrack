@@ -3,9 +3,9 @@ from .tracker import Tracker
 from deep_sort import nn_matching
 
 class MVTracker:
-    def __init__(self, view_ls):
+    def __init__(self, view_ls, sv_threshold=0.3):
         self.mvtrack_dict = {}
-        self.max_cosine_distance = 0.3
+        self.max_cosine_distance = sv_threshold
         self.nn_budget = None
         self.matching_mat = None
         self.next_id = [1]

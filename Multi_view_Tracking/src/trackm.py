@@ -22,8 +22,10 @@ from deep_sort.update import Update
 import argparse
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--feature', type=str, default=None)
-parser.add_argument('--result_dir', type=str, default=None)
+parser.add_argument('--sv_threshold', type=float, default=0.3, help="single view threshold")
+parser.add_argument('--cv_threshold', type=float, default=0.3, help="cross view threshold")
+parser.add_argument('--feature', type=str, default=None, help="feature npy file")
+parser.add_argument('--result_dir', type=str, default="result", help="result directory")
 args = parser.parse_args()
 
 def search_feature(frame_id, view_id, feature_list):
@@ -32,7 +34,7 @@ def search_feature(frame_id, view_id, feature_list):
             return item[2:]
     return []
 
-def gather_seq_info_multi_view(datas, seq, seq_length):
+def gather_seq_info_multi_view(view_ls, datas, seq):
     seq_dict = {}
     print('loading dataset...')
 
@@ -40,8 +42,6 @@ def gather_seq_info_multi_view(datas, seq, seq_length):
 
     detections = defaultdict(list)
     view_detections = defaultdict(list)
-    
-    view_ls = ['Drone', 'View1', 'View2']
 
     for view in view_ls:
         det_data[view] = sorted(det_data[view], key=lambda x:x[0])
@@ -75,17 +75,19 @@ def main(datas, result_root, seqs):
     logger.setLevel(logging.INFO)
     mkdir_if_missing(result_root)
     # run tracking
-    accs = []
-    n_frame = 0
     for seq in seqs:
         logger.info('start seq: {}'.format(seq))
-        frame_rate = 30
-        seq_length = len(seq)
-        seq_mv = gather_seq_info_multi_view(datas, seq, seq_length)
 
         view_ls = ['Drone', 'View1', 'View2']
-        mvtracker = MVTracker(view_ls)
-        updater = Update(seq=seq_mv, mvtracker=mvtracker, display=0, view_list=view_ls)
+        seq_mv = gather_seq_info_multi_view(view_ls, datas, seq)
+
+        mvtracker = MVTracker(view_ls, args.sv_threshold)
+        updater = Update(seq=seq_mv, 
+                         mvtracker=mvtracker, 
+                         display=0, 
+                         view_list=view_ls, 
+                         cv_threshold=args.cv_threshold,
+                         )
         updater.run()
 
         for view in view_ls:
@@ -110,9 +112,7 @@ if __name__ == '__main__':
                   shopSideSquare
                   southGate'''
     seqs = [seq.strip() for seq in seqs_str.split()]
-    
+
     datas = np.load(args.feature, allow_pickle=True).item()
-    print(args.feature)
-    # datas: input data from a file.
-    # data[0]: frame_id, view_id, xmin, ymin, w, h, score, 0, 0, 0, single_view_feature
-    main(datas, args.feature, seqs)
+
+    main(datas, args.result_dir, seqs)
