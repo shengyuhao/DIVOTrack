@@ -12,12 +12,12 @@ import config as C
 
 
 class Update():
-    def __init__(self, seq, mvtracker, display, view_list):
+    def __init__(self, seq, mvtracker, display, view_list, cv_threshold):
         self.seq = seq
         self.view_ls = mvtracker.view_ls
         self.tracker = mvtracker
         self.display = display
-        self.min_confidence = 0.7
+        self.cv_threshold = cv_threshold
         self.nms_max_overlap = 1
         self.min_detection_height = 0
         self.delta = 0.5
@@ -47,7 +47,7 @@ class Update():
         detections = self.create_detections(
             self.seq[view]["detections"], frame_idx, self.min_detection_height)   
 
-        detections = [d for d in detections]# if d.confidence >= self.min_confidence]
+        detections = [d for d in detections]
         # Run non-maxima suppression.
         boxes = np.array([d.tlwh for d in detections])
         scores = np.array([d.confidence for d in detections])
@@ -60,8 +60,7 @@ class Update():
         view_detections = self.create_detections(
             self.seq[view]["view_detections"], frame_idx, self.min_detection_height)   
 
-        view_detections = [d for d in view_detections]# if d.confidence >= self.min_confidence]
-
+        view_detections = [d for d in view_detections]
         # Run non-maxima suppression.
         boxes = np.array([d.tlwh for d in view_detections])
         scores = np.array([d.confidence for d in view_detections])
@@ -80,7 +79,7 @@ class Update():
                     S12 = np.dot(x, y.transpose(1, 0))
                     scale12 = np.log(self.delta / (1 - self.delta) * S12.shape[1]) / self.epsilon
                     S12 = softmax(S12 * scale12)
-                    S12[S12 < 0.5] = 0
+                    S12[S12 < self.cv_threshold] = 0
                     assign_ls = sklearn_linear_assignment(- S12)
                     assign_ls = np.asarray(assign_ls)
                     assign_ls = np.transpose(assign_ls)
