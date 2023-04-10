@@ -22,7 +22,7 @@ Cross-view multi-object tracking aims to link objects between frames and camera 
 The test result of the cross-view MOT baseline method *MvMHAT* on the DIVOTrack. 
 ![test.gif](asset/test.gif)
 
-The ground truth of the DIVOTrak.
+The ground truth of the DIVOTrack.
 ![gt.gif](asset/gt.gif)
 
 ## Dataset Description
