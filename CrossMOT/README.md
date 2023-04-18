@@ -87,7 +87,7 @@ For tracking, you only need to specify the tracking model by running the followi
 cd src
 python track.py mot --load_model {your path to the tracking model} --test_divo --conf_thres 0.5 --reid_dim 512 --track_name {your exp name}
 ```
-
+You can download our model from [this link](https://drive.google.com/file/d/1mQyw7F-V8_Btms5ifXSpIagBzcWoVuRP/view?usp=share_link)
 ## Ablation Study 
 You can modify the training or tracking settings to reproduce our ablation study. The instructions are as follows:
 
