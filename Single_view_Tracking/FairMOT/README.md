@@ -33,12 +33,12 @@ DIVOTrack_github
 ```
 
 ## Pretrained model
-* You can download the pretrained model from [Google Drive](https://drive.google.com/file/d/1KIJMI6dUdXQrFqRxRZyfUDyi_8b2BnUO/view?usp=sharing).
+* You can download the pretrained model from [Google Drive](https://drive.google.com/file/d/1iqRQjsG9BawIl8SlFomMg5iwkb6nqSpi/view).
 After downloading, you should put the pretrained models in the following structure:
 ```
 ${ROOT}
    └——————models
-           └——————ctdet_coco_dla_2x.pth
+           └——————fairmot_dla34.pth
 ```
 
 ## Training
