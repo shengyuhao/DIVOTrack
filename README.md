@@ -58,18 +58,35 @@ The whole dataset can download from [GoogleDrive](https://drive.google.com/drive
 ## Training Detector
 The training process of our detector is in `./Training_detector/` and the details can see from  [Training_detector/README.md](https://github.com/shengyuhao/DIVOTrack/tree/main/Training_Detector#readme).
 ## Single-view Tracking
-The implement of single-view tracking baseline methods is in `./Single_view_Tracking` and the details can see from [Single_view_Tracking/README.md](https://github.com/shengyuhao/DIVOTrack/tree/main/Single_view_Tracking#readme).
-## Cross-view Tracking
-The implement of cross-view tracking baseline methods is in ```./Cross_view_Tracking``` and the details can see from [Cross_view_Tracking/README.md](https://github.com/shengyuhao/DIVOTrack/tree/main/Cross_view_Tracking#readme).
-## TrackEval
+We conducted experiments on DIVOTrack in fix benchmarks:
+
+
+| Benchmark | HOTA ↑ | IDF1 ↑ | MOTA ↑ | MOTP ↑ | MT ↑ | ML ↓ | AssA ↑ | IDSw ↓ | FM ↓ |
+| --------- | ------ | ------ | ------ | ------ | ---- | ---- | ------ | ------ | ---- |
+| [DeepSort](./Single_view_Tracking/Deepsort/) | 52.3 | 58.3 | 76.3 | 81.0 | 382 | 73 | 43.6 | 2,013 | 2,521 |
+| [CenterTrack](./Single_view_Tracking/CenterTrack/) | 54.2 | 61.0 | 72.3 | 80.3 | 479 | 49 | 48.1 | 1,732 | 2,438 |
+| [Tracktor](./Single_view_Tracking/Tracktor/) | 46.7 | 54.5 | 63.7 | 80.4 | 420 | 33 | 39.3 | 1,517 | 3,601 |
+| [FairMOT](./Single_view_Tracking/FairMOT/) | 62.7 | 76.1 | 78.8 | 81.8 | 417 | 66 | 60.9 | 788 | 3,725 |
+| [TraDeS](./Single_view_Tracking/TraDeS/) | 57.5 | 66.0 | 72.6 | 82.0 | 467 | 53 | 52.9 | 1,341 | 2,612 |
+
 We evaluate each single-view tracking baseline using `./TrackEval`, and the details can see from [TrackEval/README.md](https://github.com/shengyuhao/DIVOTrack/tree/main/TrackEval#readme).
+## Cross-view Tracking
+We conducted experiments on the DIVOTrack dataset using six benchmarks as well as our proposed method [CrossMOT](./CrossMOT/)
+| Benchmark | CVMA ↑ | CVIDF1 ↑ |
+| --------- | ------ | -------- |
+| [OSNet](./Cross_view_Tracking/OSNet/) | 
+| [Strong](./Cross_view_Tracking/StrongReID/) |
+| [AGW](./Cross_view_Tracking/AGW/) |
+| [MvMHAT](./Cross_view_Tracking/MvMHAT/) |
+| CT | 
+| MGN |
+| [CrossMOT](./CrossMOT/) |
+
 ## Multi-view Tracking
 The multi-view tracking results can be obtained from `./Multi_view_Tracking`, the details can see from [Multi_view_Tracking/README.md](https://github.com/shengyuhao/DIVOTrack/tree/main/Multi_view_Tracking#readme)
 ## MOTChallengeEvalKit_cv_test
 The cross-view evaluation can be obtained from `./MOTChallengeEvalKit_cv_test`, and the details can see from [MOTChallengeEvalKit_cv_test/README.md](https://github.com/shengyuhao/DIVOTrack/tree/main/MOTChallengeEvalKit_cv_test#readme)
 
-## CrossMOT: A Novel Baseline Cross-View Tracking Method with A Unified Joint Detection and Cross-view Tracking Framework
-The details of the implementation of CrossMOT can be found in [CrossMOT/README.md](https://github.com/shengyuhao/DIVOTrack/tree/main/CrossMOT#readme)
 
 ## Reference
 Any use whatsoever of this dataset and its associated software shall constitute your acceptance of the terms of this agreement. By using the dataset and its associated software, you agree to cite the papers of the authors, in any of your publications by you and your collaborators that make any use of the dataset, in the following format:
