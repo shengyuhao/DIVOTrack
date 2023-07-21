@@ -156,7 +156,7 @@ def main():
             att = '' if len(attributes) == 0 else attributes[0]
             if len(attributes) > 1:
               print(attributes)
-              import pdb; pdb.set_trace()
+
             track_id = track_ids[instance_token]
             vel = nusc.box_velocity(box.token) # global frame
             vel = np.dot(np.linalg.inv(trans_matrix), 
