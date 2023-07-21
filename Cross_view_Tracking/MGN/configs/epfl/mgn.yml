@@ -1,0 +1,13 @@
+_BASE_: ../Base-MGN.yml
+
+MODEL:
+  BACKBONE:
+    WITH_IBN: True
+
+DATASETS:
+  NAMES: ("EPFL",)
+  TESTS: ("EPFL",)
+
+DATAROOT: /mnt/sdb/dataset/MOT_datasets/CrossMOT_dataset/EPFL/ReID_format/
+
+OUTPUT_DIR: logs/EPFL/mgn_R50-ibn

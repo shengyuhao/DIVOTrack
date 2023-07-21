@@ -1,0 +1,13 @@
+_BASE_: ../Base-MGN.yml
+
+MODEL:
+  BACKBONE:
+    WITH_IBN: True
+
+DATASETS:
+  NAMES: ("DIVO",)
+  TESTS: ("DIVO",)
+
+DATAROOT: /mnt/sdb/dataset/MOT_datasets/CrossMOT_dataset/DIVOTrack/ReID_format/
+
+OUTPUT_DIR: logs/DIVO/mgn_R50-ibn

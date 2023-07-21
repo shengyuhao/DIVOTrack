@@ -1,0 +1,13 @@
+_BASE_: ../Base-MGN.yml
+
+MODEL:
+  BACKBONE:
+    WITH_IBN: True
+
+DATASETS:
+  NAMES: ("CAMPUS",)
+  TESTS: ("CAMPUS",)
+
+DATAROOT: /mnt/sdb/dataset/MOT_datasets/CrossMOT_dataset/CAMPUS/ReID_format/
+
+OUTPUT_DIR: logs/CAMPUS/mgn_R50-ibn
