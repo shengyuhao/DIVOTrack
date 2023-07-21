@@ -1,0 +1,121 @@
+DATALOADER: !!python/object/new:yacs.config.CfgNode
+  dictitems:
+    DROP_LAST: true
+    NUM_INSTANCE: 4
+    NUM_WORKERS: 96
+    SAMPLER: random_identity
+    USE_RESAMPLING: false
+  state:
+    __deprecated_keys__: !!set {}
+    __immutable__: false
+    __new_allowed__: false
+    __renamed_keys__: {}
+DATASETS: !!python/object/new:yacs.config.CfgNode
+  dictitems:
+    JSON_TRAIN_PATH: ''
+    NAMES: mm
+    ROOT_DIR: /mnt/sdb/dataset/MOT_datasets/CrossMOT_dataset/MvMHAT/
+  state:
+    __deprecated_keys__: !!set {}
+    __immutable__: false
+    __new_allowed__: false
+    __renamed_keys__: {}
+GPU_IDS:
+- 0
+INPUT: !!python/object/new:yacs.config.CfgNode
+  dictitems:
+    PADDING: 10
+    PIXEL_MEAN:
+    - 0.485
+    - 0.456
+    - 0.406
+    PIXEL_STD:
+    - 0.229
+    - 0.224
+    - 0.225
+    PROB: 0.5
+    RE_PROB: 0.5
+    SIZE_TEST:
+    - 256
+    - 128
+    SIZE_TRAIN:
+    - 256
+    - 128
+  state:
+    __deprecated_keys__: !!set {}
+    __immutable__: false
+    __new_allowed__: false
+    __renamed_keys__: {}
+LOG_DIR: ./logs/mm
+MODEL: !!python/object/new:yacs.config.CfgNode
+  dictitems:
+    BACKBONE_EMB_SIZE: 2048
+    KEEP_CAMID_CENTROIDS: true
+    LAST_STRIDE: 1
+    NAME: resnet50
+    PRETRAINED: true
+    PRETRAIN_PATH: ./models/resnet50-19c8e357.pth
+    RESUME_TRAINING: false
+    USE_CENTROIDS: false
+  state:
+    __deprecated_keys__: !!set {}
+    __immutable__: false
+    __new_allowed__: false
+    __renamed_keys__: {}
+OUTPUT_DIR: ./logs/mm
+REPRODUCIBLE: false
+REPRODUCIBLE_NUM_RUNS: 3
+REPRODUCIBLE_SEED: 0
+SOLVER: !!python/object/new:yacs.config.CfgNode
+  dictitems:
+    BASE_LR: 0.00035
+    CENTER_LOSS_WEIGHT: 0.0005
+    CENTER_LR: 0.5
+    CENTROID_CONTRASTIVE_WEIGHT: 1.0
+    CHECKPOINT_PERIOD: 50
+    CLUSTER_MARGIN: 0.3
+    DISTANCE_FUNC: euclidean
+    DIST_BACKEND: ddp
+    EVAL_PERIOD: 140
+    GAMMA: 0.1
+    IMS_PER_BATCH: 16
+    LR_SCHEDULER_NAME: multistep_lr
+    LR_STEPS: !!python/tuple
+    - 40
+    - 70
+    MARGIN: 0.5
+    MAX_EPOCHS: 120
+    MOMENTUM: 0.9
+    MONITOR_METRIC_MODE: max
+    MONITOR_METRIC_NAME: mAP
+    OPTIMIZER_NAME: Adam
+    QUERY_CONTRASTIVE_WEIGHT: 1.0
+    QUERY_XENT_WEIGHT: 1.0
+    USE_AUTOMATIC_OPTIM: false
+    USE_WARMUP_LR: true
+    WARMUP_EPOCHS: 10
+    WEIGHT_DECAY: 0.0005
+    WEIGHT_DECAY_BIAS: 0.0005
+  state:
+    __deprecated_keys__: !!set {}
+    __immutable__: false
+    __new_allowed__: false
+    __renamed_keys__: {}
+TEST: !!python/object/new:yacs.config.CfgNode
+  dictitems:
+    FEAT_NORM: true
+    IMS_PER_BATCH: 128
+    ONLY_TEST: false
+    VISUALIZE: 'no'
+    VISUALIZE_MAX_NUMBER: 1000000
+    VISUALIZE_TOPK: 10
+    WEIGHT: ''
+  state:
+    __deprecated_keys__: !!set {}
+    __immutable__: false
+    __new_allowed__: false
+    __renamed_keys__: {}
+USE_MIXED_PRECISION: false
+num_classes: 339
+num_query: 256756
+use_multiple_loggers: true

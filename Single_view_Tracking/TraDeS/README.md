@@ -8,7 +8,7 @@ The code is built with [TraDeS](https://github.com/JialianW/TraDeS). Thanks for 
 Please refer to [INSTALL.md](https://github.com/shengyuhao/DIVOTrack/blob/main/Single_view_Tracking/TraDeS/readme/INSTALL.md) for installation instructions.
 
 ## Data preparation
-The data in the following structure:
+The data is in the following structure:
 ```
 DIVOTrack
     └——————datasets
