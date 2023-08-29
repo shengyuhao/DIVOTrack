@@ -1,6 +1,6 @@
 # DIVOTrack: A Novel Dataset and Baseline Method for Cross-View Multi-Object Tracking in DIVerse Open Scenes
 
-This repository contains the details of dataset and the Pytorch implementation of Baseline Method CrossMOT of the Paper:
+This repository contains the details of the dataset and the Pytorch implementation of the Baseline Method CrossMOT of the Paper:
 [DIVOTrack: A Novel Dataset and Baseline Method for Cross-View Multi-Object Tracking in DIVerse Open Scenes](https://arxiv.org/abs/2302.07676)
 
 
@@ -24,13 +24,13 @@ The ground truth of the DIVOTrack.
 ![gt.gif](asset/gt.gif)
 
 ## <a id="des">Dataset Description</a>
-We collect data in 10 different real-world scenarios, named: `'Circle', 'Shop', 'Moving', 'Park', 'Ground', 'Gate1', 'Floor', 'Side', 'Square', 'Gate2'`. All
+We collect data in 10 different real-world scenarios, named: `'Circle', 'Shop', 'Moving', 'Park', 'Ground', 'Gate1', 'Floor', 'Side', 'Square', and 'Gate2'`. All
 the sequences are captured by using 3 moving cameras: `'View1', 'View2', 'View3'` and are manually synchronized. 
 
-In the old version, the corresponding scenarios named: `'circleRegion', 'innerShop', 'movingView', 'park', 'playground', 'shopFrontGate', 'shopSecondFloor', 'shopSideGate', 'shopSideSquare', 'southGate'`. The corresponding camera named: `'Drone', 'View1', 'View2'`.
+In the old version, the corresponding scenarios named: `'circleRegion', 'innerShop', 'movingView', 'park', 'playground', 'shopFrontGate', 'shopSecondFloor', 'shopSideGate', 'shopSideSquare', 'southGate'`. The corresponding camera is named: `'Drone', 'View1', 'View2'`.
 
 ### <a id="str">Dataset Structure</a>
-The structure of our dataset as:
+The structure of our dataset as follows:
 ```
 DIVOTrack
     └─────datasets
@@ -51,12 +51,12 @@ DIVOTrack
 
 ```
 ### <a id="dow">Dataset Downloads</a>
-The whole dataset can download from [GoogleDrive](https://drive.google.com/drive/folders/1RCk95TdFv3Tt7gVuyxJasiHG1IPE6jkX?usp=sharing). **Note that, each file needs to unzip by the password. You can decompress each `.zip` file in its folder after send us (shengyuhao@zju.edu.cn, gaoangwang@intl.zju.edu.cn) the License in any format.** After that, you should run `generate_ini.py` to generate `seqinfo.ini` file. 
+The whole dataset can be downloaded from [GoogleDrive](https://drive.google.com/drive/folders/1RCk95TdFv3Tt7gVuyxJasiHG1IPE6jkX?usp=sharing). **Note that, each file needs to unzip by the password. You can decompress each `.zip` file in its folder after sending us (shengyuhao@zju.edu.cn, gaoangwang@intl.zju.edu.cn) the License in any format.** After that, you should run `generate_ini.py` to generate `seqinfo.ini` file. 
 
 ## <a id="det">Training Detector</a>
-The training process of our detector is in `./Training_detector/` and the details can see from  [Training_detector/README.md](https://github.com/shengyuhao/DIVOTrack/tree/main/Training_Detector#readme).
+The training process of our detector is in `./Training_detector/` and the details can be seen from  [Training_detector/README.md](https://github.com/shengyuhao/DIVOTrack/tree/main/Training_Detector#readme).
 ## <a id="sin">Single-view Tracking</a>
-We conducted experiments on DIVOTrack in fix benchmarks:
+We conducted experiments on DIVOTrack in five benchmarks:
 
 | Benchmark | HOTA ↑ | IDF1 ↑ | MOTA ↑ | MOTP ↑ | MT ↑ | ML ↓ | AssA ↑ | IDSw ↓ | FM ↓ |
 | --------- | ------ | ------ | ------ | ------ | ---- | ---- | ------ | ------ | ---- |
