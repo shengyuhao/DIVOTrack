@@ -121,13 +121,13 @@ def gather_seq_info_multi_view(opt, dataloader, seq, seq_length, use_cuda=True):
             wh = output["wh"]
 
             if opt.baseline == 0:
-                view_id_feature = F.normalize(output["id"], dim=1)
+                view_id_feature = F.normalize(output["id"], dim=1) # This is cross view id feature
                 id_feature = F.normalize(output["single_view_id"], dim=1)
             else:
                 if opt.baseline_view == 0:
                     id_feature = F.normalize(output["single_view_id"], dim=1)
                 else:
-                    view_id_feature = F.normalize(output["id"], dim=1)
+                    view_id_feature = F.normalize(output["id"], dim=1) # This is cross view id feature
 
             reg = output["reg"] if opt.reg_offset else None
             dets, bboxes, scores, clses, inds = mot_decode(
