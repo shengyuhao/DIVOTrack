@@ -396,7 +396,7 @@ class opts(object):
                     "hm": opt.num_classes,
                     "wh": 2 if not opt.ltrb else 4,
                     "single_view_id": int(opt.reid_dim),
-                    "id": int(opt.reid_dim),
+                    "id": int(opt.reid_dim), # This is cross view id head
                 }
             else:
                 if opt.baseline_view == 0:
