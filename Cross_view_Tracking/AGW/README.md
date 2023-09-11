@@ -34,7 +34,7 @@ python setup.py develop
 ```
   
 #### 3. Train
-Download the [pre-trained model](https://drive.google.com/file/d/1kPr3jWutqkW7AlqBOy0XqjfXaupslvti/view?usp=share_link) and put it into `./models/` 
+Download the [pre-trained model](https://huggingface.co/datasets/syhao777/DIVOTrack/blob/main/Cross_view_Tracking/AGW.zip) and put it into `./models/` 
 To train a AGW model with on `./bounding_box_train/` with GPU device 0, run similarly:
 ```
 sh Train-AGW.sh
