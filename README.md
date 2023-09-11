@@ -53,7 +53,7 @@ DIVOTrack
 
 ```
 ### <a id="dow">Dataset Downloads</a>
-The whole dataset can be downloaded from [GoogleDrive](https://drive.google.com/drive/folders/1RCk95TdFv3Tt7gVuyxJasiHG1IPE6jkX?usp=sharing). **Note that, each file needs to unzip by the password. You can decompress each `.zip` file in its folder after sending us (shengyuhao@zju.edu.cn, gaoangwang@intl.zju.edu.cn) the License in any format.** After that, you should run `generate_ini.py` to generate `seqinfo.ini` file. 
+The whole dataset can be downloaded from [Huggingface](https://huggingface.co/datasets/syhao777/DIVOTrack). **Note that, each file needs to unzip by the password. You can decompress each `.zip` file in its folder after sending us (shengyuhao@zju.edu.cn, gaoangwang@intl.zju.edu.cn) the License in any format.** After that, you should run `generate_ini.py` to generate `seqinfo.ini` file. 
 
 ## <a id="det">Training Detector</a>
 The training process of our detector is in `./Training_detector/` and the details can be seen from  [Training_detector/README.md](https://github.com/shengyuhao/DIVOTrack/tree/main/Training_Detector#readme).
