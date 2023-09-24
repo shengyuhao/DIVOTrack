@@ -31,6 +31,7 @@ the sequences are captured by using 3 moving cameras: `'View1', 'View2', 'View3'
 
 In the old version, the corresponding scenarios named: `'circleRegion', 'innerShop', 'movingView', 'park', 'playground', 'shopFrontGate', 'shopSecondFloor', 'shopSideGate', 'shopSideSquare', 'southGate'`. The corresponding camera is named: `'Drone', 'View1', 'View2'`.
 
+For the test set, we provide the ground truth of the 5 scenes: `'Circle', 'Gate1', 'Floor', 'Shop', and 'Square'`.
 ### <a id="str">Dataset Structure</a>
 The structure of our dataset as follows:
 ```
