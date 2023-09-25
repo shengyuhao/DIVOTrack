@@ -32,7 +32,7 @@ python convert_divo_to_coco.py
 ```
  
 ## Train
-The pre-trained model can download from [Google Drive](https://drive.google.com/file/d/1-RM7T76RTPh8Q0h8Cn9ZdyhU-gnnPIuT/view?usp=share_link) and put it into `./models/`
+The pre-trained model can download from [Google Drive](https://drive.google.com/file/d/1SD31FLwbXArcX3LXnRCqh6RF-q38nO7f) and put it into `./models/`
 ```
 cd ${CenterTrack_ROOT}
 cd src
