@@ -61,9 +61,10 @@ sh experiments/test.sh
 ## Evaluation
 1. Change the directory name from "result_divo" to "fairmot"
 2. Make sure "centertrack" has the middle directory "data". (i.e. fairmot/data/circleRegion_Drone.txt instead of fairmot/circleRegion_Drone.txt)
-3. Copy your result_divo to DIVOTrack/TrackEval/data/trackers/mot_challenge/divo
-4. Go to DIVOTrack/TrackEval
-5. See the instrcution on [TrackEval](https://github.com/shengyuhao/DIVOTrack/tree/main/TrackEval)
+3. Resize the result files by "resize.py"
+4. Copy your result_divo to DIVOTrack/TrackEval/data/trackers/mot_challenge/divo
+5. Go to DIVOTrack/TrackEval
+6. See the instruction on [TrackEval](https://github.com/shengyuhao/DIVOTrack/tree/main/TrackEval)
 
 ## Final Model
 
