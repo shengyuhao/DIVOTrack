@@ -1,5 +1,5 @@
 # DIVOTrack: A Novel Dataset and Baseline Method for Cross-View Multi-Object Tracking in DIVerse Open Scenes
-[![](http://img.shields.io/badge/cs.CV-arXiv%3A2308.09592-B31B1B.svg)](https://arxiv.org/abs/2302.07676)
+[![](http://img.shields.io/badge/cs.CV-arXiv%3A2302.07676-B31B1B.svg)](https://arxiv.org/abs/2302.07676)
 [![](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-orange)](https://huggingface.co/datasets/syhao777/DIVOTrack)
 
 This repository contains the details of the dataset and the Pytorch implementation of the Baseline Method CrossMOT of the Paper:
