@@ -89,11 +89,13 @@ With the exception of CrossMOT, all of the other Re-ID methods require [Multi_vi
 ## <a id="ref">Reference</a>
 Any use whatsoever of this dataset and its associated software shall constitute your acceptance of the terms of this agreement. By using the dataset and its associated software, you agree to cite the papers of the authors, in any of your publications by you and your collaborators that make any use of the dataset, in the following format:
 ```
-@article{wangdivotrack,
-  title={DIVOTrack: A Novel Dataset and Baseline Method for Cross-View Multi-Object Tracking in DIVerse Open Scenes},
-  author={Shenghao Hao, Peiyuan Liu, Yibing Zhan, Kaixun Jin, Zuozhu Liu, Mingli Song, Jenq-Neng Hwang, Gaoang Wang},
-  journal={arXiv preprint arXiv:2302.07676},
-  year={2023}
+@article{hao2023divotrack,
+  title={Divotrack: A novel dataset and baseline method for cross-view multi-object tracking in diverse open scenes},
+  author={Hao, Shengyu and Liu, Peiyuan and Zhan, Yibing and Jin, Kaixun and Liu, Zuozhu and Song, Mingli and Hwang, Jenq-Neng and Wang, Gaoang},
+  journal={International Journal of Computer Vision},
+  pages={1--16},
+  year={2023},
+  publisher={Springer}
 }
 ```
 The license agreement for data usage implies the citation of the paper above. Please notice that citing the dataset URL instead of the publications would not be compliant with this license agreement. You can read the LICENSE from [LICENSE](https://github.com/shengyuhao/DIVOTrack/blob/main/LICENSE.md).
