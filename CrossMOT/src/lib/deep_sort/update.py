@@ -9,7 +9,7 @@ import cv2
 import numpy as np
 from opts import opts
 
-RENEW_TIME = 30
+RENEW_TIME = 1
 
 
 class Update:
@@ -46,8 +46,6 @@ class Update:
             self.seq[view]["detections"], frame_idx, self.min_detection_height
         )
 
-        detections = [d for d in detections]
-
         # Run non-maxima suppression.
         boxes = np.array([d.tlwh for d in detections])
         scores = np.array([d.confidence for d in detections])
@@ -59,8 +57,6 @@ class Update:
         view_detections = self.create_detections(
             self.seq[view]["view_detections"], frame_idx, self.min_detection_height
         )
-
-        view_detections = [d for d in view_detections]
 
         # Run non-maxima suppression.
         boxes = np.array([d.tlwh for d in view_detections])
