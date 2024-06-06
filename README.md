@@ -33,7 +33,7 @@ In the old version, the corresponding scenarios named: `'circleRegion', 'innerSh
 
 For the test set, we provide the ground truth of the 5 scenes: `'Circle', 'Gate1', 'Floor', 'Shop', and 'Square'`.
 ### <a id="str">Dataset Structure</a>
-The structure of our dataset as follows:
+The structure of our dataset is as follows:
 ```
 DIVOTrack
     └─────datasets
@@ -89,12 +89,14 @@ With the exception of CrossMOT, all of the other Re-ID methods require [Multi_vi
 ## <a id="ref">Reference</a>
 Any use whatsoever of this dataset and its associated software shall constitute your acceptance of the terms of this agreement. By using the dataset and its associated software, you agree to cite the papers of the authors, in any of your publications by you and your collaborators that make any use of the dataset, in the following format:
 ```
-@article{hao2023divotrack,
+@article{hao2024divotrack,
   title={Divotrack: A novel dataset and baseline method for cross-view multi-object tracking in diverse open scenes},
   author={Hao, Shengyu and Liu, Peiyuan and Zhan, Yibing and Jin, Kaixun and Liu, Zuozhu and Song, Mingli and Hwang, Jenq-Neng and Wang, Gaoang},
   journal={International Journal of Computer Vision},
-  pages={1--16},
-  year={2023},
+  volume={132},
+  number={4},
+  pages={1075--1090},
+  year={2024},
   publisher={Springer}
 }
 ```
