@@ -20,11 +20,15 @@ different facility or organizational unit in the requesting university, organiza
 4. All technical papers, documents and reports which used the DIVOTrack dataset should acknowledge the 
 use of the database as follows: "The research in this paper used the DIVOTrack dataset collected by Zhejiang University." and provide citations to the corresponding article:
 ```
-@article{wangdivotrack,
-  title={DIVOTrack: A Novel Dataset and Baseline Method for Cross-View Multi-Object Tracking in DIVerse Open Scenes},
-  author={Shenghao Hao, Peiyuan Liu, Yibing Zhan, Kaixun Jin, Zuozhu Liu, Mingli Song, Jenq-Neng Hwang, Gaoang Wang},
-  journal={arXiv preprint arXiv:2302.07676},
-  year={2023}
+@article{hao2024divotrack,
+  title={Divotrack: A novel dataset and baseline method for cross-view multi-object tracking in diverse open scenes},
+  author={Hao, Shengyu and Liu, Peiyuan and Zhan, Yibing and Jin, Kaixun and Liu, Zuozhu and Song, Mingli and Hwang, Jenq-Neng and Wang, Gaoang},
+  journal={International Journal of Computer Vision},
+  volume={132},
+  number={4},
+  pages={1075--1090},
+  year={2024},
+  publisher={Springer}
 }
 ```
 5. A student applicant should ask his/her supervisor to sign this agreement, and send the signed agreement to 
