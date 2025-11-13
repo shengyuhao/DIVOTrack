@@ -35,7 +35,7 @@ use of the database as follows: "The research in this paper used the DIVOTrack d
 us using a formal university email (do not use emails like ```xxx@163.com```, ```xxx@gmail.com```; otherwise the 
 application will not be considered). A student applicant should also copy the application email to his/her 
 supervisor while sending the agreement to us. 
-6. Please send the application with signed agreement to Shengyu Hao (shengyuhao@zju.edu.cn) and Gaoang Wang (gaoangwang@intl.zju.edu.cn). ```Again, a student applicant should also copy the application email to his/her supervisor while sending the agreement to us```. 
+6. Please send the application with signed agreement to Shengyu Hao (victorhsy7@gmai.com) and Gaoang Wang (gaoangwang@intl.zju.edu.cn). ```Again, a student applicant should also copy the application email to his/her supervisor while sending the agreement to us```. 
 7. The final interpretation right of this agreement belongs to Zhejiang University and authors.
 
 (For a student applicant, please provide your supervisor’s information below and ask your supervisor to sign the 
@@ -46,5 +46,6 @@ Email:_____________
 Faculty Homepage:__________________ \
 University and Department:__________________ \
 Date:_________ (MM/DD/YY)
+
 
 
