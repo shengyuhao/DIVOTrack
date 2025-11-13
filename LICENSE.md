@@ -32,7 +32,7 @@ use of the database as follows: "The research in this paper used the DIVOTrack d
 }
 ```
 5. A student applicant should ask his/her supervisor to sign this agreement, and send the signed agreement to 
-us using a formal university email (do not use emails like ```xxx@163.com```, ```xxx@gmail.com```; otherwise the 
+us using a formal university email (do not use emails like ```xxx@163.com```, ```xxx@qq.com```; otherwise the 
 application will not be considered). A student applicant should also copy the application email to his/her 
 supervisor while sending the agreement to us. 
 6. Please send the application with signed agreement to Shengyu Hao (victorhsy7@gmai.com) and Gaoang Wang (gaoangwang@intl.zju.edu.cn). ```Again, a student applicant should also copy the application email to his/her supervisor while sending the agreement to us```. 
@@ -46,6 +46,7 @@ Email:_____________
 Faculty Homepage:__________________ \
 University and Department:__________________ \
 Date:_________ (MM/DD/YY)
+
 
 
 
